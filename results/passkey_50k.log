@@ -1,0 +1,189 @@
+########## B
+number of parameters: 63.52M
+Model type: B | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy before fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.06  first_token=0.14
+  ctx=  1024  exact=0.02  first_token=0.04
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.06  first_token=0.14
+  ctx=  1024  exact=0.02  first_token=0.04
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Fine-tuning for 300 iters on lengths [256, 512, 768, 1024]:
+  iter    1  L=1024 bs=4  loss 7.9603  (0.36s/it)
+  iter   10  L= 256 bs=16  loss 1.3965  (0.19s/it)
+  iter   20  L= 512 bs=8  loss 1.4665  (0.18s/it)
+  iter   30  L=1024 bs=4  loss 2.4539  (0.18s/it)
+  iter   40  L= 256 bs=16  loss 2.0501  (0.18s/it)
+  iter   50  L=1024 bs=4  loss 2.0839  (0.18s/it)
+  iter   60  L=1024 bs=4  loss 0.4442  (0.18s/it)
+  iter   70  L=1024 bs=4  loss 1.4116  (0.17s/it)
+  iter   80  L= 256 bs=16  loss 1.8182  (0.17s/it)
+  iter   90  L=1024 bs=4  loss 0.5432  (0.17s/it)
+  iter  100  L= 256 bs=16  loss 0.8410  (0.17s/it)
+  iter  110  L= 768 bs=5  loss 2.1646  (0.17s/it)
+  iter  120  L= 256 bs=16  loss 1.2898  (0.17s/it)
+  iter  130  L= 256 bs=16  loss 1.1715  (0.17s/it)
+  iter  140  L= 512 bs=8  loss 0.9361  (0.17s/it)
+  iter  150  L= 512 bs=8  loss 1.1356  (0.17s/it)
+  iter  160  L=1024 bs=4  loss 1.1607  (0.17s/it)
+  iter  170  L= 768 bs=5  loss 3.7097  (0.17s/it)
+  iter  180  L= 512 bs=8  loss 1.1964  (0.17s/it)
+  iter  190  L= 512 bs=8  loss 1.1811  (0.17s/it)
+  iter  200  L= 256 bs=16  loss 0.8865  (0.17s/it)
+  iter  210  L= 768 bs=5  loss 0.5274  (0.17s/it)
+  iter  220  L= 256 bs=16  loss 1.5265  (0.17s/it)
+  iter  230  L= 768 bs=5  loss 1.3885  (0.17s/it)
+  iter  240  L= 512 bs=8  loss 1.1228  (0.17s/it)
+  iter  250  L= 768 bs=5  loss 1.3457  (0.17s/it)
+  iter  260  L= 256 bs=16  loss 0.6922  (0.17s/it)
+  iter  270  L= 768 bs=5  loss 0.7761  (0.17s/it)
+  iter  280  L=1024 bs=4  loss 1.2110  (0.17s/it)
+  iter  290  L= 256 bs=16  loss 1.7236  (0.17s/it)
+  iter  300  L= 256 bs=16  loss 1.7316  (0.17s/it)
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.58  first_token=0.98
+  ctx=  1024  exact=0.58  first_token=1.00
+  ctx=  2048  exact=0.30  first_token=0.80
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.58  first_token=0.98
+  ctx=  1024  exact=0.58  first_token=1.00
+  ctx=  2048  exact=0.58  first_token=0.90
+  ctx=  4096  exact=0.26  first_token=0.74
+  ctx=  8192  exact=0.06  first_token=0.26
+  ctx= 16384  exact=0.00  first_token=0.02
+########## Jm
+number of parameters: 63.65M
+Model type: Jm | params 63,648,768 | delimiter 764 | device cuda
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.04  first_token=0.08
+  ctx=  1024  exact=0.02  first_token=0.06
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.04  first_token=0.10
+  ctx=  1024  exact=0.02  first_token=0.06
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Fine-tuning for 300 iters on lengths [256, 512, 768, 1024]:
+  iter    1  L=1024 bs=4  loss 7.4067  (0.39s/it)
+  iter   10  L= 256 bs=16  loss 1.5035  (0.24s/it)
+  iter   20  L= 512 bs=8  loss 1.2927  (0.23s/it)
+  iter   30  L=1024 bs=4  loss 2.3035  (0.23s/it)
+  iter   40  L= 256 bs=16  loss 1.9155  (0.23s/it)
+  iter   50  L=1024 bs=4  loss 2.3690  (0.23s/it)
+  iter   60  L=1024 bs=4  loss 0.3848  (0.23s/it)
+  iter   70  L=1024 bs=4  loss 1.1218  (0.23s/it)
+  iter   80  L= 256 bs=16  loss 1.7685  (0.23s/it)
+  iter   90  L=1024 bs=4  loss 0.4396  (0.23s/it)
+  iter  100  L= 256 bs=16  loss 0.8537  (0.23s/it)
+  iter  110  L= 768 bs=5  loss 2.1931  (0.23s/it)
+  iter  120  L= 256 bs=16  loss 1.2693  (0.23s/it)
+  iter  130  L= 256 bs=16  loss 1.1592  (0.23s/it)
+  iter  140  L= 512 bs=8  loss 0.7286  (0.23s/it)
+  iter  150  L= 512 bs=8  loss 1.2464  (0.23s/it)
+  iter  160  L=1024 bs=4  loss 1.4755  (0.23s/it)
+  iter  170  L= 768 bs=5  loss 3.9428  (0.22s/it)
+  iter  180  L= 512 bs=8  loss 1.3146  (0.22s/it)
+  iter  190  L= 512 bs=8  loss 1.1655  (0.22s/it)
+  iter  200  L= 256 bs=16  loss 0.8906  (0.22s/it)
+  iter  210  L= 768 bs=5  loss 0.5701  (0.22s/it)
+  iter  220  L= 256 bs=16  loss 1.6098  (0.22s/it)
+  iter  230  L= 768 bs=5  loss 1.0011  (0.22s/it)
+  iter  240  L= 512 bs=8  loss 1.2527  (0.22s/it)
+  iter  250  L= 768 bs=5  loss 1.4557  (0.22s/it)
+  iter  260  L= 256 bs=16  loss 0.7360  (0.22s/it)
+  iter  270  L= 768 bs=5  loss 0.8245  (0.22s/it)
+  iter  280  L=1024 bs=4  loss 0.9762  (0.22s/it)
+  iter  290  L= 256 bs=16  loss 1.7185  (0.22s/it)
+  iter  300  L= 256 bs=16  loss 1.6479  (0.22s/it)
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.62  first_token=0.98
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.60  first_token=0.90
+  ctx=  4096  exact=0.52  first_token=0.98
+  ctx=  8192  exact=0.34  first_token=0.66
+  ctx= 16384  exact=0.02  first_token=0.02
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.62  first_token=0.98
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.60  first_token=0.90
+  ctx=  4096  exact=0.52  first_token=0.98
+  ctx=  8192  exact=0.56  first_token=0.98
+  ctx= 16384  exact=0.68  first_token=0.98
+########## Jmr
+number of parameters: 63.52M
+Model type: Jmr | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Fine-tuning for 300 iters on lengths [256, 512, 768, 1024]:
+  iter    1  L=1024 bs=4  loss 10.7357  (0.38s/it)
+  iter   10  L= 256 bs=16  loss 2.5517  (0.23s/it)
+  iter   20  L= 512 bs=8  loss 1.6668  (0.23s/it)
+  iter   30  L=1024 bs=4  loss 2.5030  (0.22s/it)
+  iter   40  L= 256 bs=16  loss 2.1534  (0.22s/it)
+  iter   50  L=1024 bs=4  loss 1.9809  (0.22s/it)
+  iter   60  L=1024 bs=4  loss 0.5997  (0.22s/it)
+  iter   70  L=1024 bs=4  loss 1.5449  (0.22s/it)
+  iter   80  L= 256 bs=16  loss 1.8152  (0.22s/it)
+  iter   90  L=1024 bs=4  loss 0.7490  (0.22s/it)
+  iter  100  L= 256 bs=16  loss 0.8203  (0.22s/it)
+  iter  110  L= 768 bs=5  loss 2.3425  (0.22s/it)
+  iter  120  L= 256 bs=16  loss 1.4349  (0.22s/it)
+  iter  130  L= 256 bs=16  loss 1.3222  (0.22s/it)
+  iter  140  L= 512 bs=8  loss 0.7595  (0.22s/it)
+  iter  150  L= 512 bs=8  loss 1.1417  (0.22s/it)
+  iter  160  L=1024 bs=4  loss 1.5288  (0.22s/it)
+  iter  170  L= 768 bs=5  loss 4.1241  (0.22s/it)
+  iter  180  L= 512 bs=8  loss 1.1448  (0.22s/it)
+  iter  190  L= 512 bs=8  loss 1.1598  (0.22s/it)
+  iter  200  L= 256 bs=16  loss 0.9713  (0.22s/it)
+  iter  210  L= 768 bs=5  loss 0.5197  (0.22s/it)
+  iter  220  L= 256 bs=16  loss 1.5454  (0.22s/it)
+  iter  230  L= 768 bs=5  loss 1.1205  (0.22s/it)
+  iter  240  L= 512 bs=8  loss 1.1783  (0.22s/it)
+  iter  250  L= 768 bs=5  loss 1.4910  (0.22s/it)
+  iter  260  L= 256 bs=16  loss 0.8168  (0.22s/it)
+  iter  270  L= 768 bs=5  loss 0.9244  (0.22s/it)
+  iter  280  L=1024 bs=4  loss 1.3703  (0.22s/it)
+  iter  290  L= 256 bs=16  loss 1.7906  (0.22s/it)
+  iter  300  L= 256 bs=16  loss 1.8113  (0.22s/it)
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.54  first_token=0.94
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.60  first_token=0.90
+  ctx=  4096  exact=0.54  first_token=1.00
+  ctx=  8192  exact=0.52  first_token=0.94
+  ctx= 16384  exact=0.60  first_token=0.94
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.54  first_token=0.94
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.60  first_token=0.90
+  ctx=  4096  exact=0.54  first_token=1.00
+  ctx=  8192  exact=0.56  first_token=0.98
+  ctx= 16384  exact=0.64  first_token=0.96
