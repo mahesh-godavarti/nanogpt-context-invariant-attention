@@ -1,0 +1,10 @@
+# Copyright (c) 2026 Mahesh Godavarti. Licensed under CC BY-NC-SA 4.0.
+__pycache__/
+*.pyc
+out-*/
+*.log
+!results/*.log
+data/**/*.bin
+*.pt
+.claude/
+queue_*.sh

@@ -1,0 +1,11 @@
+number of parameters: 63.65M
+Model type: Jm
+Params: 63,648,768
+Trained block_size: 1024
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+ 16384       86.43      1
+

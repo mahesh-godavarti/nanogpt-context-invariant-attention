@@ -1,0 +1,14 @@
+number of parameters: 63.52M
+Model type: B | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy before fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.56  first_token=0.94
+  ctx=  1024  exact=0.54  first_token=0.96
+  ctx=  2048  exact=0.58  first_token=0.86
+  ctx=  4096  exact=0.08  first_token=0.22
+  ctx=  8192  exact=0.00  first_token=0.04
+Passkey accuracy before fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.56  first_token=0.94
+  ctx=  1024  exact=0.54  first_token=0.96
+  ctx=  2048  exact=0.56  first_token=0.86
+  ctx=  4096  exact=0.46  first_token=0.90
+  ctx=  8192  exact=0.34  first_token=0.84

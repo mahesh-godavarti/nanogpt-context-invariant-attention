@@ -1,0 +1,20 @@
+##### c=0
+cross_scale_s=0.0 cross_shift_c=0.0 cross_scale_ref=32.0
+  4096       42.34      1
+  8192       54.44      1
+ 16384       88.44      1
+##### c=0.5
+cross_scale_s=0.0 cross_shift_c=0.5 cross_scale_ref=32.0
+  4096       40.47      1
+  8192       45.82      1
+ 16384       64.85      1
+##### c=1.0
+cross_scale_s=0.0 cross_shift_c=1.0 cross_scale_ref=32.0
+  4096       39.70      1
+  8192       41.16      1
+ 16384       49.34      1
+##### c=1.5
+cross_scale_s=0.0 cross_shift_c=1.5 cross_scale_ref=32.0
+  4096       39.79      1
+  8192       41.00      1
+ 16384       48.09      1
