@@ -293,6 +293,8 @@ Key config parameters beyond standard nanoGPT:
 
 Copyright (c) 2026 Mahesh Godavarti. Licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0): free to use, change and share for any noncommercial purpose; commercial use is not permitted. See [LICENSE](LICENSE). The original nanoGPT code this builds on remains under its MIT license (see below).
 
+**Patent pending.** The content-addressed attention and the adaptation methods in this repository are the subject of a pending patent application.
+
 ## Acknowledgments
 
 Based on [nanoGPT](https://github.com/karpathy/nanoGPT) by Andrej Karpathy (MIT License).
