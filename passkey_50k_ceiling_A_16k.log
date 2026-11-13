@@ -1,0 +1,5 @@
+########## A ceiling
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.18  first_token=0.20

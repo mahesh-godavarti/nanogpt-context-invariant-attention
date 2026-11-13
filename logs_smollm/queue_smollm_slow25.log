@@ -1,0 +1,39 @@
+##### smoke (10 iters slow25) Tue Oct 27 12:53:20 UTC 2026
+adapt: loaded 274 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+adapt: content-address map initialised to zero
+step 0: train loss 3.2111, val loss 2.8713
+step 5: train loss 3.2217, val loss 2.6329
+step 10: train loss 3.7780, val loss 3.1006
+smoke clean
+##### train smollm_adapt_slow25 Tue Oct 27 12:54:24 UTC 2026
+adapt: loaded 274 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+adapt: content-address map initialised to zero
+step 0: train loss 3.0949, val loss 2.8372
+step 100: train loss 3.2715, val loss 2.9425
+step 200: train loss 3.1904, val loss 2.9547
+step 300: train loss 2.9878, val loss 3.0683
+step 400: train loss 3.0926, val loss 3.0401
+step 500: train loss 3.0628, val loss 3.0461
+##### slow25: ppl Tue Oct 27 13:26:09 UTC 2026
+##### slow25 c=0
+   512       28.05      8
+  1024       23.84      4
+  2048       21.11      2
+  4096      102.33      1
+  8192      286.93      1
+ 16384      564.88      1
+##### slow25 c=1.5
+   512       28.05      8
+  1024       23.86      4
+  2048       21.33      2
+  4096      101.62      1
+  8192      301.16      1
+ 16384      652.25      1
+##### slow25: passkey Tue Oct 27 14:58:20 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=0.98  first_token=1.00
+  ctx=  2048  exact=0.58  first_token=0.90
+  ctx=  4096  exact=0.00  first_token=0.14
+  ctx=  8192  exact=0.00  first_token=0.30
+##### slow25 queue finished Tue Oct 27 15:38:23 UTC 2026

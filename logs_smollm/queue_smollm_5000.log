@@ -1,0 +1,59 @@
+##### train smollm_adapt_5000 Tue Oct 27 15:39:25 UTC 2026
+adapt: loaded 274 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+adapt: content-address map initialised to zero
+step 0: train loss 3.4265, val loss 2.9682
+step 500: train loss 3.0696, val loss 2.9874
+step 1000: train loss 3.0117, val loss 3.1304
+step 1500: train loss 3.1387, val loss 3.1597
+step 2000: train loss 3.1017, val loss 3.2254
+step 2500: train loss 3.0665, val loss 3.2935
+step 3000: train loss 3.0823, val loss 3.2597
+step 3500: train loss 3.0085, val loss 3.2771
+step 4000: train loss 3.0074, val loss 3.3578
+step 4500: train loss 2.9903, val loss 3.3994
+step 5000: train loss 3.1191, val loss 3.4998
+##### 5000: ppl Tue Oct 27 20:41:09 UTC 2026
+##### 5000 c=0
+   512       43.66      8
+  1024       37.23      4
+  2048       33.80      2
+  4096       38.62      1
+  8192       43.78      1
+ 16384       61.78      1
+##### 5000 c=1.5
+   512       43.65      8
+  1024       37.19      4
+  2048       33.04      2
+  4096       35.24      1
+  8192       35.98      1
+ 16384       41.39      1
+##### 5000: passkey Tue Oct 27 22:13:32 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.84  first_token=1.00
+  ctx=  1024  exact=0.94  first_token=0.98
+  ctx=  2048  exact=0.88  first_token=0.94
+  ctx=  4096  exact=0.42  first_token=0.72
+  ctx=  8192  exact=0.06  first_token=0.26
+  ctx= 16384  exact=0.00  first_token=0.04
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.84  first_token=1.00
+  ctx=  1024  exact=0.94  first_token=0.98
+  ctx=  2048  exact=0.84  first_token=0.94
+  ctx=  4096  exact=0.50  first_token=0.76
+  ctx=  8192  exact=0.20  first_token=0.52
+  ctx= 16384  exact=0.00  first_token=0.12
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=0.84  first_token=1.00
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=0.98  first_token=1.00
+  ctx= 16384  exact=0.96  first_token=1.00
+##### 5000 queue finished Wed Oct 28 01:16:07 UTC 2026

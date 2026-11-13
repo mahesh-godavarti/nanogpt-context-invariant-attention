@@ -1,0 +1,125 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/smollm_window_s2.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Window mode (user 2026-10-28): SmolLM-135M with keys closer than 2048 tokens scored exactly as pretrained (continuous RoPE) and
+# keys 2048+ tokens back scored by reset-RoPE + content address. Within 2048 tokens the model is the untouched model; no anneal.
+# Far scores start with a per-head bias of -4 (learned). Trained with window 1024 on 2048-token book sequences so far keys exist
+# (user 2026-10-28); evaluated with window 2048 so the deployed model is exact within its full pretrained context.
+model_type = 'Jm'
+delimiter_ids = (30, 1673)
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-smollm-B/ckpt.pt'
+adapt_zero_addr = True
+window = 1024            # training window; evaluation uses --window 2048
+far_bias_init = -4.0
+
+out_dir = 'out-smollm-window-500-s2'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'smollm_pg19_large'
+gradient_accumulation_steps = 8
+batch_size = 1
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 1e-4
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 1e-5
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 2
+tokens per iteration will be: 16,384
+found vocab_size = 49152 (inside data/smollm_pg19_large/meta.pkl)
+Adapting pretrained checkpoint out-smollm-B/ckpt.pt
+number of parameters: 134.68M
+adapt: loaded 274 tensors; new (fresh) tensors: ['transformer.h.0.attn.far_bias', 'transformer.h.1.attn.far_bias', 'transformer.h.2.attn.far_bias', 'transformer.h.3.attn.far_bias', 'transformer.h.4.attn.far_bias', 'transformer.h.5.attn.far_bias', 'transformer.h.6.attn.far_bias', 'transformer.h.7.attn.far_bias', 'transformer.h.8.attn.far_bias', 'transformer.h.9.attn.far_bias', 'transformer.h.10.attn.far_bias', 'transformer.h.11.attn.far_bias', 'transformer.h.12.attn.far_bias', 'transformer.h.13.attn.far_bias', 'transformer.h.14.attn.far_bias', 'transformer.h.15.attn.far_bias', 'transformer.h.16.attn.far_bias', 'transformer.h.17.attn.far_bias', 'transformer.h.18.attn.far_bias', 'transformer.h.19.attn.far_bias', 'transformer.h.20.attn.far_bias', 'transformer.h.21.attn.far_bias', 'transformer.h.22.attn.far_bias', 'transformer.h.23.attn.far_bias', 'transformer.h.24.attn.far_bias', 'transformer.h.25.attn.far_bias', 'transformer.h.26.attn.far_bias', 'transformer.h.27.attn.far_bias', 'transformer.h.28.attn.far_bias', 'transformer.h.29.attn.far_bias', 'seg_ln.weight', 'seg_proj.weight']; unexpected: []
+adapt: content-address map initialised to zero
+/home/ubuntu/nanoGPT-unitmask/train.py:246: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 212, with 134,645,760 parameters
+num non-decayed parameter tensors: 92, with 35,982 parameters
+using fused AdamW: True
+step 0: train loss 3.4395, val loss 3.0658
+iter 0: loss 3.3705, time 22457.48ms, mfu -100.00%
+iter 10: loss 3.4604, time 7131.75ms, mfu 0.91%
+iter 20: loss 3.2571, time 7138.92ms, mfu 0.91%
+iter 30: loss 3.6634, time 7138.12ms, mfu 0.91%
+iter 40: loss 2.5958, time 7137.47ms, mfu 0.91%
+iter 50: loss 3.1644, time 7136.12ms, mfu 0.91%
+iter 60: loss 3.0673, time 7141.20ms, mfu 0.91%
+iter 70: loss 3.7061, time 7132.76ms, mfu 0.91%
+iter 80: loss 3.1983, time 7137.98ms, mfu 0.91%
+iter 90: loss 3.0675, time 7139.58ms, mfu 0.91%
+step 100: train loss 3.2416, val loss 2.9116
+saving checkpoint to out-smollm-window-500-s2
+iter 100: loss 3.3944, time 24099.54ms, mfu 0.84%
+iter 110: loss 3.2637, time 7143.02ms, mfu 0.85%
+iter 120: loss 3.0574, time 7138.41ms, mfu 0.86%
+iter 130: loss 2.7193, time 7201.42ms, mfu 0.86%
+iter 140: loss 2.9623, time 7132.19ms, mfu 0.86%
+iter 150: loss 3.1396, time 7135.74ms, mfu 0.87%
+iter 160: loss 3.4438, time 7136.98ms, mfu 0.87%
+iter 170: loss 4.0492, time 7139.62ms, mfu 0.88%
+iter 180: loss 3.0912, time 7138.63ms, mfu 0.88%
+iter 190: loss 3.2685, time 7135.68ms, mfu 0.88%
+step 200: train loss 3.2618, val loss 2.9614
+saving checkpoint to out-smollm-window-500-s2
+iter 200: loss 2.9886, time 35133.72ms, mfu 0.81%
+iter 210: loss 3.1625, time 7145.03ms, mfu 0.82%
+iter 220: loss 3.1240, time 7136.42ms, mfu 0.83%
+iter 230: loss 2.9259, time 7136.51ms, mfu 0.84%
+iter 240: loss 3.3860, time 7140.63ms, mfu 0.84%
+iter 250: loss 3.1418, time 7139.96ms, mfu 0.85%
+iter 260: loss 2.8407, time 7144.29ms, mfu 0.86%
+iter 270: loss 3.3296, time 7139.99ms, mfu 0.86%
+iter 280: loss 3.2906, time 7128.67ms, mfu 0.87%
+iter 290: loss 3.0808, time 7139.35ms, mfu 0.87%
+step 300: train loss 3.0442, val loss 2.8832
+saving checkpoint to out-smollm-window-500-s2
+iter 300: loss 3.3950, time 35125.85ms, mfu 0.80%
+iter 310: loss 3.8265, time 7139.80ms, mfu 0.81%
+iter 320: loss 2.9935, time 7137.76ms, mfu 0.82%
+iter 330: loss 3.0981, time 7132.66ms, mfu 0.83%
+iter 340: loss 3.2429, time 7139.60ms, mfu 0.84%
+iter 350: loss 3.3787, time 7134.89ms, mfu 0.84%
+iter 360: loss 3.5701, time 7131.94ms, mfu 0.85%
+iter 370: loss 3.3832, time 7140.93ms, mfu 0.86%
+iter 380: loss 2.8240, time 7138.38ms, mfu 0.86%
+iter 390: loss 2.9768, time 7139.40ms, mfu 0.87%
+step 400: train loss 3.1401, val loss 3.1041
+saving checkpoint to out-smollm-window-500-s2
+iter 400: loss 3.9196, time 35160.43ms, mfu 0.80%
+iter 410: loss 3.2242, time 7141.48ms, mfu 0.81%
+iter 420: loss 3.3573, time 7133.47ms, mfu 0.82%
+iter 430: loss 3.1263, time 7133.61ms, mfu 0.83%
+iter 440: loss 3.2052, time 7135.39ms, mfu 0.84%
+iter 450: loss 2.6968, time 7147.44ms, mfu 0.84%
+iter 460: loss 2.9479, time 7139.93ms, mfu 0.85%
+iter 470: loss 3.0376, time 7158.52ms, mfu 0.85%
+iter 480: loss 2.9834, time 7133.65ms, mfu 0.86%
+iter 490: loss 3.2149, time 7136.10ms, mfu 0.86%
+step 500: train loss 2.9658, val loss 2.9727
+saving checkpoint to out-smollm-window-500-s2
+iter 500: loss 3.3766, time 35095.11ms, mfu 0.80%

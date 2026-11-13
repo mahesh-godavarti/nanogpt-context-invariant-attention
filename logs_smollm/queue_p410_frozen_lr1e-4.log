@@ -1,0 +1,24 @@
+##### train 410M frozen lr1e-4 Wed Nov  4 01:46:55 UTC 2026
+step 0: train loss 3.7688, val loss 3.3829
+step 100: train loss 2.8389, val loss 2.9353
+step 200: train loss 2.8388, val loss 3.0188
+step 300: train loss 2.8781, val loss 2.8212
+step 400: train loss 2.8249, val loss 2.8099
+step 500: train loss 2.8243, val loss 2.7946
+##### ppl (window 2048, c=0) Wed Nov  4 04:05:15 UTC 2026
+   512       21.98      8
+  1024       18.03      4
+  2048       16.32      2
+  4096       15.45      1
+  8192       15.86      1
+##### ppl 16384 alone
+ 16384       16.60      1
+##### passkey Wed Nov  4 04:48:03 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.84  first_token=0.98
+  ctx=  1024  exact=0.86  first_token=0.98
+  ctx=  2048  exact=0.76  first_token=0.92
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=0.94  first_token=0.94
+##### 410M frozen lr1e-4 finished Wed Nov  4 05:50:30 UTC 2026

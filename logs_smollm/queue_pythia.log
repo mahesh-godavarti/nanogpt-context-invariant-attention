@@ -1,0 +1,59 @@
+##### smoke (10 iters pythia window) Thu Oct 29 18:00:05 UTC 2026
+step 0: train loss 10.2196, val loss 10.5657
+step 5: train loss 8.6402, val loss 8.9670
+step 10: train loss 7.9276, val loss 8.8877
+smoke clean
+##### untouched Pythia: ppl Thu Oct 29 18:01:12 UTC 2026
+##### pythia-B plain
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096      105.65      1
+  8192      764.89      1
+ 16384     1585.71      1
+##### pythia-B ntk
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096       25.77      1
+  8192       33.46      1
+ 16384       73.75      1
+##### untouched Pythia: passkey Thu Oct 29 18:09:58 UTC 2026
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.98  first_token=0.98
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.98  first_token=0.98
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=0.96  first_token=0.96
+  ctx=  8192  exact=0.68  first_token=0.92
+  ctx= 16384  exact=0.00  first_token=0.02
+##### train pythia window Thu Oct 29 18:19:14 UTC 2026
+adapt: content-address map initialised to zero
+step 0: train loss 11.5331, val loss 10.8871
+step 100: train loss 7.5459, val loss 9.1231
+step 200: train loss 6.7514, val loss 7.7968
+step 300: train loss 5.4800, val loss 6.7998
+step 400: train loss 5.0017, val loss 6.1078
+step 500: train loss 4.7215, val loss 5.6838
+##### pythia window: ppl (window 2048, c=0) Thu Oct 29 18:54:20 UTC 2026
+   512      386.77      8
+  1024      331.04      4
+  2048      324.41      2
+  4096      357.73      1
+  8192      437.06      1
+ 16384      443.12      1
+##### pythia window: passkey Thu Oct 29 19:13:13 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.14
+  ctx=  1024  exact=0.00  first_token=0.06
+  ctx=  2048  exact=0.00  first_token=0.04
+  ctx=  4096  exact=0.00  first_token=0.08
+  ctx=  8192  exact=0.00  first_token=0.06
+  ctx= 16384  exact=0.00  first_token=0.08
+##### pythia queue finished Thu Oct 29 19:38:44 UTC 2026

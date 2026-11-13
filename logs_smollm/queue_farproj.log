@@ -1,0 +1,33 @@
+##### smoke (10 iters) Fri Oct 30 15:50:05 UTC 2026
+adapt: far-path q/k projections initialised from the pretrained projections
+adapt: pretrained weights frozen; trainable parameters: 13,437,774
+new-parameter group: 92 tensors, 13,437,774 params at 50.0x lr
+step 0: train loss 3.9413, val loss 3.6935
+step 5: train loss 2.9774, val loss 2.7147
+step 10: train loss 3.8277, val loss 2.9920
+smoke clean
+##### train farproj frozen Fri Oct 30 15:52:32 UTC 2026
+adapt: far-path q/k projections initialised from the pretrained projections
+adapt: pretrained weights frozen; trainable parameters: 13,437,774
+step 0: train loss 3.6059, val loss 3.1247
+step 100: train loss 3.0798, val loss 2.8842
+step 200: train loss 3.1795, val loss 2.9561
+step 300: train loss 3.1764, val loss 2.7517
+step 400: train loss 3.1388, val loss 2.8926
+step 500: train loss 3.1873, val loss 2.9521
+##### ppl (window 2048, c=0) Fri Oct 30 17:32:16 UTC 2026
+   512       23.90      8
+  1024       20.57      4
+  2048       17.74      2
+  4096       18.47      1
+  8192       17.02      1
+ 16384       16.63      1
+##### passkey Fri Oct 30 18:02:00 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=0.98  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=0.94  first_token=1.00
+##### farproj queue finished Fri Oct 30 18:47:15 UTC 2026

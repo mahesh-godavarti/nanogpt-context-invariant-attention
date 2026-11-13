@@ -1,0 +1,88 @@
+##### GPU smoke (20 iters Jmp) Sun Oct 25 11:51:04 UTC 2026
+smoke clean
+##### train Jm (delimiter 764) Sun Oct 25 11:51:44 UTC 2026
+iter 0: loss 10.8607, time 30399.41ms, mfu -100.00%
+iter 2500: loss 4.2950, time 31272.00ms, mfu 1.62%
+iter 4990: loss 3.8455, time 1463.79ms, mfu 1.79%
+step 5000: train loss 3.7274, val loss 3.7082
+##### train Jmp (delimiter 764) Sun Oct 25 13:59:00 UTC 2026
+iter 0: loss 10.8596, time 33713.73ms, mfu -100.00%
+iter 2500: loss 4.2637, time 34301.89ms, mfu 1.47%
+iter 4990: loss 3.8415, time 1621.68ms, mfu 1.62%
+step 5000: train loss 3.7167, val loss 3.7005
+##### train Jmr (delimiter 764) Sun Oct 25 16:19:08 UTC 2026
+iter 0: loss 10.8615, time 30529.39ms, mfu -100.00%
+iter 2500: loss 4.1994, time 31278.26ms, mfu 1.62%
+iter 4990: loss 3.8398, time 1464.39ms, mfu 1.79%
+step 5000: train loss 3.8246, val loss 3.8402
+##### train Jmrp (delimiter 764) Sun Oct 25 18:26:06 UTC 2026
+iter 0: loss 10.8622, time 33940.34ms, mfu -100.00%
+iter 2500: loss 4.2213, time 34565.04ms, mfu 1.52%
+iter 4990: loss 3.8997, time 1560.02ms, mfu 1.68%
+step 5000: train loss 3.8736, val loss 3.8873
+##### evals Sun Oct 25 20:41:49 UTC 2026
+##### Jm c=0
+cross_scale_s=0.0 cross_shift_c=0.0 cross_scale_ref=32.0
+   256       47.01     16
+   512       44.12      8
+  1024       40.60      4
+  2048       41.31      2
+  4096       41.50      1
+  8192       62.25      1
+##### Jm c=1.5
+cross_scale_s=0.0 cross_shift_c=1.5 cross_scale_ref=32.0
+   256       47.01     16
+   512       44.12      8
+  1024       40.60      4
+  2048       41.40      2
+  4096       39.71      1
+  8192       43.70      1
+##### Jmp c=0
+cross_scale_s=0.0 cross_shift_c=0.0 cross_scale_ref=32.0
+   256       46.49     16
+   512       43.74      8
+  1024       40.31      4
+  2048       41.03      2
+  4096       40.80      1
+  8192       59.67      1
+##### Jmp c=1.5
+cross_scale_s=0.0 cross_shift_c=1.5 cross_scale_ref=32.0
+   256       46.49     16
+   512       43.74      8
+  1024       40.31      4
+  2048       41.29      2
+  4096       39.89      1
+  8192       44.27      1
+##### Jmr c=0
+cross_scale_s=0.0 cross_shift_c=0.0 cross_scale_ref=32.0
+   256       50.98     16
+   512       48.81      8
+  1024       45.64      4
+  2048       47.37      2
+  4096       46.08      1
+  8192       58.23      1
+##### Jmr c=1.5
+cross_scale_s=0.0 cross_shift_c=1.5 cross_scale_ref=32.0
+   256       50.98     16
+   512       48.81      8
+  1024       45.63      4
+  2048       47.29      2
+  4096       44.93      1
+  8192       48.48      1
+##### Jmrp c=0
+cross_scale_s=0.0 cross_shift_c=0.0 cross_scale_ref=32.0
+   256       52.92     16
+   512       50.88      8
+  1024       47.80      4
+  2048       50.08      2
+  4096       47.76      1
+  8192       53.88      1
+##### Jmrp c=1.5
+cross_scale_s=0.0 cross_shift_c=1.5 cross_scale_ref=32.0
+   256       52.92     16
+   512       50.88      8
+  1024       47.79      4
+  2048       50.13      2
+  4096       48.00      1
+  8192       52.10      1
+##### pilot2 finished Sun Oct 25 21:07:55 UTC 2026

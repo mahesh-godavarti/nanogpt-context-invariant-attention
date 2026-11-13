@@ -1,0 +1,73 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/smollm_adapt.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Adapt the public pretrained SmolLM-135M (LLaMA architecture, RoPE, context 2048, 600B tokens) to content addresses
+# using ~8M tokens of PG-19 books (not its pretraining data). alpha goes 0.1 -> 1 over all 500 steps; evaluation on WikiText-103.
+model_type = 'Jm'
+delimiter_ids = (30, 1673)          # SmolLM tokenizer: '.' and ' .'
+init_from = 'adapt'
+adapt = True
+adapt_ckpt = 'out-smollm-B/ckpt.pt'  # the untouched SmolLM saved as a model-B checkpoint (make_hf_ckpt.py)
+adapt_alpha0 = 0.1
+adapt_anneal_iters = 500
+adapt_slow_frac = 1.0
+
+out_dir = 'out-smollm-adaptJm-500'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'smollm_pg19'
+gradient_accumulation_steps = 4
+batch_size = 2
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 1e-4
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 1e-5
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1337
+Overriding: max_iters = 10
+Overriding: lr_decay_iters = 10
+Overriding: adapt_anneal_iters = 10
+Overriding: eval_interval = 5
+Overriding: eval_iters = 2
+Overriding: out_dir = out-smoke-smollm
+tokens per iteration will be: 16,384
+found vocab_size = 49152 (inside data/smollm_pg19/meta.pkl)
+Adapting pretrained checkpoint out-smollm-B/ckpt.pt
+number of parameters: 134.68M
+adapt: loaded 274 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+/home/ubuntu/nanoGPT-unitmask/train.py:236: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 212, with 134,645,760 parameters
+num non-decayed parameter tensors: 62, with 35,712 parameters
+using fused AdamW: True
+step 0: train loss 3.3406, val loss 2.9985
+iter 0: loss 3.6698, time 5008.74ms, mfu -100.00%
+step 5: train loss 4.6830, val loss 4.4743
+saving checkpoint to out-smoke-smollm
+step 10: train loss 6.5718, val loss 6.8747
+saving checkpoint to out-smoke-smollm
+iter 10: loss 5.2138, time 17662.81ms, mfu 0.37%

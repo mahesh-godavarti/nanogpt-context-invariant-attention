@@ -1,0 +1,67 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/pythia_cont_lr2e-5.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Control for the Pythia window run: Pythia-160M fine-tuned 500 steps on the same FineWeb-Edu tokens, same schedule, no addresses.
+# keys 2048+ tokens back scored by reset-RoPE + content address. Within 2048 tokens the model is the untouched model; no anneal.
+# Far scores start with a per-head bias of -4 (learned). Trained with window 1024 on 2048-token FineWeb-Edu sequences so far keys exist
+# (user 2026-10-28); evaluated with window 2048 so the deployed model is exact within its full pretrained context.
+model_type = 'B'
+delimiter_ids = (15, 964)           # Pythia tokenizer: '.' and ' .'
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-pythia-B/ckpt.pt'
+adapt_zero_addr = True
+window = 0
+grad_checkpoint = False
+far_bias_init = -6.0   # Pythia: its attention scores are larger, -4 let far keys disturb the start by +0.28 nats; -6 by +0.06
+
+out_dir = 'out-pythia-Bcont-500-lr2e-5'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'pythia_fineweb'
+gradient_accumulation_steps = 8
+batch_size = 1
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 2e-5   # 5x lower: at 1e-4 the control's val loss jumped 3.35 -> 3.79 during warmup
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 2e-6
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1337
+tokens per iteration will be: 16,384
+found vocab_size = 50304 (inside data/pythia_fineweb/meta.pkl)
+Adapting pretrained checkpoint out-pythia-B/ckpt.pt
+number of parameters: 162.32M
+adapt: loaded 197 tensors; new (fresh) tensors: []; unexpected: []
+/home/ubuntu/nanoGPT-unitmask/train.py:251: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 74, with 162,201,600 parameters
+num non-decayed parameter tensors: 122, with 121,344 parameters
+using fused AdamW: True
+step 0: train loss 3.2374, val loss 3.3481
+iter 0: loss 3.3403, time 3345.45ms, mfu -100.00%
+iter 10: loss 3.6372, time 1180.50ms, mfu 5.34%
+iter 20: loss 3.0421, time 1197.62ms, mfu 5.33%

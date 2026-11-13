@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Mahesh Godavarti
-# Licensed under CC BY-NC-SA 4.0. See LICENSE file for details.
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
 
 """Rebuild the seed-averaged tables in the README from the logs in this directory.
 

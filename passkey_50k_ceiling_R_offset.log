@@ -1,0 +1,17 @@
+########## R ceiling
+number of parameters: 63.52M
+Model type: R | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.95  first_token=1.00
+  ctx=  1024  exact=0.96  first_token=1.00
+  ctx=  2048  exact=0.97  first_token=1.00
+  ctx=  4096  exact=0.95  first_token=1.00
+  ctx=  8192  exact=0.70  first_token=0.82
+  ctx= 16384  exact=0.29  first_token=0.35
+Passkey accuracy after fine-tuning (cross_shift_c=1.0):
+  ctx=   512  exact=0.95  first_token=1.00
+  ctx=  1024  exact=0.96  first_token=1.00
+  ctx=  2048  exact=0.97  first_token=1.00
+  ctx=  4096  exact=0.95  first_token=1.00
+  ctx=  8192  exact=0.91  first_token=0.99
+  ctx= 16384  exact=0.93  first_token=0.98

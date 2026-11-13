@@ -1,0 +1,74 @@
+##### repeat test Fri Nov  6 17:27:25 UTC 2026
+out-smollm-B SmolLM untouched model_type=B ntk=False window=0
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.19         0.969       20.66
+  4096       1787.59         0.068       29.50
+  8192       2561.61         0.059       24.99
+ 14000       5325.27         0.057       24.08
+out-smollm-B SmolLM untouched+NTK model_type=B ntk=True window=0
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.19         0.969       20.66
+  4096        191.48         0.181       29.50
+  8192        822.29         0.080       24.99
+ 14000       1245.74         0.080       24.08
+out-smollm-window-500 SmolLM window all-weights model_type=Jm ntk=False window=2048
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.32         0.952       22.55
+  4096          8.65         0.547       32.67
+  8192          9.55         0.552       27.56
+ 14000         11.84         0.519       26.24
+out-smollm-window-500-farproj-frozen SmolLM window frozen model_type=Jm ntk=False window=2048
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.19         0.969       20.65
+  4096         10.17         0.530       29.50
+  8192         10.27         0.540       24.99
+ 14000         12.22         0.502       24.08
+out-pythia-B Pythia-160M untouched model_type=B ntk=False window=0
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.29         0.954       39.34
+  4096       1809.22         0.032       35.14
+  8192       1894.27         0.038       40.58
+ 14000       1870.99         0.033       35.93
+out-pythia-B Pythia-160M untouched+NTK model_type=B ntk=True window=0
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.29         0.954       39.34
+  4096         19.56         0.445       35.14
+  8192         46.44         0.339       40.58
+ 14000        290.56         0.170       35.93
+out-pythia-window-500-splitlr Pythia-160M window all-weights model_type=Jm ntk=False window=2048
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.56         0.919       42.94
+  4096         19.62         0.462       38.77
+  8192         24.42         0.435       45.06
+ 14000         21.43         0.452       38.95
+out-pythia-window-500-farproj-frozen-lr1e-4 Pythia-160M window frozen model_type=Jm ntk=False window=2048
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.30         0.953       39.40
+  4096         24.04         0.404       34.97
+  8192         29.18         0.404       40.75
+ 14000         28.25         0.401       35.92
+out-pythia410-B Pythia-410M untouched model_type=B ntk=False window=0
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.12         0.983       24.63
+  4096       7262.99         0.015       22.95
+  8192      45305.91         0.000       24.44
+ 14000      41605.59         0.002       23.07
+out-pythia410-B Pythia-410M untouched+NTK model_type=B ntk=True window=0
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.12         0.983       24.63
+  4096          7.36         0.603       22.95
+  8192        151.01         0.209       24.44
+ 14000        476.61         0.123       23.07
+out-pythia410-window-500-splitlr Pythia-410M window all-weights model_type=Jm ntk=False window=2048
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.22         0.965       27.00
+  4096         27.28         0.393       25.49
+  8192         28.85         0.387       27.18
+ 14000         26.00         0.407       25.33
+out-pythia410-window-500-farproj-frozen-lr1e-4 Pythia-410M window frozen model_type=Jm ntk=False window=2048
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.12         0.983       24.63
+  4096          3.94         0.706       22.92
+  8192          6.16         0.633       24.46
+ 14000          6.44         0.622       23.10
+##### repeat test finished Fri Nov  6 18:06:23 UTC 2026

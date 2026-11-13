@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Mahesh Godavarti
-# Licensed under CC BY-NC-SA 4.0. See LICENSE file for details.
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
 
 """Evaluate a trained model's perplexity at multiple context lengths.
 
@@ -57,6 +57,7 @@ def main():
                    help='seed for sampling evaluation windows (same windows for every model/setting)')
     p.add_argument('--ntk', action='store_true',
                    help='B: dynamic NTK scaling of the RoPE base beyond the training length')
+    p.add_argument('--window', type=int, default=None, help='window-mode models: override the near/far boundary (tokens) at evaluation')
     p.add_argument('--rope_ref_len', type=int, default=None,
                    help='B: reference (training) length for NTK scaling (default: trained block_size)')
     args = p.parse_args()
@@ -76,15 +77,25 @@ def main():
     model = model.to(args.device).eval()
     if args.no_flex:
         model.config.use_flex = False
+    if args.window is not None:
+        model.config.window = args.window
+        print(f"window={model.config.window}")
     if args.cross_scale_s is not None:
         model.config.cross_scale_s = args.cross_scale_s
     if args.cross_scale_ref is not None:
         model.config.cross_scale_ref = args.cross_scale_ref
     if args.cross_shift_c is not None:
         model.config.cross_shift_c = args.cross_shift_c
-    if model_args.get('model_type', 'B') != 'B':
+    mt = model_args.get('model_type', 'B')
+    if mt in ('R', 'Jm', 'Jmr'):
         print(f"cross_scale_s={model.config.cross_scale_s} cross_shift_c={model.config.cross_shift_c} "
               f"cross_scale_ref={model.config.cross_scale_ref}")
+        if args.ntk:   # adapted model with bands left on continuous RoPE: NTK-scale those bands beyond the trained length
+            model.config.rope_ntk = True
+            model.config.rope_ref_len = args.rope_ref_len or model_args['block_size']
+            print(f"rope_ntk=True on the un-annealed bands, rope_ref_len={model.config.rope_ref_len}")
+    elif mt == 'A':
+        print("ALiBi: no position scaling applies")
     else:
         model.config.rope_ntk = args.ntk
         model.config.rope_ref_len = args.rope_ref_len or model_args['block_size']

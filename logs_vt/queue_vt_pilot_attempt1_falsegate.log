@@ -1,0 +1,3 @@
+##### GPU smoke (20 iters Bp, Jmp) Sat Oct 24 22:12:50 UTC 2026
+/home/ubuntu/nanoGPT-unitmask/train.py:209: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+##### SMOKE FAILED (Bp) Sat Oct 24 22:13:19 UTC 2026

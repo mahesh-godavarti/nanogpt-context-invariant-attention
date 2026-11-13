@@ -1,0 +1,9 @@
+##### window: passkey fine-tune @4096 Thu Oct 29 02:56:32 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=0.90  first_token=1.00
+##### window passkey @4096 finished Thu Oct 29 03:43:48 UTC 2026

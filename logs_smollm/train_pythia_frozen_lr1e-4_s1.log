@@ -1,0 +1,132 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/pythia_window_frozen_lr1e-4_s1.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Pythia-160M (GPT-NeoX, quarter rotary): window mode, separate far-path q/k projections, pretrained model FROZEN. Originally SmolLM-135M with keys closer than 2048 tokens scored exactly as pretrained (continuous RoPE) and
+# keys 2048+ tokens back scored by reset-RoPE + content address. Within 2048 tokens the model is the untouched model; no anneal.
+# Far scores start with a per-head bias of -4 (learned). Trained with window 1024 on 2048-token book sequences so far keys exist
+# (user 2026-10-28); evaluated with window 2048 so the deployed model is exact within its full pretrained context.
+model_type = 'Jm'
+delimiter_ids = (15, 964)           # Pythia tokenizer
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-pythia-B/ckpt.pt'
+adapt_zero_addr = True
+window = 1024            # training window; evaluation uses --window 2048
+far_bias_init = -4.0   # -6 may have starved the far path on 410M; -4 as on SmolLM
+
+out_dir = 'out-pythia-window-500-farproj-frozen-lr1e-4-s1'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'pythia_fineweb'
+gradient_accumulation_steps = 8
+batch_size = 1
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 2e-5   # schedule base; pretrained weights are frozen
+new_param_lr = 1e-4
+far_proj = True
+freeze_pretrained = True
+grad_checkpoint = True
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 1e-5
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1
+tokens per iteration will be: 16,384
+found vocab_size = 50304 (inside data/pythia_fineweb/meta.pkl)
+Adapting pretrained checkpoint out-pythia-B/ckpt.pt
+number of parameters: 176.79M
+adapt: loaded 197 tensors; new (fresh) tensors: ['transformer.h.0.attn.far_bias', 'transformer.h.0.attn.q_far_proj.weight', 'transformer.h.0.attn.q_far_proj.bias', 'transformer.h.0.attn.k_far_proj.weight', 'transformer.h.0.attn.k_far_proj.bias', 'transformer.h.1.attn.far_bias', 'transformer.h.1.attn.q_far_proj.weight', 'transformer.h.1.attn.q_far_proj.bias', 'transformer.h.1.attn.k_far_proj.weight', 'transformer.h.1.attn.k_far_proj.bias', 'transformer.h.2.attn.far_bias', 'transformer.h.2.attn.q_far_proj.weight', 'transformer.h.2.attn.q_far_proj.bias', 'transformer.h.2.attn.k_far_proj.weight', 'transformer.h.2.attn.k_far_proj.bias', 'transformer.h.3.attn.far_bias', 'transformer.h.3.attn.q_far_proj.weight', 'transformer.h.3.attn.q_far_proj.bias', 'transformer.h.3.attn.k_far_proj.weight', 'transformer.h.3.attn.k_far_proj.bias', 'transformer.h.4.attn.far_bias', 'transformer.h.4.attn.q_far_proj.weight', 'transformer.h.4.attn.q_far_proj.bias', 'transformer.h.4.attn.k_far_proj.weight', 'transformer.h.4.attn.k_far_proj.bias', 'transformer.h.5.attn.far_bias', 'transformer.h.5.attn.q_far_proj.weight', 'transformer.h.5.attn.q_far_proj.bias', 'transformer.h.5.attn.k_far_proj.weight', 'transformer.h.5.attn.k_far_proj.bias', 'transformer.h.6.attn.far_bias', 'transformer.h.6.attn.q_far_proj.weight', 'transformer.h.6.attn.q_far_proj.bias', 'transformer.h.6.attn.k_far_proj.weight', 'transformer.h.6.attn.k_far_proj.bias', 'transformer.h.7.attn.far_bias', 'transformer.h.7.attn.q_far_proj.weight', 'transformer.h.7.attn.q_far_proj.bias', 'transformer.h.7.attn.k_far_proj.weight', 'transformer.h.7.attn.k_far_proj.bias', 'transformer.h.8.attn.far_bias', 'transformer.h.8.attn.q_far_proj.weight', 'transformer.h.8.attn.q_far_proj.bias', 'transformer.h.8.attn.k_far_proj.weight', 'transformer.h.8.attn.k_far_proj.bias', 'transformer.h.9.attn.far_bias', 'transformer.h.9.attn.q_far_proj.weight', 'transformer.h.9.attn.q_far_proj.bias', 'transformer.h.9.attn.k_far_proj.weight', 'transformer.h.9.attn.k_far_proj.bias', 'transformer.h.10.attn.far_bias', 'transformer.h.10.attn.q_far_proj.weight', 'transformer.h.10.attn.q_far_proj.bias', 'transformer.h.10.attn.k_far_proj.weight', 'transformer.h.10.attn.k_far_proj.bias', 'transformer.h.11.attn.far_bias', 'transformer.h.11.attn.q_far_proj.weight', 'transformer.h.11.attn.q_far_proj.bias', 'transformer.h.11.attn.k_far_proj.weight', 'transformer.h.11.attn.k_far_proj.bias', 'seg_ln.weight', 'seg_ln.bias', 'seg_proj.weight', 'seg_proj.bias']; unexpected: []
+adapt: far-path q/k projections initialised from the pretrained projections
+adapt: pretrained weights frozen; trainable parameters: 14,471,184
+adapt: content-address map initialised to zero
+/home/ubuntu/nanoGPT-unitmask/train.py:263: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+new-parameter group: 64 tensors, 14,471,184 params at 5.0x lr
+num decayed parameter tensors: 0, with 0 parameters
+num non-decayed parameter tensors: 0, with 0 parameters
+using fused AdamW: True
+step 0: train loss 3.9518, val loss 3.8505
+iter 0: loss 3.9948, time 15796.58ms, mfu -100.00%
+iter 10: loss 3.5992, time 6189.53ms, mfu 1.09%
+iter 20: loss 3.3141, time 6144.84ms, mfu 1.09%
+iter 30: loss 2.8395, time 6146.21ms, mfu 1.09%
+iter 40: loss 3.3000, time 6146.34ms, mfu 1.09%
+iter 50: loss 3.1707, time 6143.54ms, mfu 1.09%
+iter 60: loss 3.3712, time 6154.81ms, mfu 1.10%
+iter 70: loss 3.3806, time 6206.34ms, mfu 1.09%
+iter 80: loss 3.6295, time 6211.80ms, mfu 1.09%
+iter 90: loss 3.3766, time 6152.35ms, mfu 1.09%
+step 100: train loss 3.2752, val loss 3.4012
+saving checkpoint to out-pythia-window-500-farproj-frozen-lr1e-4-s1
+iter 100: loss 3.2048, time 16650.77ms, mfu 1.03%
+iter 110: loss 3.4156, time 6151.02ms, mfu 1.03%
+iter 120: loss 3.1960, time 6149.67ms, mfu 1.04%
+iter 130: loss 3.3233, time 6206.06ms, mfu 1.04%
+iter 140: loss 3.0723, time 6208.96ms, mfu 1.05%
+iter 150: loss 3.4608, time 6144.03ms, mfu 1.05%
+iter 160: loss 3.7199, time 6147.16ms, mfu 1.06%
+iter 170: loss 3.3158, time 6147.55ms, mfu 1.06%
+iter 180: loss 3.8156, time 6144.73ms, mfu 1.07%
+iter 190: loss 3.4421, time 6147.07ms, mfu 1.07%
+step 200: train loss 3.3256, val loss 3.4330
+saving checkpoint to out-pythia-window-500-farproj-frozen-lr1e-4-s1
+iter 200: loss 3.0231, time 22115.66ms, mfu 0.99%
+iter 210: loss 3.1371, time 6144.39ms, mfu 1.00%
+iter 220: loss 3.8229, time 6142.02ms, mfu 1.01%
+iter 230: loss 3.3093, time 6152.40ms, mfu 1.02%
+iter 240: loss 3.2483, time 6151.45ms, mfu 1.03%
+iter 250: loss 3.5155, time 6152.20ms, mfu 1.04%
+iter 260: loss 3.3267, time 6152.13ms, mfu 1.04%
+iter 270: loss 3.0205, time 6209.82ms, mfu 1.05%
+iter 280: loss 3.2897, time 6142.32ms, mfu 1.05%
+iter 290: loss 3.2814, time 6145.53ms, mfu 1.06%
+step 300: train loss 3.3353, val loss 3.3708
+saving checkpoint to out-pythia-window-500-farproj-frozen-lr1e-4-s1
+iter 300: loss 3.0820, time 22018.25ms, mfu 0.98%
+iter 310: loss 3.4442, time 6144.76ms, mfu 0.99%
+iter 320: loss 3.2034, time 6142.41ms, mfu 1.00%
+iter 330: loss 3.4197, time 6144.79ms, mfu 1.01%
+iter 340: loss 3.4393, time 6207.43ms, mfu 1.02%
+iter 350: loss 3.7676, time 6147.05ms, mfu 1.03%
+iter 360: loss 3.5442, time 6146.29ms, mfu 1.04%
+iter 370: loss 3.1023, time 6146.99ms, mfu 1.04%
+iter 380: loss 2.5692, time 6154.35ms, mfu 1.05%
+iter 390: loss 3.3654, time 6153.35ms, mfu 1.05%
+step 400: train loss 3.2696, val loss 3.5199
+saving checkpoint to out-pythia-window-500-farproj-frozen-lr1e-4-s1
+iter 400: loss 3.3597, time 22042.46ms, mfu 0.98%
+iter 410: loss 3.6403, time 6212.73ms, mfu 0.99%
+iter 420: loss 3.8866, time 6150.32ms, mfu 1.00%
+iter 430: loss 3.2079, time 6148.40ms, mfu 1.01%
+iter 440: loss 3.3141, time 6145.73ms, mfu 1.02%
+iter 450: loss 3.2978, time 6144.63ms, mfu 1.03%
+iter 460: loss 3.2196, time 6144.63ms, mfu 1.03%
+iter 470: loss 3.2626, time 6146.35ms, mfu 1.04%
+iter 480: loss 3.2832, time 6205.29ms, mfu 1.05%
+iter 490: loss 3.2127, time 6145.34ms, mfu 1.05%
+step 500: train loss 3.4084, val loss 3.3652
+saving checkpoint to out-pythia-window-500-farproj-frozen-lr1e-4-s1
+iter 500: loss 3.2821, time 22017.56ms, mfu 0.98%

@@ -1,0 +1,38 @@
+##### train pythia control Thu Oct 29 23:13:15 UTC 2026
+adapt: loaded 197 tensors; new (fresh) tensors: []; unexpected: []
+step 0: train loss 3.2374, val loss 3.3481
+step 100: train loss 3.4485, val loss 3.7860
+step 200: train loss 3.3708, val loss 3.8117
+step 300: train loss 3.3284, val loss 3.7540
+step 400: train loss 3.1196, val loss 3.5685
+step 500: train loss 3.0217, val loss 3.5586
+##### pythia control ppl plain
+   512       45.45      8
+  1024       37.74      4
+  2048       34.48      2
+  4096      129.20      1
+  8192      961.47      1
+ 16384     1900.06      1
+##### pythia control ppl ntk
+   512       45.45      8
+  1024       37.74      4
+  2048       34.48      2
+  4096       31.17      1
+  8192       38.03      1
+ 16384       75.98      1
+##### pythia control passkey Thu Oct 29 23:33:44 UTC 2026
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.94  first_token=1.00
+  ctx=  1024  exact=0.94  first_token=0.98
+  ctx=  2048  exact=0.94  first_token=0.98
+  ctx=  4096  exact=0.00  first_token=0.06
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.94  first_token=1.00
+  ctx=  1024  exact=0.94  first_token=0.98
+  ctx=  2048  exact=0.94  first_token=0.98
+  ctx=  4096  exact=0.98  first_token=1.00
+  ctx=  8192  exact=0.98  first_token=0.98
+  ctx= 16384  exact=0.38  first_token=0.58
+##### pythia control finished Thu Oct 29 23:42:59 UTC 2026

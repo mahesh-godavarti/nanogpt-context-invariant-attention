@@ -1,0 +1,82 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/smollm_window_farproj_frozen.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Window mode with SEPARATE far-path q/k projections (copied from the pretrained ones) and the pretrained model FROZEN (user 2026-10-30): SmolLM-135M with keys closer than 2048 tokens scored exactly as pretrained (continuous RoPE) and
+# keys 2048+ tokens back scored by reset-RoPE + content address. Within 2048 tokens the model is the untouched model; no anneal.
+# Far scores start with a per-head bias of -4 (learned). Trained with window 1024 on 2048-token book sequences so far keys exist
+# (user 2026-10-28); evaluated with window 2048 so the deployed model is exact within its full pretrained context.
+model_type = 'Jm'
+delimiter_ids = (30, 1673)
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-smollm-B/ckpt.pt'
+adapt_zero_addr = True
+window = 1024            # training window; evaluation uses --window 2048
+far_bias_init = -4.0
+
+out_dir = 'out-smollm-window-500-farproj-frozen'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'smollm_pg19_large'
+gradient_accumulation_steps = 8
+batch_size = 1
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 2e-5   # schedule base; pretrained weights are frozen
+new_param_lr = 1e-3    # far-path q/k projections, address map, far biases
+far_proj = True
+freeze_pretrained = True
+grad_checkpoint = True
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 1e-5
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1337
+Overriding: max_iters = 10
+Overriding: lr_decay_iters = 10
+Overriding: eval_interval = 5
+Overriding: eval_iters = 2
+Overriding: out_dir = out-smoke-farproj
+tokens per iteration will be: 16,384
+found vocab_size = 49152 (inside data/smollm_pg19_large/meta.pkl)
+Adapting pretrained checkpoint out-smollm-B/ckpt.pt
+number of parameters: 147.95M
+adapt: loaded 274 tensors; new (fresh) tensors: ['transformer.h.0.attn.far_bias', 'transformer.h.0.attn.q_far_proj.weight', 'transformer.h.0.attn.k_far_proj.weight', 'transformer.h.1.attn.far_bias', 'transformer.h.1.attn.q_far_proj.weight', 'transformer.h.1.attn.k_far_proj.weight', 'transformer.h.2.attn.far_bias', 'transformer.h.2.attn.q_far_proj.weight', 'transformer.h.2.attn.k_far_proj.weight', 'transformer.h.3.attn.far_bias', 'transformer.h.3.attn.q_far_proj.weight', 'transformer.h.3.attn.k_far_proj.weight', 'transformer.h.4.attn.far_bias', 'transformer.h.4.attn.q_far_proj.weight', 'transformer.h.4.attn.k_far_proj.weight', 'transformer.h.5.attn.far_bias', 'transformer.h.5.attn.q_far_proj.weight', 'transformer.h.5.attn.k_far_proj.weight', 'transformer.h.6.attn.far_bias', 'transformer.h.6.attn.q_far_proj.weight', 'transformer.h.6.attn.k_far_proj.weight', 'transformer.h.7.attn.far_bias', 'transformer.h.7.attn.q_far_proj.weight', 'transformer.h.7.attn.k_far_proj.weight', 'transformer.h.8.attn.far_bias', 'transformer.h.8.attn.q_far_proj.weight', 'transformer.h.8.attn.k_far_proj.weight', 'transformer.h.9.attn.far_bias', 'transformer.h.9.attn.q_far_proj.weight', 'transformer.h.9.attn.k_far_proj.weight', 'transformer.h.10.attn.far_bias', 'transformer.h.10.attn.q_far_proj.weight', 'transformer.h.10.attn.k_far_proj.weight', 'transformer.h.11.attn.far_bias', 'transformer.h.11.attn.q_far_proj.weight', 'transformer.h.11.attn.k_far_proj.weight', 'transformer.h.12.attn.far_bias', 'transformer.h.12.attn.q_far_proj.weight', 'transformer.h.12.attn.k_far_proj.weight', 'transformer.h.13.attn.far_bias', 'transformer.h.13.attn.q_far_proj.weight', 'transformer.h.13.attn.k_far_proj.weight', 'transformer.h.14.attn.far_bias', 'transformer.h.14.attn.q_far_proj.weight', 'transformer.h.14.attn.k_far_proj.weight', 'transformer.h.15.attn.far_bias', 'transformer.h.15.attn.q_far_proj.weight', 'transformer.h.15.attn.k_far_proj.weight', 'transformer.h.16.attn.far_bias', 'transformer.h.16.attn.q_far_proj.weight', 'transformer.h.16.attn.k_far_proj.weight', 'transformer.h.17.attn.far_bias', 'transformer.h.17.attn.q_far_proj.weight', 'transformer.h.17.attn.k_far_proj.weight', 'transformer.h.18.attn.far_bias', 'transformer.h.18.attn.q_far_proj.weight', 'transformer.h.18.attn.k_far_proj.weight', 'transformer.h.19.attn.far_bias', 'transformer.h.19.attn.q_far_proj.weight', 'transformer.h.19.attn.k_far_proj.weight', 'transformer.h.20.attn.far_bias', 'transformer.h.20.attn.q_far_proj.weight', 'transformer.h.20.attn.k_far_proj.weight', 'transformer.h.21.attn.far_bias', 'transformer.h.21.attn.q_far_proj.weight', 'transformer.h.21.attn.k_far_proj.weight', 'transformer.h.22.attn.far_bias', 'transformer.h.22.attn.q_far_proj.weight', 'transformer.h.22.attn.k_far_proj.weight', 'transformer.h.23.attn.far_bias', 'transformer.h.23.attn.q_far_proj.weight', 'transformer.h.23.attn.k_far_proj.weight', 'transformer.h.24.attn.far_bias', 'transformer.h.24.attn.q_far_proj.weight', 'transformer.h.24.attn.k_far_proj.weight', 'transformer.h.25.attn.far_bias', 'transformer.h.25.attn.q_far_proj.weight', 'transformer.h.25.attn.k_far_proj.weight', 'transformer.h.26.attn.far_bias', 'transformer.h.26.attn.q_far_proj.weight', 'transformer.h.26.attn.k_far_proj.weight', 'transformer.h.27.attn.far_bias', 'transformer.h.27.attn.q_far_proj.weight', 'transformer.h.27.attn.k_far_proj.weight', 'transformer.h.28.attn.far_bias', 'transformer.h.28.attn.q_far_proj.weight', 'transformer.h.28.attn.k_far_proj.weight', 'transformer.h.29.attn.far_bias', 'transformer.h.29.attn.q_far_proj.weight', 'transformer.h.29.attn.k_far_proj.weight', 'seg_ln.weight', 'seg_proj.weight']; unexpected: []
+adapt: far-path q/k projections initialised from the pretrained projections
+adapt: pretrained weights frozen; trainable parameters: 13,437,774
+adapt: content-address map initialised to zero
+/home/ubuntu/nanoGPT-unitmask/train.py:263: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+new-parameter group: 92 tensors, 13,437,774 params at 50.0x lr
+num decayed parameter tensors: 0, with 0 parameters
+num non-decayed parameter tensors: 0, with 0 parameters
+using fused AdamW: True
+step 0: train loss 3.9413, val loss 3.6935
+iter 0: loss 4.0698, time 13636.31ms, mfu -100.00%
+step 5: train loss 2.9774, val loss 2.7147
+saving checkpoint to out-smoke-farproj
+step 10: train loss 3.8277, val loss 2.9920
+saving checkpoint to out-smoke-farproj
+iter 10: loss 3.2999, time 18525.97ms, mfu 0.37%

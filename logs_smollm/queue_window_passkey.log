@@ -1,0 +1,16 @@
+##### window: passkey rerun Wed Oct 28 13:34:08 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=0.52  first_token=1.00
+  ctx=  8192  exact=0.18  first_token=1.00
+  ctx= 16384  exact=0.08  first_token=0.96
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=0.38  first_token=0.96
+  ctx=  8192  exact=0.16  first_token=1.00
+  ctx= 16384  exact=0.06  first_token=1.00
+##### window passkey rerun finished Wed Oct 28 14:46:39 UTC 2026

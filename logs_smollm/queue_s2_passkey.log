@@ -1,0 +1,12 @@
+##### seed-2 passkey rerun: fine-tune seed 12, 600 iters Wed Nov  4 13:48:00 UTC 2026
+  iter  100  L=2048 bs=2  loss 2.7745  (1.65s/it)
+  iter  300  L=2048 bs=2  loss 2.0959  (1.70s/it)
+  iter  600  L=2048 bs=2  loss 0.9545  (1.64s/it)
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.84  first_token=0.90
+  ctx=  1024  exact=0.88  first_token=0.88
+  ctx=  2048  exact=0.78  first_token=0.78
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=0.98  first_token=1.00
+  ctx= 16384  exact=0.96  first_token=0.98
+##### seed-2 passkey rerun finished Wed Nov  4 14:19:49 UTC 2026

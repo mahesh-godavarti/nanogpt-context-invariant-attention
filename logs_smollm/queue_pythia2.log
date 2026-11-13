@@ -1,0 +1,29 @@
+##### smoke (10 iters pythia window) Thu Oct 29 21:02:54 UTC 2026
+step 0: train loss 3.6644, val loss 3.7828
+step 5: train loss 3.3391, val loss 3.6353
+step 10: train loss 3.3033, val loss 3.6263
+smoke clean
+##### train pythia window Thu Oct 29 21:04:33 UTC 2026
+adapt: content-address map initialised to zero
+step 0: train loss 3.6718, val loss 3.6745
+step 100: train loss 3.5806, val loss 3.9154
+step 200: train loss 3.4540, val loss 3.7787
+step 300: train loss 3.1077, val loss 3.7381
+step 400: train loss 3.2393, val loss 3.6273
+step 500: train loss 3.0894, val loss 3.5867
+##### pythia window: ppl (window 2048, c=0) Thu Oct 29 22:00:12 UTC 2026
+   512       46.63      8
+  1024       38.83      4
+  2048       35.55      2
+  4096       31.80      1
+  8192       31.69      1
+ 16384       30.46      1
+##### pythia window: passkey Thu Oct 29 22:16:16 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.98  first_token=0.98
+  ctx=  1024  exact=0.92  first_token=0.98
+  ctx=  2048  exact=0.88  first_token=0.90
+  ctx=  4096  exact=0.90  first_token=0.94
+  ctx=  8192  exact=0.92  first_token=0.96
+  ctx= 16384  exact=0.92  first_token=0.94
+##### pythia queue finished Thu Oct 29 22:40:24 UTC 2026

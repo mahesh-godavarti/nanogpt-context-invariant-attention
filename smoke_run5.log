@@ -1,0 +1,70 @@
+============================================================
+TRAINING Model Jm — 1K iters, delimiter=EOT (50256)
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/train_wikitext103_small_Jm.py:
+# Train model Jm (unit-masked + content addresses) on WikiText-103 -- small model
+model_type = 'Jm'
+delimiter_id = 628
+
+out_dir = 'out-wikitext103-small-Jm'
+eval_interval = 500
+eval_iters = 200
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+init_from = 'scratch'
+
+wandb_log = False
+
+dataset = 'wikitext103'
+gradient_accumulation_steps = 8
+batch_size = 8
+block_size = 1024
+
+n_layer = 6
+n_head = 8
+n_embd = 256
+dropout = 0.1
+bias = False
+
+learning_rate = 6e-4
+max_iters = 5000
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 1000
+lr_decay_iters = 5000
+min_lr = 6e-5
+
+compile = True
+
+Overriding: compile = False
+Overriding: block_size = 256
+Overriding: batch_size = 16
+Overriding: gradient_accumulation_steps = 4
+Overriding: max_iters = 1000
+Overriding: eval_interval = 500
+Overriding: warmup_iters = 200
+Overriding: lr_decay_iters = 1000
+Overriding: delimiter_id = 50256
+Overriding: out_dir = out-smoke-Jm-eot
+tokens per iteration will be: 16,384
+Initializing a new model from scratch
+defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+number of parameters: 17.63M
+/home/ubuntu/nanoGPT-unitmask/train.py:201: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 26, with 17,629,184 parameters
+num non-decayed parameter tensors: 14, with 3,584 parameters
+using fused AdamW: True
+step 0: train loss 10.8582, val loss 10.8615
+iter 0: loss 10.8482, time 51465.55ms, mfu -100.00%
+iter 10: loss 10.4856, time 1584.26ms, mfu 0.37%
+iter 20: loss 10.2624, time 1508.37ms, mfu 0.37%
+iter 30: loss 9.9436, time 1485.21ms, mfu 0.37%
+iter 40: loss 9.6009, time 1630.19ms, mfu 0.37%

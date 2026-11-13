@@ -1,0 +1,383 @@
+============================================================
+TRAINING Model Jm — 1K iters, block_size=256
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/train_wikitext103_small_Jm.py:
+# Train model Jm (unit-masked + content addresses) on WikiText-103 -- small model
+model_type = 'Jm'
+delimiter_id = 628
+
+out_dir = 'out-wikitext103-small-Jm'
+eval_interval = 500
+eval_iters = 200
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+init_from = 'scratch'
+
+wandb_log = False
+
+dataset = 'wikitext103'
+gradient_accumulation_steps = 8
+batch_size = 8
+block_size = 1024
+
+n_layer = 6
+n_head = 8
+n_embd = 256
+dropout = 0.1
+bias = False
+
+learning_rate = 6e-4
+max_iters = 5000
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 1000
+lr_decay_iters = 5000
+min_lr = 6e-5
+
+compile = True
+
+Overriding: compile = False
+Overriding: block_size = 256
+Overriding: batch_size = 16
+Overriding: gradient_accumulation_steps = 4
+Overriding: max_iters = 1000
+Overriding: eval_interval = 500
+Overriding: warmup_iters = 200
+Overriding: lr_decay_iters = 1000
+Overriding: out_dir = out-smoke-Jm
+tokens per iteration will be: 16,384
+Initializing a new model from scratch
+defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+number of parameters: 17.63M
+/home/ubuntu/nanoGPT-unitmask/train.py:201: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 26, with 17,629,184 parameters
+num non-decayed parameter tensors: 14, with 3,584 parameters
+using fused AdamW: True
+step 0: train loss 10.8573, val loss 10.8611
+iter 0: loss 10.8470, time 49690.14ms, mfu -100.00%
+iter 10: loss 10.4955, time 1585.17ms, mfu 0.37%
+iter 20: loss 10.2765, time 1471.14ms, mfu 0.37%
+iter 30: loss 9.9476, time 1428.07ms, mfu 0.37%
+iter 40: loss 9.6051, time 1590.35ms, mfu 0.37%
+iter 50: loss 9.2218, time 1463.34ms, mfu 0.37%
+iter 60: loss 8.8504, time 1465.30ms, mfu 0.38%
+iter 70: loss 8.4967, time 1472.07ms, mfu 0.38%
+iter 80: loss 8.0633, time 1477.09ms, mfu 0.38%
+iter 90: loss 7.6828, time 1585.36ms, mfu 0.38%
+iter 100: loss 7.4378, time 1489.14ms, mfu 0.38%
+iter 110: loss 7.1577, time 1534.22ms, mfu 0.38%
+iter 120: loss 6.9682, time 1440.27ms, mfu 0.38%
+iter 130: loss 6.9384, time 1447.54ms, mfu 0.38%
+iter 140: loss 6.6195, time 1439.46ms, mfu 0.39%
+iter 150: loss 6.6578, time 1467.65ms, mfu 0.39%
+iter 160: loss 6.5859, time 1475.19ms, mfu 0.39%
+iter 170: loss 6.4593, time 1477.19ms, mfu 0.39%
+iter 180: loss 6.4304, time 1605.01ms, mfu 0.39%
+iter 190: loss 6.3413, time 1480.14ms, mfu 0.39%
+iter 200: loss 6.3874, time 1615.01ms, mfu 0.38%
+iter 210: loss 6.2569, time 1481.03ms, mfu 0.38%
+iter 220: loss 6.2805, time 1624.91ms, mfu 0.38%
+iter 230: loss 6.2297, time 1485.74ms, mfu 0.38%
+iter 240: loss 6.1588, time 1474.78ms, mfu 0.38%
+iter 250: loss 5.9610, time 1470.84ms, mfu 0.38%
+iter 260: loss 6.0532, time 1452.74ms, mfu 0.39%
+iter 270: loss 6.2804, time 1476.74ms, mfu 0.39%
+iter 280: loss 5.9274, time 1476.14ms, mfu 0.39%
+iter 290: loss 5.8446, time 1479.63ms, mfu 0.39%
+iter 300: loss 5.8761, time 1489.59ms, mfu 0.39%
+iter 310: loss 5.8880, time 1474.46ms, mfu 0.39%
+iter 320: loss 5.9647, time 1483.84ms, mfu 0.39%
+iter 330: loss 5.8338, time 1612.09ms, mfu 0.39%
+iter 340: loss 6.0099, time 1495.98ms, mfu 0.39%
+iter 350: loss 5.8285, time 1469.15ms, mfu 0.39%
+iter 360: loss 5.9409, time 1472.59ms, mfu 0.39%
+iter 370: loss 5.6500, time 1480.20ms, mfu 0.39%
+iter 380: loss 5.7832, time 1474.70ms, mfu 0.39%
+iter 390: loss 5.7057, time 1476.82ms, mfu 0.39%
+iter 400: loss 5.6354, time 1484.65ms, mfu 0.39%
+iter 410: loss 5.8669, time 1474.67ms, mfu 0.39%
+iter 420: loss 5.6318, time 1456.27ms, mfu 0.39%
+iter 430: loss 5.6660, time 1578.37ms, mfu 0.39%
+iter 440: loss 5.8600, time 1476.92ms, mfu 0.39%
+iter 450: loss 5.6779, time 1476.45ms, mfu 0.39%
+iter 460: loss 5.5783, time 1478.04ms, mfu 0.39%
+iter 470: loss 5.6284, time 1484.66ms, mfu 0.39%
+iter 480: loss 5.5388, time 1491.49ms, mfu 0.39%
+iter 490: loss 5.7767, time 1483.35ms, mfu 0.39%
+step 500: train loss 5.5344, val loss 5.4883
+saving checkpoint to out-smoke-Jm
+iter 500: loss 5.4232, time 49279.51ms, mfu 0.35%
+iter 510: loss 5.5942, time 1613.96ms, mfu 0.35%
+iter 520: loss 5.6250, time 1484.39ms, mfu 0.36%
+iter 530: loss 5.7091, time 1473.26ms, mfu 0.36%
+iter 540: loss 5.6357, time 1483.03ms, mfu 0.36%
+iter 550: loss 5.4021, time 1478.12ms, mfu 0.37%
+iter 560: loss 5.3956, time 1487.75ms, mfu 0.37%
+iter 570: loss 5.6410, time 1473.95ms, mfu 0.37%
+iter 580: loss 5.4374, time 1454.34ms, mfu 0.37%
+iter 590: loss 5.4489, time 1488.06ms, mfu 0.38%
+iter 600: loss 5.4370, time 1455.92ms, mfu 0.38%
+iter 610: loss 5.5339, time 1486.73ms, mfu 0.38%
+iter 620: loss 5.4635, time 1480.47ms, mfu 0.38%
+iter 630: loss 5.5125, time 1482.14ms, mfu 0.38%
+iter 640: loss 5.5362, time 1488.72ms, mfu 0.38%
+iter 650: loss 5.2891, time 1477.50ms, mfu 0.38%
+iter 660: loss 5.5890, time 1529.00ms, mfu 0.38%
+iter 670: loss 5.4411, time 1454.42ms, mfu 0.38%
+iter 680: loss 5.4044, time 1494.10ms, mfu 0.39%
+iter 690: loss 5.5140, time 1484.78ms, mfu 0.39%
+iter 700: loss 5.3490, time 1486.31ms, mfu 0.39%
+iter 710: loss 5.3071, time 1481.79ms, mfu 0.39%
+iter 720: loss 5.6304, time 1488.55ms, mfu 0.39%
+iter 730: loss 5.1542, time 1467.82ms, mfu 0.39%
+iter 740: loss 5.2869, time 1646.35ms, mfu 0.38%
+iter 750: loss 5.3130, time 1475.55ms, mfu 0.39%
+iter 760: loss 5.4287, time 1451.60ms, mfu 0.39%
+iter 770: loss 5.4384, time 1448.13ms, mfu 0.39%
+iter 780: loss 5.4024, time 1479.11ms, mfu 0.39%
+iter 790: loss 5.5133, time 1638.98ms, mfu 0.39%
+iter 800: loss 5.3700, time 1472.60ms, mfu 0.39%
+iter 810: loss 5.4248, time 1490.26ms, mfu 0.39%
+iter 820: loss 5.2886, time 1479.46ms, mfu 0.39%
+iter 830: loss 5.3738, time 1483.96ms, mfu 0.39%
+iter 840: loss 5.3080, time 1443.76ms, mfu 0.39%
+iter 850: loss 5.1290, time 1477.04ms, mfu 0.39%
+iter 860: loss 5.2729, time 1478.84ms, mfu 0.39%
+iter 870: loss 5.1114, time 1495.02ms, mfu 0.39%
+iter 880: loss 5.1106, time 1476.99ms, mfu 0.39%
+iter 890: loss 5.5743, time 1489.43ms, mfu 0.39%
+iter 900: loss 5.1772, time 1491.66ms, mfu 0.39%
+iter 910: loss 5.3056, time 1662.84ms, mfu 0.39%
+iter 920: loss 5.4090, time 1473.06ms, mfu 0.39%
+iter 930: loss 5.2572, time 1496.11ms, mfu 0.39%
+iter 940: loss 5.2154, time 1462.21ms, mfu 0.39%
+iter 950: loss 5.1641, time 1478.09ms, mfu 0.39%
+iter 960: loss 5.3633, time 1475.21ms, mfu 0.39%
+iter 970: loss 4.9960, time 1499.06ms, mfu 0.39%
+iter 980: loss 5.1246, time 1479.10ms, mfu 0.39%
+iter 990: loss 5.3101, time 1643.66ms, mfu 0.39%
+step 1000: train loss 5.2250, val loss 5.1729
+saving checkpoint to out-smoke-Jm
+iter 1000: loss 5.2729, time 49361.95ms, mfu 0.35%
+
+============================================================
+EVAL Model Jm — extrapolation
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+number of parameters: 17.63M
+Model type: Jm
+Params: 17,632,768
+Trained block_size: 256
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+   256      176.39      8
+   512      177.22      4
+  1024      187.36      2
+  2048      205.19      1
+  4096      232.96      1
+
+
+============================================================
+TRAINING Model Jmr — 1K iters, block_size=256
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/train_wikitext103_small_Jmr.py:
+# Train model Jmr (unit-masked + random addresses) on WikiText-103 -- small model
+model_type = 'Jmr'
+delimiter_id = 628
+
+out_dir = 'out-wikitext103-small-Jmr'
+eval_interval = 500
+eval_iters = 200
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+init_from = 'scratch'
+
+wandb_log = False
+
+dataset = 'wikitext103'
+gradient_accumulation_steps = 8
+batch_size = 8
+block_size = 1024
+
+n_layer = 6
+n_head = 8
+n_embd = 256
+dropout = 0.1
+bias = False
+
+learning_rate = 6e-4
+max_iters = 5000
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 1000
+lr_decay_iters = 5000
+min_lr = 6e-5
+
+compile = True
+
+Overriding: compile = False
+Overriding: block_size = 256
+Overriding: batch_size = 16
+Overriding: gradient_accumulation_steps = 4
+Overriding: max_iters = 1000
+Overriding: eval_interval = 500
+Overriding: warmup_iters = 200
+Overriding: lr_decay_iters = 1000
+Overriding: out_dir = out-smoke-Jmr
+tokens per iteration will be: 16,384
+Initializing a new model from scratch
+defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+number of parameters: 17.60M
+/home/ubuntu/nanoGPT-unitmask/train.py:201: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 25, with 17,596,416 parameters
+num non-decayed parameter tensors: 13, with 3,328 parameters
+using fused AdamW: True
+step 0: train loss 10.8539, val loss 10.8514
+iter 0: loss 10.8525, time 51001.23ms, mfu -100.00%
+iter 10: loss 10.4642, time 1574.43ms, mfu 0.37%
+iter 20: loss 10.2372, time 1456.99ms, mfu 0.37%
+iter 30: loss 9.9085, time 1469.91ms, mfu 0.37%
+iter 40: loss 9.5527, time 1458.15ms, mfu 0.38%
+iter 50: loss 9.1560, time 1567.32ms, mfu 0.38%
+iter 60: loss 8.9275, time 1578.78ms, mfu 0.37%
+iter 70: loss 8.4280, time 1464.01ms, mfu 0.38%
+iter 80: loss 8.0921, time 1467.53ms, mfu 0.38%
+iter 90: loss 7.6884, time 1471.00ms, mfu 0.38%
+iter 100: loss 7.3380, time 1463.57ms, mfu 0.38%
+iter 110: loss 7.1391, time 1468.60ms, mfu 0.38%
+iter 120: loss 7.1556, time 1479.82ms, mfu 0.38%
+iter 130: loss 6.8318, time 1592.22ms, mfu 0.38%
+iter 140: loss 6.7080, time 1479.76ms, mfu 0.38%
+iter 150: loss 6.7349, time 1577.24ms, mfu 0.38%
+iter 160: loss 6.5862, time 1456.63ms, mfu 0.38%
+iter 170: loss 6.6554, time 1457.29ms, mfu 0.38%
+iter 180: loss 6.2904, time 1498.41ms, mfu 0.38%
+iter 190: loss 6.6440, time 1462.43ms, mfu 0.39%
+iter 200: loss 6.3213, time 1454.89ms, mfu 0.39%
+iter 210: loss 6.1541, time 1464.32ms, mfu 0.39%
+iter 220: loss 6.2105, time 1497.67ms, mfu 0.39%
+iter 230: loss 6.2116, time 1620.10ms, mfu 0.38%
+iter 240: loss 5.9795, time 1475.19ms, mfu 0.39%
+iter 250: loss 5.9287, time 1628.44ms, mfu 0.38%
+iter 260: loss 6.0733, time 1465.43ms, mfu 0.38%
+iter 270: loss 5.9736, time 1464.22ms, mfu 0.38%
+iter 280: loss 6.0310, time 1457.38ms, mfu 0.39%
+iter 290: loss 5.8663, time 1473.66ms, mfu 0.39%
+iter 300: loss 5.9169, time 1464.84ms, mfu 0.39%
+iter 310: loss 6.0752, time 1452.30ms, mfu 0.39%
+iter 320: loss 5.9659, time 1479.21ms, mfu 0.39%
+iter 330: loss 5.9174, time 1496.09ms, mfu 0.39%
+iter 340: loss 5.7088, time 1467.70ms, mfu 0.39%
+iter 350: loss 5.5538, time 1549.83ms, mfu 0.39%
+iter 360: loss 5.7204, time 1516.16ms, mfu 0.39%
+iter 370: loss 5.7417, time 1488.12ms, mfu 0.39%
+iter 380: loss 5.7301, time 1499.96ms, mfu 0.39%
+iter 390: loss 5.5610, time 1505.20ms, mfu 0.39%
+iter 400: loss 5.7621, time 1487.04ms, mfu 0.39%
+iter 410: loss 5.6170, time 1483.98ms, mfu 0.39%
+iter 420: loss 5.5547, time 1481.48ms, mfu 0.39%
+iter 430: loss 5.6599, time 1444.00ms, mfu 0.39%
+iter 440: loss 5.7795, time 1459.84ms, mfu 0.39%
+iter 450: loss 5.4165, time 1478.69ms, mfu 0.39%
+iter 460: loss 5.8426, time 1498.15ms, mfu 0.39%
+iter 470: loss 5.5294, time 1459.92ms, mfu 0.39%
+iter 480: loss 5.4821, time 1461.34ms, mfu 0.39%
+iter 490: loss 5.6132, time 1482.15ms, mfu 0.39%
+step 500: train loss 5.5494, val loss 5.5023
+saving checkpoint to out-smoke-Jmr
+iter 500: loss 5.5813, time 51595.83ms, mfu 0.35%
+iter 510: loss 5.5445, time 1470.55ms, mfu 0.36%
+iter 520: loss 5.4759, time 1463.96ms, mfu 0.36%
+iter 530: loss 5.7324, time 1528.26ms, mfu 0.36%
+iter 540: loss 5.6908, time 1462.49ms, mfu 0.37%
+iter 550: loss 5.6621, time 1450.46ms, mfu 0.37%
+iter 560: loss 5.3327, time 1486.26ms, mfu 0.37%
+iter 570: loss 5.6669, time 1640.72ms, mfu 0.37%
+iter 580: loss 5.4351, time 1463.29ms, mfu 0.37%
+iter 590: loss 5.6264, time 1495.94ms, mfu 0.37%
+iter 600: loss 5.3481, time 1489.02ms, mfu 0.38%
+iter 610: loss 5.5142, time 1577.56ms, mfu 0.37%
+iter 620: loss 5.4376, time 1472.95ms, mfu 0.38%
+iter 630: loss 5.4299, time 1459.72ms, mfu 0.38%
+iter 640: loss 5.5119, time 1473.71ms, mfu 0.38%
+iter 650: loss 5.3401, time 1624.10ms, mfu 0.38%
+iter 660: loss 5.3242, time 1467.84ms, mfu 0.38%
+iter 670: loss 5.3043, time 1472.44ms, mfu 0.38%
+iter 680: loss 5.4026, time 1465.72ms, mfu 0.38%
+iter 690: loss 5.3893, time 1454.20ms, mfu 0.38%
+iter 700: loss 5.2525, time 1467.96ms, mfu 0.38%
+iter 710: loss 5.4525, time 1468.35ms, mfu 0.39%
+iter 720: loss 5.2133, time 1499.53ms, mfu 0.39%
+iter 730: loss 5.1633, time 1482.78ms, mfu 0.39%
+iter 740: loss 5.3116, time 1620.80ms, mfu 0.38%
+iter 750: loss 5.5218, time 1466.30ms, mfu 0.38%
+iter 760: loss 5.3559, time 1473.97ms, mfu 0.39%
+iter 770: loss 5.3683, time 1470.71ms, mfu 0.39%
+iter 780: loss 5.5319, time 1569.46ms, mfu 0.38%
+iter 790: loss 5.2860, time 1633.81ms, mfu 0.38%
+iter 800: loss 5.3623, time 1466.88ms, mfu 0.38%
+iter 810: loss 5.4819, time 1468.44ms, mfu 0.38%
+iter 820: loss 5.3795, time 1464.74ms, mfu 0.39%
+iter 830: loss 5.1532, time 1470.45ms, mfu 0.39%
+iter 840: loss 5.3221, time 1484.17ms, mfu 0.39%
+iter 850: loss 5.2995, time 1653.15ms, mfu 0.38%
+iter 860: loss 5.1597, time 1476.99ms, mfu 0.38%
+iter 870: loss 5.2803, time 1476.91ms, mfu 0.38%
+iter 880: loss 5.2556, time 1474.39ms, mfu 0.39%
+iter 890: loss 5.1935, time 1493.19ms, mfu 0.39%
+iter 900: loss 5.4270, time 1481.78ms, mfu 0.39%
+iter 910: loss 5.1556, time 1483.99ms, mfu 0.39%
+iter 920: loss 5.3305, time 1628.02ms, mfu 0.38%
+iter 930: loss 5.4554, time 1479.78ms, mfu 0.38%
+iter 940: loss 5.4623, time 1471.36ms, mfu 0.39%
+iter 950: loss 5.4732, time 1479.17ms, mfu 0.39%
+iter 960: loss 5.3525, time 1475.16ms, mfu 0.39%
+iter 970: loss 5.5393, time 1493.29ms, mfu 0.39%
+iter 980: loss 5.2999, time 1454.84ms, mfu 0.39%
+iter 990: loss 5.4928, time 1472.21ms, mfu 0.39%
+step 1000: train loss 5.2338, val loss 5.1758
+saving checkpoint to out-smoke-Jmr
+iter 1000: loss 5.2344, time 51907.72ms, mfu 0.35%
+
+============================================================
+EVAL Model Jmr — extrapolation
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+number of parameters: 17.60M
+Model type: Jmr
+Params: 17,599,744
+Trained block_size: 256
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+   256      177.49      8
+   512      179.19      4
+  1024      193.66      2
+  2048      206.17      1
+  4096      240.30      1
+
+
+========== ALL DONE ==========

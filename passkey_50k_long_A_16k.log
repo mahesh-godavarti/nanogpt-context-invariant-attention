@@ -1,0 +1,15 @@
+########## A seed=0
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.05  first_token=0.17
+########## A seed=1
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.05  first_token=0.18
+########## A seed=2
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.04  first_token=0.11

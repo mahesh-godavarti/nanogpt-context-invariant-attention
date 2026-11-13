@@ -1,0 +1,128 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/pythia410_window_splitlr_s2.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Pythia-410M, two-rate all-weights window recipe (the one that worked on Pythia-160M); grad checkpointing for memory.
+# keys 2048+ tokens back scored by reset-RoPE + content address. Within 2048 tokens the model is the untouched model; no anneal.
+# Far scores start with a per-head bias of -4 (learned). Trained with window 1024 on 2048-token FineWeb-Edu sequences so far keys exist
+# (user 2026-10-28); evaluated with window 2048 so the deployed model is exact within its full pretrained context.
+model_type = 'Jm'
+delimiter_ids = (15, 964)           # Pythia tokenizer: '.' and ' .'
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-pythia410-B/ckpt.pt'
+adapt_zero_addr = True
+window = 1024            # training window; evaluation uses --window 2048
+grad_checkpoint = True
+far_bias_init = -6.0   # Pythia: its attention scores are larger, -4 let far keys disturb the start by +0.28 nats; -6 by +0.06
+
+out_dir = 'out-pythia410-window-500-splitlr-s2'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'pythia_fineweb'
+gradient_accumulation_steps = 8
+batch_size = 1
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 2e-5   # pretrained weights
+new_param_lr = 1e-3    # address map and far biases (50x)
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 2e-6
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 2
+tokens per iteration will be: 16,384
+found vocab_size = 50304 (inside data/pythia_fineweb/meta.pkl)
+Adapting pretrained checkpoint out-pythia410-B/ckpt.pt
+number of parameters: 405.86M
+adapt: loaded 389 tensors; new (fresh) tensors: ['transformer.h.0.attn.far_bias', 'transformer.h.1.attn.far_bias', 'transformer.h.2.attn.far_bias', 'transformer.h.3.attn.far_bias', 'transformer.h.4.attn.far_bias', 'transformer.h.5.attn.far_bias', 'transformer.h.6.attn.far_bias', 'transformer.h.7.attn.far_bias', 'transformer.h.8.attn.far_bias', 'transformer.h.9.attn.far_bias', 'transformer.h.10.attn.far_bias', 'transformer.h.11.attn.far_bias', 'transformer.h.12.attn.far_bias', 'transformer.h.13.attn.far_bias', 'transformer.h.14.attn.far_bias', 'transformer.h.15.attn.far_bias', 'transformer.h.16.attn.far_bias', 'transformer.h.17.attn.far_bias', 'transformer.h.18.attn.far_bias', 'transformer.h.19.attn.far_bias', 'transformer.h.20.attn.far_bias', 'transformer.h.21.attn.far_bias', 'transformer.h.22.attn.far_bias', 'transformer.h.23.attn.far_bias', 'seg_ln.weight', 'seg_ln.bias', 'seg_proj.weight', 'seg_proj.bias']; unexpected: []
+adapt: content-address map initialised to zero
+/home/ubuntu/nanoGPT-unitmask/train.py:263: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+new-parameter group: 28 tensors, 527,232 params at 50.0x lr
+num decayed parameter tensors: 146, with 405,012,480 parameters
+num non-decayed parameter tensors: 242, with 321,536 parameters
+using fused AdamW: True
+step 0: train loss 3.4078, val loss 3.0800
+iter 0: loss 3.2396, time 40817.97ms, mfu -100.00%
+iter 10: loss 3.1038, time 16699.40ms, mfu 0.96%
+iter 20: loss 3.1104, time 16704.97ms, mfu 0.96%
+iter 30: loss 2.9377, time 16696.35ms, mfu 0.96%
+iter 40: loss 2.8870, time 16690.74ms, mfu 0.96%
+iter 50: loss 2.9680, time 16698.34ms, mfu 0.96%
+iter 60: loss 2.5147, time 16704.63ms, mfu 0.96%
+iter 70: loss 2.7616, time 16689.54ms, mfu 0.96%
+iter 80: loss 3.1088, time 16718.30ms, mfu 0.96%
+iter 90: loss 2.7342, time 16699.27ms, mfu 0.96%
+step 100: train loss 2.7817, val loss 2.9272
+saving checkpoint to out-pythia410-window-500-splitlr-s2
+iter 100: loss 2.8021, time 61286.95ms, mfu 0.89%
+iter 110: loss 2.8285, time 16700.52ms, mfu 0.89%
+iter 120: loss 2.8979, time 16705.56ms, mfu 0.90%
+iter 130: loss 2.1822, time 16630.80ms, mfu 0.91%
+iter 140: loss 2.9810, time 16694.41ms, mfu 0.91%
+iter 150: loss 2.6810, time 16688.09ms, mfu 0.91%
+iter 160: loss 3.1783, time 16692.50ms, mfu 0.92%
+iter 170: loss 3.1168, time 16688.57ms, mfu 0.92%
+iter 180: loss 3.0030, time 16697.62ms, mfu 0.93%
+iter 190: loss 3.0251, time 16708.54ms, mfu 0.93%
+step 200: train loss 2.8059, val loss 2.9505
+saving checkpoint to out-pythia410-window-500-splitlr-s2
+iter 200: loss 2.8477, time 78669.42ms, mfu 0.86%
+iter 210: loss 2.6116, time 16694.87ms, mfu 0.87%
+iter 220: loss 2.8395, time 16708.80ms, mfu 0.88%
+iter 230: loss 2.9637, time 16706.08ms, mfu 0.88%
+iter 240: loss 2.8599, time 16701.64ms, mfu 0.89%
+iter 250: loss 2.5104, time 16705.48ms, mfu 0.90%
+iter 260: loss 3.2442, time 16700.80ms, mfu 0.90%
+iter 270: loss 2.9210, time 16688.12ms, mfu 0.91%
+iter 280: loss 3.0240, time 16699.43ms, mfu 0.91%
+iter 290: loss 3.1162, time 16691.81ms, mfu 0.92%
+step 300: train loss 2.7735, val loss 2.9715
+saving checkpoint to out-pythia410-window-500-splitlr-s2
+iter 300: loss 3.0020, time 78700.44ms, mfu 0.85%
+iter 310: loss 2.4130, time 16685.75ms, mfu 0.86%
+iter 320: loss 2.8035, time 16700.63ms, mfu 0.87%
+iter 330: loss 2.6288, time 16700.64ms, mfu 0.88%
+iter 340: loss 2.3149, time 16707.89ms, mfu 0.88%
+iter 350: loss 2.8280, time 16690.26ms, mfu 0.89%
+iter 360: loss 3.0692, time 16685.26ms, mfu 0.90%
+iter 370: loss 2.7386, time 16689.39ms, mfu 0.90%
+iter 380: loss 2.9038, time 16694.27ms, mfu 0.91%
+iter 390: loss 2.9408, time 16703.82ms, mfu 0.91%
+step 400: train loss 2.9058, val loss 2.9336
+saving checkpoint to out-pythia410-window-500-splitlr-s2
+iter 400: loss 2.9310, time 78709.70ms, mfu 0.84%
+iter 410: loss 2.9773, time 16702.39ms, mfu 0.85%
+iter 420: loss 3.1306, time 16688.50ms, mfu 0.86%
+iter 430: loss 2.7962, time 16721.30ms, mfu 0.87%
+iter 440: loss 2.5365, time 16703.19ms, mfu 0.88%
+iter 450: loss 3.0695, time 16721.41ms, mfu 0.89%
+iter 460: loss 2.8196, time 16719.46ms, mfu 0.90%
+iter 470: loss 2.8472, time 16710.07ms, mfu 0.90%
+iter 480: loss 2.0968, time 16711.68ms, mfu 0.91%
+iter 490: loss 3.0604, time 16718.85ms, mfu 0.91%
+step 500: train loss 2.7273, val loss 2.9539
+saving checkpoint to out-pythia410-window-500-splitlr-s2
+iter 500: loss 2.1278, time 78818.86ms, mfu 0.84%

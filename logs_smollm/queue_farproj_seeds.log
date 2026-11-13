@@ -1,0 +1,45 @@
+##### train farproj frozen seed 1 Fri Oct 30 20:12:35 UTC 2026
+step 0: train loss 3.5775, val loss 3.1563
+step 100: train loss 3.2651, val loss 2.9013
+step 200: train loss 3.1091, val loss 2.8631
+step 300: train loss 3.4275, val loss 2.8668
+step 400: train loss 3.1838, val loss 2.8999
+step 500: train loss 3.0099, val loss 2.9088
+##### ppl seed 1 (window 2048, c=0)
+   512       23.90      8
+  1024       20.57      4
+  2048       17.74      2
+  4096       18.43      1
+  8192       17.00      1
+ 16384       16.57      1
+##### passkey seed 1 Fri Oct 30 22:21:48 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=0.96  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=0.96  first_token=1.00
+##### train farproj frozen seed 2 Fri Oct 30 23:07:04 UTC 2026
+step 0: train loss 3.3866, val loss 3.2237
+step 100: train loss 3.2353, val loss 2.9610
+step 200: train loss 3.2036, val loss 2.9030
+step 300: train loss 3.2057, val loss 2.8575
+step 400: train loss 3.2635, val loss 2.9480
+step 500: train loss 3.2910, val loss 3.0161
+##### ppl seed 2 (window 2048, c=0)
+   512       23.90      8
+  1024       20.57      4
+  2048       17.74      2
+  4096       18.47      1
+  8192       17.03      1
+ 16384       16.73      1
+##### passkey seed 2 Sat Oct 31 01:15:53 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=0.96  first_token=1.00
+##### farproj seeds finished Sat Oct 31 02:00:35 UTC 2026

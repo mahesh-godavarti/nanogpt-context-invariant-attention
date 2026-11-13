@@ -1,0 +1,16 @@
+number of parameters: 63.52M
+Model type: B
+Params: 63,517,184
+Trained block_size: 1024
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+   256       46.25     16
+   512       43.79      8
+  1024       40.58      4
+  2048       41.92      2
+  4096       47.55      1
+  8192       58.80      1
+

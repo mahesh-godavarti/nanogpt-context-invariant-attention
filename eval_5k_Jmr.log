@@ -1,0 +1,129 @@
+number of parameters: 63.52M
+Model type: Jmr
+Params: 63,517,184
+Trained block_size: 1024
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+   256       50.18     16
+   512       46.91      8
+  1024       44.22      4
+  2048       43.72      2
+  4096       44.90      1
+Traceback (most recent call last):
+  File "/home/ubuntu/nanoGPT-unitmask/eval_lengths.py", line 99, in <module>
+    main()
+  File "/home/ubuntu/nanoGPT-unitmask/eval_lengths.py", line 92, in main
+    ppl = eval_ppl(model, val_data, L, bs, args.device, args.n_batches)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/eval_lengths.py", line 32, in eval_ppl
+    _, loss = model(x, y)
+              ^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 404, in forward
+    x = block(x, rope=rope, addr=addr, block_mask=block_mask)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 213, in forward
+    x = x + self.attn(self.ln_1(x), kwargs['rope'], kwargs['addr'],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 167, in forward
+    y = flex_attention(q_rot, k2, v2, block_mask=block_mask)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py", line 1353, in flex_attention
+    out, lse = torch.compile(
+               ^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 574, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py", line 1340, in _flex_attention_hop_wrapper
+    def _flex_attention_hop_wrapper(*args, **kwargs):
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 745, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "<eval_with_key>.11", line 22, in forward
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_higher_order_ops/flex_attention.py", line 90, in __call__
+    return super().__call__(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 440, in __call__
+    return wrapper()
+           ^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 745, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 436, in wrapper
+    return self.dispatch(
+           ^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 302, in dispatch
+    return kernel(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_higher_order_ops/flex_attention.py", line 731, in flex_attention_autograd
+    out, logsumexp = FlexAttentionAutogradOp.apply(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_higher_order_ops/flex_attention.py", line 597, in forward
+    out, logsumexp = flex_attention(
+                     ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_higher_order_ops/flex_attention.py", line 90, in __call__
+    return super().__call__(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 440, in __call__
+    return wrapper()
+           ^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 745, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 431, in wrapper
+    return torch.overrides.handle_torch_function(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/overrides.py", line 1720, in handle_torch_function
+    result = mode.__torch_function__(public_api, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_dynamo/_trace_wrapped_higher_order_op.py", line 142, in __torch_function__
+    return func(*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_higher_order_ops/flex_attention.py", line 90, in __call__
+    return super().__call__(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 440, in __call__
+    return wrapper()
+           ^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 745, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 436, in wrapper
+    return self.dispatch(
+           ^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_ops.py", line 302, in dispatch
+    return kernel(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_higher_order_ops/flex_attention.py", line 264, in sdpa_dense
+    out, lse = math_attention(
+               ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/_higher_order_ops/flex_attention.py", line 247, in math_attention
+    post_mod_scores = torch._safe_softmax(post_mod_scores, dim=-1)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1024.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 162.75 MiB is free. Including non-PyTorch memory, this process has 14.40 GiB memory in use. Of the allocated memory 13.25 GiB is allocated by PyTorch, and 1.03 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

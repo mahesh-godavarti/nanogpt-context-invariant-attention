@@ -1,9 +1,9 @@
 # Copyright (c) 2026 Mahesh Godavarti
-# Licensed under CC BY-NC-SA 4.0. See LICENSE file for details.
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
 
 # Train model R (reset-RoPE, no addresses) on WikiText-103 -- small model
 model_type = 'R'
-delimiter_id = 628
+delimiter_id = 764  # " ." in GPT-2 BPE; 628 ("\n\n") never occurs in the prepared WikiText-103 data
 
 out_dir = 'out-wikitext103-small-R'
 eval_interval = 500

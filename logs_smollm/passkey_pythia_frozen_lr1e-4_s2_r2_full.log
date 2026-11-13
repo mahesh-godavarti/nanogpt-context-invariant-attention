@@ -1,0 +1,77 @@
+tokenizer: hf:EleutherAI/pythia-160m
+number of parameters: 176.79M
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+window=2048
+passkey fine-tune with the pretrained weights frozen; trainable 14,471,184
+Model type: Jm | params 176,794,128 | delimiter 628 | device cuda
+Fine-tuning for 600 iters on lengths [1024, 2048, 3072, 4096]:
+  iter    1  L=3072 bs=1  loss 9.8418  (1.96s/it)
+  iter   10  L=1024 bs=4  loss 0.5852  (1.81s/it)
+  iter   20  L=1024 bs=4  loss 0.6177  (1.84s/it)
+  iter   30  L=4096 bs=1  loss 6.0151  (1.72s/it)
+  iter   40  L=1024 bs=4  loss 1.4963  (1.65s/it)
+  iter   50  L=4096 bs=1  loss 2.6521  (1.69s/it)
+  iter   60  L=2048 bs=2  loss 0.8314  (1.68s/it)
+  iter   70  L=4096 bs=1  loss 0.2271  (1.67s/it)
+  iter   80  L=4096 bs=1  loss 0.8107  (1.67s/it)
+  iter   90  L=3072 bs=1  loss 0.7476  (1.66s/it)
+  iter  100  L=2048 bs=2  loss 2.7745  (1.65s/it)
+  iter  110  L=4096 bs=1  loss 0.0742  (1.64s/it)
+  iter  120  L=4096 bs=1  loss 0.1491  (1.64s/it)
+  iter  130  L=4096 bs=1  loss 4.6027  (1.70s/it)
+  iter  140  L=4096 bs=1  loss 0.0059  (1.69s/it)
+  iter  150  L=2048 bs=2  loss 0.9806  (1.68s/it)
+  iter  160  L=2048 bs=2  loss 2.0115  (1.70s/it)
+  iter  170  L=4096 bs=1  loss 0.0558  (1.71s/it)
+  iter  180  L=4096 bs=1  loss 0.0157  (1.73s/it)
+  iter  190  L=1024 bs=4  loss 1.0846  (1.73s/it)
+  iter  200  L=1024 bs=4  loss 0.8053  (1.74s/it)
+  iter  210  L=2048 bs=2  loss 1.7825  (1.73s/it)
+  iter  220  L=1024 bs=4  loss 1.5541  (1.72s/it)
+  iter  230  L=2048 bs=2  loss 2.0918  (1.73s/it)
+  iter  240  L=1024 bs=4  loss 1.1002  (1.73s/it)
+  iter  250  L=2048 bs=2  loss 1.1765  (1.72s/it)
+  iter  260  L=3072 bs=1  loss 0.0306  (1.71s/it)
+  iter  270  L=3072 bs=1  loss 0.0713  (1.71s/it)
+  iter  280  L=4096 bs=1  loss 0.1207  (1.71s/it)
+  iter  290  L=3072 bs=1  loss 0.0914  (1.71s/it)
+  iter  300  L=2048 bs=2  loss 2.0959  (1.70s/it)
+  iter  310  L=3072 bs=1  loss 0.0649  (1.70s/it)
+  iter  320  L=3072 bs=1  loss 0.0004  (1.69s/it)
+  iter  330  L=1024 bs=4  loss 1.8570  (1.68s/it)
+  iter  340  L=4096 bs=1  loss 0.0146  (1.67s/it)
+  iter  350  L=3072 bs=1  loss 0.0006  (1.67s/it)
+  iter  360  L=2048 bs=2  loss 0.3417  (1.68s/it)
+  iter  370  L=3072 bs=1  loss 0.0067  (1.67s/it)
+  iter  380  L=1024 bs=4  loss 0.5276  (1.66s/it)
+  iter  390  L=1024 bs=4  loss 1.4694  (1.66s/it)
+  iter  400  L=3072 bs=1  loss 0.0024  (1.66s/it)
+  iter  410  L=3072 bs=1  loss 0.0015  (1.66s/it)
+  iter  420  L=2048 bs=2  loss 0.6714  (1.67s/it)
+  iter  430  L=1024 bs=4  loss 0.4666  (1.67s/it)
+  iter  440  L=1024 bs=4  loss 0.3752  (1.67s/it)
+  iter  450  L=2048 bs=2  loss 0.5775  (1.66s/it)
+  iter  460  L=1024 bs=4  loss 0.6707  (1.65s/it)
+  iter  470  L=3072 bs=1  loss 0.0070  (1.65s/it)
+  iter  480  L=3072 bs=1  loss 0.0074  (1.64s/it)
+  iter  490  L=2048 bs=2  loss 2.4254  (1.64s/it)
+  iter  500  L=3072 bs=1  loss 0.0678  (1.63s/it)
+  iter  510  L=1024 bs=4  loss 1.1253  (1.64s/it)
+  iter  520  L=4096 bs=1  loss 0.0017  (1.64s/it)
+  iter  530  L=4096 bs=1  loss 0.0015  (1.65s/it)
+  iter  540  L=3072 bs=1  loss 0.0392  (1.64s/it)
+  iter  550  L=2048 bs=2  loss 3.4862  (1.65s/it)
+  iter  560  L=2048 bs=2  loss 2.0590  (1.65s/it)
+  iter  570  L=3072 bs=1  loss 0.0092  (1.65s/it)
+  iter  580  L=2048 bs=2  loss 4.5761  (1.65s/it)
+  iter  590  L=2048 bs=2  loss 0.3807  (1.65s/it)
+  iter  600  L=2048 bs=2  loss 0.9545  (1.64s/it)
+evaluation window=2048
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.84  first_token=0.90
+  ctx=  1024  exact=0.88  first_token=0.88
+  ctx=  2048  exact=0.78  first_token=0.78
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=0.98  first_token=1.00
+  ctx= 16384  exact=0.96  first_token=0.98

@@ -1,0 +1,45 @@
+##### train frozen lr 3e-4 Tue Nov  3 13:32:29 UTC 2026
+step 0: train loss 3.9590, val loss 3.8646
+step 100: train loss 3.4075, val loss 3.6701
+step 200: train loss 3.5418, val loss 3.4497
+step 300: train loss 3.3334, val loss 3.5765
+step 400: train loss 3.4519, val loss 3.4425
+step 500: train loss 3.3022, val loss 3.4478
+##### ppl lr 3e-4 (window 2048, c=0)
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096       28.51      1
+  8192       30.58      1
+ 16384       30.71      1
+##### passkey lr 3e-4 Tue Nov  3 14:41:35 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.86  first_token=0.90
+  ctx=  1024  exact=0.90  first_token=0.90
+  ctx=  2048  exact=0.74  first_token=0.76
+  ctx=  4096  exact=0.36  first_token=0.44
+  ctx=  8192  exact=0.16  first_token=0.20
+  ctx= 16384  exact=0.08  first_token=0.10
+##### train frozen lr 3e-3 Tue Nov  3 15:05:21 UTC 2026
+step 0: train loss 3.9590, val loss 3.8646
+step 100: train loss 4.7818, val loss 5.1859
+step 200: train loss 5.6260, val loss 5.3577
+step 300: train loss 5.3613, val loss 5.6647
+step 400: train loss 5.4172, val loss 5.6932
+step 500: train loss 5.3424, val loss 5.5491
+##### ppl lr 3e-3 (window 2048, c=0)
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096      340.41      1
+  8192     1100.94      1
+ 16384     2038.77      1
+##### passkey lr 3e-3 Tue Nov  3 16:14:28 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.86  first_token=0.90
+  ctx=  1024  exact=0.90  first_token=0.90
+  ctx=  2048  exact=0.74  first_token=0.76
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+##### frozen lr sweep finished Tue Nov  3 16:38:15 UTC 2026

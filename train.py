@@ -1,5 +1,5 @@
 # Copyright (c) 2026 Mahesh Godavarti
-# Licensed under CC BY-NC-SA 4.0. See LICENSE file for details.
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
 
 """
 This training script can be run both on a single gpu in debug mode,
@@ -57,8 +57,22 @@ n_head = 12
 n_embd = 768
 dropout = 0.0 # for pretraining 0 is good, for finetuning try 0.1+
 bias = False # do we use bias inside LayerNorm and Linear layers?
-model_type = 'B' # 'B', 'R', 'Jm', 'Jmr'
-delimiter_id = 628 # \n\n token id in GPT-2 BPE
+model_type = 'B' # 'B', 'A', 'R', 'Jm', 'Jmr'
+rotate_v = False # value transport (B', R', Jm', Jmr')
+delimiter_ids = ()     # set of delimiter token ids (overrides delimiter_id when non-empty), e.g. (30, 1673) for SmolLM '.' and ' .'
+adapt = False          # adapt a pretrained B checkpoint to content addresses (model_type must be 'Jm'; init_from='adapt')
+adapt_ckpt = ''        # path of the pretrained B checkpoint for init_from='adapt'
+adapt_alpha0 = 0.1     # starting alpha (small but nonzero so the content map is already useful)
+adapt_anneal_iters = 0 # iterations over which alpha goes linearly from adapt_alpha0 to 1 (0 = fixed at adapt_alpha0)
+window = 0             # window mode (Jm): keys closer than this are scored as the pretrained model does; farther keys by address
+far_bias_init = -4.0
+far_proj = False       # window mode: separate far-path q/k projections (copied from the pretrained ones at init)
+freeze_pretrained = False # train only the adaptation parameters
+new_param_lr = 0.0     # if > 0: learning rate for the NEW parameters (address map, far biases); pretrained weights use learning_rate
+grad_checkpoint = False # window mode: recompute blocks in backward (needed with float32 scores at 2048 tokens on the T4)
+adapt_zero_addr = False # start the content-address map at zero (addresses grow only by learning; alpha=1 with zero map = model R)
+adapt_slow_frac = 1.0  # fraction of frequency bands (slowest first) that are annealed; the rest keep continuous RoPE
+delimiter_id = 764 # " ." in GPT-2 BPE (sentence end; "\n\n" = 628 never occurs in the prepared WikiText-103)
 use_flex = True # Jm/Jmr: FlexAttention (needs torch.compile for its fused kernel) or SDPA with a boolean mask. On GPUs where compile is unavailable, SDPA is ~4x faster.
 seed = 1337 # base random seed (init and data order); DDP ranks add their rank
 # adamw optimizer
@@ -155,7 +169,9 @@ if os.path.exists(meta_path):
 # model init
 model_args = dict(n_layer=n_layer, n_head=n_head, n_embd=n_embd, block_size=block_size,
                   bias=bias, vocab_size=None, dropout=dropout,
-                  model_type=model_type, delimiter_id=delimiter_id, use_flex=use_flex)
+                  model_type=model_type, delimiter_id=delimiter_id, use_flex=use_flex, rotate_v=rotate_v,
+                  adapt=adapt, adapt_alpha=adapt_alpha0, adapt_slow_frac=adapt_slow_frac, delimiter_ids=tuple(delimiter_ids),
+                  window=window, far_bias_init=far_bias_init, grad_checkpoint=grad_checkpoint, far_proj=far_proj, freeze_pretrained=freeze_pretrained)
 if init_from == 'scratch':
     # init a new model from scratch
     print("Initializing a new model from scratch")
@@ -174,8 +190,8 @@ elif init_from == 'resume':
     # force these config attributes to be equal otherwise we can't even resume training
     # the rest of the attributes (e.g. dropout) can stay as desired from command line
     for k in ['n_layer', 'n_head', 'n_embd', 'block_size', 'bias', 'vocab_size',
-              'model_type', 'delimiter_id']:
-        model_args[k] = checkpoint_model_args[k]
+              'model_type', 'delimiter_id', 'rotate_v']:
+        model_args[k] = checkpoint_model_args.get(k, model_args.get(k))
     # create the model
     gptconf = GPTConfig(**model_args)
     model = GPT(gptconf)
@@ -189,6 +205,45 @@ elif init_from == 'resume':
     model.load_state_dict(state_dict)
     iter_num = checkpoint['iter_num']
     best_val_loss = checkpoint['best_val_loss']
+elif init_from == 'adapt':
+    # Adapt a pretrained continuous-RoPE (B) checkpoint: architecture and vocab from the checkpoint, model_type/delimiter/adapt
+    # settings from this config; weights loaded non-strictly (the content-address map is new and starts fresh); fresh optimizer.
+    print(f"Adapting pretrained checkpoint {adapt_ckpt}")
+    checkpoint = torch.load(adapt_ckpt, map_location=device)
+    for k in ['n_layer', 'n_head', 'n_embd', 'block_size', 'bias', 'vocab_size',
+              'arch', 'n_kv_head', 'intermediate_size', 'rms_eps', 'rope_base', 'rope_per_head',
+              'rotary_dims', 'attn_bias', 'untied_head']:   # every architecture field, incl. llama and neox ones
+        if k in checkpoint['model_args']:
+            model_args[k] = checkpoint['model_args'][k]
+    model_args['block_size'] = max(model_args['block_size'], block_size)   # RoPE has no position table; longer training contexts are allowed
+    gptconf = GPTConfig(**model_args)
+    model = GPT(gptconf)
+    state_dict = checkpoint['model']
+    unwanted_prefix = '_orig_mod.'
+    for k, v in list(state_dict.items()):
+        if k.startswith(unwanted_prefix):
+            state_dict[k[len(unwanted_prefix):]] = state_dict.pop(k)
+    missing, unexpected = model.load_state_dict(state_dict, strict=False)
+    print(f"adapt: loaded {len(state_dict)} tensors; new (fresh) tensors: {missing}; unexpected: {unexpected}")
+    assert not unexpected, f"adapt: checkpoint tensors not used by the model (architecture mismatch): {unexpected}"
+    assert all(m.startswith('seg_') or m.endswith('far_bias') or '_far_proj' in m or m == 'base_freq' for m in missing), f"adapt: pretrained tensors missing: {missing}"
+    if far_proj:
+        for blk in model.transformer.h:
+            blk.attn.init_far_proj()
+        print("adapt: far-path q/k projections initialised from the pretrained projections")
+    if freeze_pretrained:
+        n_train = 0
+        for n, p_ in model.named_parameters():
+            new_p = n.startswith('seg_') or n.endswith('far_bias') or '_far_proj' in n
+            p_.requires_grad_(new_p); n_train += p_.numel() if new_p else 0
+        print(f"adapt: pretrained weights frozen; trainable parameters: {n_train:,}")
+    if adapt_zero_addr and hasattr(model, 'seg_proj'):
+        torch.nn.init.zeros_(model.seg_proj.weight)
+        if model.seg_proj.bias is not None:
+            torch.nn.init.zeros_(model.seg_proj.bias)
+        print("adapt: content-address map initialised to zero")
+    iter_num = 0
+    best_val_loss = 1e9
 elif init_from.startswith('gpt2'):
     print(f"Initializing from OpenAI GPT-2 weights: {init_from}")
     # initialize from OpenAI GPT-2 weights
@@ -208,7 +263,8 @@ model.to(device)
 scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
 
 # optimizer
-optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2), device_type)
+optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2), device_type,
+                                       new_param_lr_mult=(new_param_lr / learning_rate) if new_param_lr > 0 else 1.0)
 if init_from == 'resume':
     optimizer.load_state_dict(checkpoint['optimizer'])
 checkpoint = None # free up memory
@@ -268,8 +324,12 @@ while True:
 
     # determine and set the learning rate for this iteration
     lr = get_lr(iter_num) if decay_lr else learning_rate
+    if adapt:
+        a = 1.0 if adapt_anneal_iters <= 0 and adapt_alpha0 >= 1.0 else (adapt_alpha0 if adapt_anneal_iters <= 0 else min(1.0, adapt_alpha0 + (1.0 - adapt_alpha0) * iter_num / adapt_anneal_iters))
+        raw_model.config.adapt_alpha = a
+        model_args['adapt_alpha'] = a
     for param_group in optimizer.param_groups:
-        param_group['lr'] = lr
+        param_group['lr'] = lr * param_group.get('lr_mult', 1.0)
 
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:

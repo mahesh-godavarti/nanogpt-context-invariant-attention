@@ -1,0 +1,11 @@
+number of parameters: 63.52M
+Model type: Jmr
+Params: 63,517,184
+Trained block_size: 1024
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+ 16384       81.44      1
+

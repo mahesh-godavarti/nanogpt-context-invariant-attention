@@ -1,0 +1,29 @@
+##### smoke (10 iters) Tue Nov  3 05:42:49 UTC 2026
+step 0: train loss 3.5602, val loss 3.3134
+step 5: train loss 3.4380, val loss 3.1299
+step 10: train loss 2.7814, val loss 2.7947
+smoke clean
+##### train 410M frozen window Tue Nov  3 05:47:08 UTC 2026
+step 0: train loss 3.4563, val loss 3.2564
+step 100: train loss 2.7479, val loss 2.9658
+step 200: train loss 2.8052, val loss 2.9433
+step 300: train loss 2.7457, val loss 2.8825
+step 400: train loss 2.7172, val loss 2.9164
+step 500: train loss 2.7244, val loss 2.9243
+##### 410M window ppl (window 2048, c=0) Tue Nov  3 08:11:03 UTC 2026
+   512       24.24      8
+  1024       19.89      4
+  2048       18.10      2
+  4096       16.45      1
+  8192       16.39      1
+Traceback (most recent call last):
+RuntimeError: NVML_SUCCESS == DriverAPI::get()->nvmlInit_v2_() INTERNAL ASSERT FAILED at "/pytorch/c10/cuda/CUDACachingAllocator.cpp":983, please report a bug to PyTorch. 
+##### 410M window passkey Tue Nov  3 08:25:31 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.14
+  ctx=  1024  exact=0.00  first_token=0.06
+  ctx=  2048  exact=0.00  first_token=0.04
+  ctx=  4096  exact=0.00  first_token=0.08
+  ctx=  8192  exact=0.00  first_token=0.06
+  ctx= 16384  exact=0.00  first_token=0.08
+##### pythia410 splitlr queue finished Tue Nov  3 09:28:40 UTC 2026

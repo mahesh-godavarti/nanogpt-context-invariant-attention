@@ -1,0 +1,102 @@
+##### GPU smoke (20 iters adapt) Mon Oct 26 19:55:34 UTC 2026
+adapt: loaded 40 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+smoke clean
+##### train adapt_B_to_Jm Mon Oct 26 19:56:12 UTC 2026
+adapt: loaded 40 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+step 0: train loss 3.7797, val loss 3.7544
+iter 0: loss 3.7600, time 31028.47ms, mfu -100.00%
+iter 1000: loss 3.7875, time 31817.54ms, mfu 1.60%
+step 2500: train loss 3.6525, val loss 3.6576
+iter 2500: loss 4.0032, time 31900.38ms, mfu 1.60%
+iter 4990: loss 3.7442, time 1479.11ms, mfu 1.77%
+step 5000: train loss 3.6116, val loss 3.5995
+##### train cont_B Mon Oct 26 22:05:16 UTC 2026
+adapt: loaded 40 tensors; new (fresh) tensors: []; unexpected: []
+step 0: train loss 3.7304, val loss 3.7056
+iter 0: loss 4.0860, time 21105.80ms, mfu -100.00%
+iter 1000: loss 3.9258, time 21652.52ms, mfu 2.33%
+step 2500: train loss 3.6477, val loss 3.6532
+iter 2500: loss 3.8485, time 21738.04ms, mfu 2.32%
+iter 4990: loss 3.6392, time 1020.94ms, mfu 2.57%
+step 5000: train loss 3.5965, val loss 3.6185
+##### ppl evals Mon Oct 26 23:33:52 UTC 2026
+##### adaptJm c=0
+   256       42.25     16
+   512       39.59      8
+  1024       36.47      4
+  2048       37.18      2
+  4096       36.86      1
+  8192       45.51      1
+##### adaptJm c=1.5
+   256       42.25     16
+   512       39.59      8
+  1024       36.47      4
+  2048       37.28      2
+  4096       35.97      1
+  8192       39.65      1
+##### Bcont plain
+   256       42.33     16
+   512       39.71      8
+  1024       36.58      4
+  2048       52.62      2
+  4096       82.73      1
+  8192      130.18      1
+##### Bcont ntk
+   256       42.33     16
+   512       39.71      8
+  1024       36.58      4
+  2048       41.16      2
+  4096       49.44      1
+  8192       71.83      1
+##### passkey Mon Oct 26 23:42:12 UTC 2026
+########## adaptJm
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.68  first_token=1.00
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.72  first_token=0.96
+  ctx=  4096  exact=0.54  first_token=0.94
+  ctx=  8192  exact=0.60  first_token=0.96
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.68  first_token=1.00
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.72  first_token=0.96
+  ctx=  4096  exact=0.54  first_token=0.94
+  ctx=  8192  exact=0.60  first_token=0.96
+########## Bcont
+Passkey accuracy before fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.64  first_token=0.96
+  ctx=  1024  exact=0.62  first_token=1.00
+  ctx=  2048  exact=0.54  first_token=0.82
+  ctx=  4096  exact=0.00  first_token=0.02
+  ctx=  8192  exact=0.00  first_token=0.06
+Passkey accuracy after fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.64  first_token=0.96
+  ctx=  1024  exact=0.62  first_token=1.00
+  ctx=  2048  exact=0.72  first_token=0.94
+  ctx=  4096  exact=0.38  first_token=0.76
+  ctx=  8192  exact=0.04  first_token=0.26
+##### adapt queue finished Mon Oct 26 23:49:34 UTC 2026

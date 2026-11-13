@@ -1,0 +1,89 @@
+##### train pythia410_window_frozen_lr1e-4_s1 seed 1 Wed Nov  4 22:36:15 UTC 2026
+step 0: train loss 3.5892, val loss 3.4335
+step 100: train loss 2.9795, val loss 2.8347
+step 200: train loss 2.7585, val loss 2.8929
+step 300: train loss 2.9040, val loss 2.8637
+step 400: train loss 2.8286, val loss 2.8755
+step 500: train loss 2.8820, val loss 2.8496
+##### ppl pythia410_window_frozen_lr1e-4_s1
+   512       21.98      8
+  1024       18.03      4
+  2048       16.32      2
+  4096       15.51      1
+  8192       15.90      1
+ 16384       16.29      1
+##### passkey pythia410_window_frozen_lr1e-4_s1 Thu Nov  5 01:37:45 UTC 2026
+  restored the lowest smoothed-loss fine-tune state (ema 0.1451)
+  ctx=   512  exact=0.84  first_token=0.98
+  ctx=  1024  exact=0.86  first_token=0.98
+  ctx=  2048  exact=0.76  first_token=0.92
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=1.00  first_token=1.00
+##### train pythia410_window_frozen_lr1e-4_s2 seed 2 Thu Nov  5 02:40:43 UTC 2026
+step 0: train loss 3.6405, val loss 3.4894
+step 100: train loss 2.8174, val loss 2.9105
+step 200: train loss 2.9750, val loss 2.8510
+step 300: train loss 2.8752, val loss 2.8735
+step 400: train loss 2.8745, val loss 2.8436
+step 500: train loss 2.9907, val loss 2.9201
+##### ppl pythia410_window_frozen_lr1e-4_s2
+   512       21.98      8
+  1024       18.03      4
+  2048       16.32      2
+  4096       15.54      1
+  8192       15.94      1
+ 16384       16.46      1
+##### passkey pythia410_window_frozen_lr1e-4_s2 Thu Nov  5 05:42:17 UTC 2026
+  restored the lowest smoothed-loss fine-tune state (ema 0.1528)
+  ctx=   512  exact=0.86  first_token=0.98
+  ctx=  1024  exact=0.86  first_token=0.98
+  ctx=  2048  exact=0.76  first_token=0.92
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=1.00  first_token=1.00
+##### train pythia410_window_splitlr_s1 seed 1 Thu Nov  5 06:44:02 UTC 2026
+step 0: train loss 3.4860, val loss 3.3242
+step 100: train loss 2.8501, val loss 2.9456
+step 200: train loss 2.8280, val loss 2.8914
+step 300: train loss 2.7590, val loss 2.9584
+step 400: train loss 2.7502, val loss 3.0263
+step 500: train loss 2.7938, val loss 2.9058
+##### ppl pythia410_window_splitlr_s1
+   512       24.36      8
+  1024       20.07      4
+  2048       18.36      2
+  4096       16.58      1
+  8192       16.61      1
+ 16384       16.21      1
+##### passkey pythia410_window_splitlr_s1 Thu Nov  5 09:51:20 UTC 2026
+  restored the lowest smoothed-loss fine-tune state (ema 0.0002)
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=1.00  first_token=1.00
+##### train pythia410_window_splitlr_s2 seed 2 Thu Nov  5 10:55:09 UTC 2026
+step 0: train loss 3.4078, val loss 3.0800
+step 100: train loss 2.7817, val loss 2.9272
+step 200: train loss 2.8059, val loss 2.9505
+step 300: train loss 2.7735, val loss 2.9715
+step 400: train loss 2.9058, val loss 2.9336
+step 500: train loss 2.7273, val loss 2.9539
+##### ppl pythia410_window_splitlr_s2
+   512       24.13      8
+  1024       19.85      4
+  2048       18.11      2
+  4096       16.39      1
+  8192       16.33      1
+ 16384       16.00      1
+##### passkey pythia410_window_splitlr_s2 Thu Nov  5 14:02:37 UTC 2026
+  restored the lowest smoothed-loss fine-tune state (ema 0.0001)
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=1.00  first_token=1.00
+##### 410M seeds finished Thu Nov  5 15:05:13 UTC 2026

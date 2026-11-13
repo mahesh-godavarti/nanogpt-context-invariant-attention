@@ -1,5 +1,5 @@
 # Copyright (c) 2026 Mahesh Godavarti
-# Licensed under CC BY-NC-SA 4.0. See LICENSE file for details.
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
 
 """Prepare WikiText-103 for nanoGPT training.
 

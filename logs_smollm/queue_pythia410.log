@@ -1,0 +1,61 @@
+##### smoke (10 iters) Sun Nov  1 18:25:39 UTC 2026
+adapt: far-path q/k projections initialised from the pretrained projections
+adapt: pretrained weights frozen; trainable parameters: 50,908,032
+step 0: train loss 3.4685, val loss 3.2639
+step 5: train loss 3.0421, val loss 2.9832
+step 10: train loss 3.1010, val loss 3.0645
+smoke clean
+##### untouched 410M ppl plain
+   512       21.98      8
+  1024       18.03      4
+  2048       16.32      2
+  4096       98.37      1
+  8192     1365.91      1
+ 16384     7263.28      1
+##### untouched 410M ppl ntk
+   512       21.98      8
+  1024       18.03      4
+  2048       16.32      2
+  4096       15.09      1
+  8192       18.11      1
+ 16384       45.47      1
+##### untouched 410M passkey Sun Nov  1 18:52:15 UTC 2026
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.92  first_token=0.98
+  ctx=  1024  exact=0.96  first_token=0.98
+  ctx=  2048  exact=0.80  first_token=0.88
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+  ctx= 16384  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.92  first_token=0.98
+  ctx=  1024  exact=0.96  first_token=0.98
+  ctx=  2048  exact=0.80  first_token=0.88
+  ctx=  4096  exact=0.74  first_token=0.80
+  ctx=  8192  exact=0.26  first_token=0.60
+  ctx= 16384  exact=0.02  first_token=0.18
+##### train 410M frozen window Sun Nov  1 19:14:59 UTC 2026
+adapt: far-path q/k projections initialised from the pretrained projections
+adapt: pretrained weights frozen; trainable parameters: 50,908,032
+step 0: train loss 3.4917, val loss 3.1812
+step 100: train loss 3.0235, val loss 3.1544
+step 200: train loss 3.0538, val loss 3.3542
+step 300: train loss 3.1792, val loss 3.2109
+step 400: train loss 3.0963, val loss 3.1762
+step 500: train loss 3.0499, val loss 3.1271
+##### 410M window ppl (window 2048, c=0) Sun Nov  1 21:33:03 UTC 2026
+   512       21.98      8
+  1024       18.03      4
+  2048       16.32      2
+  4096       21.88      1
+  8192       26.05      1
+ 16384       28.22      1
+##### 410M window passkey Sun Nov  1 22:15:38 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.78  first_token=0.88
+  ctx=  1024  exact=0.80  first_token=0.90
+  ctx=  2048  exact=0.80  first_token=0.82
+  ctx=  4096  exact=0.24  first_token=0.48
+  ctx=  8192  exact=0.10  first_token=0.28
+  ctx= 16384  exact=0.08  first_token=0.14
+##### pythia410 queue finished Sun Nov  1 23:19:37 UTC 2026

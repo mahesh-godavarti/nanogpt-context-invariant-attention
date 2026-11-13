@@ -1,0 +1,48 @@
+##### train pythia_window_frozen_lr1e-4 Tue Nov  3 20:05:22 UTC 2026
+step 0: train loss 3.9590, val loss 3.8646
+step 100: train loss 3.3275, val loss 3.5543
+step 200: train loss 3.4113, val loss 3.3192
+step 300: train loss 3.2567, val loss 3.4629
+step 400: train loss 3.3833, val loss 3.3270
+step 500: train loss 3.2390, val loss 3.3491
+##### ppl pythia_window_frozen_lr1e-4 (window 2048, c=0)
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096       25.91      1
+  8192       26.43      1
+ 16384       26.25      1
+##### passkey pythia_window_frozen_lr1e-4 Tue Nov  3 21:14:41 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.86  first_token=0.90
+  ctx=  1024  exact=0.90  first_token=0.90
+  ctx=  2048  exact=0.74  first_token=0.76
+  ctx=  4096  exact=0.98  first_token=0.98
+  ctx=  8192  exact=0.94  first_token=0.98
+  ctx= 16384  exact=0.96  first_token=0.98
+##### train pythia_window_frozen_lr3e-4_2000 Tue Nov  3 21:38:30 UTC 2026
+step 0: train loss 3.9590, val loss 3.8646
+step 250: train loss 3.4051, val loss 3.4842
+step 500: train loss 3.3587, val loss 3.5670
+step 750: train loss 3.4254, val loss 3.4516
+step 1000: train loss 3.3674, val loss 3.5873
+step 1250: train loss 3.4454, val loss 3.6094
+step 1500: train loss 3.3986, val loss 3.4442
+step 1750: train loss 3.2598, val loss 3.4468
+step 2000: train loss 3.3134, val loss 3.4501
+##### ppl pythia_window_frozen_lr3e-4_2000 (window 2048, c=0)
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096       28.05      1
+  8192       29.76      1
+ 16384       29.90      1
+##### passkey pythia_window_frozen_lr3e-4_2000 Wed Nov  4 01:22:24 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.86  first_token=0.90
+  ctx=  1024  exact=0.90  first_token=0.90
+  ctx=  2048  exact=0.74  first_token=0.76
+  ctx=  4096  exact=0.24  first_token=0.30
+  ctx=  8192  exact=0.14  first_token=0.16
+  ctx= 16384  exact=0.08  first_token=0.08
+##### frozen lr sweep 2 finished Wed Nov  4 01:46:11 UTC 2026

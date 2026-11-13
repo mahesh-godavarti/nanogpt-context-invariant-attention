@@ -1,0 +1,295 @@
+============================================================
+TRAINING Model B — 1K iters, block_size=256
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/train_wikitext103_small_B.py:
+# Train model B (standard RoPE) on WikiText-103 -- small model
+model_type = 'B'
+
+out_dir = 'out-wikitext103-small-B'
+eval_interval = 500
+eval_iters = 200
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+init_from = 'scratch'
+
+wandb_log = False
+
+dataset = 'wikitext103'
+gradient_accumulation_steps = 8
+batch_size = 8
+block_size = 1024
+
+n_layer = 6
+n_head = 8
+n_embd = 256
+dropout = 0.1
+bias = False
+
+learning_rate = 6e-4
+max_iters = 5000
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 1000
+lr_decay_iters = 5000
+min_lr = 6e-5
+
+compile = True
+
+Overriding: compile = False
+Overriding: block_size = 256
+Overriding: batch_size = 16
+Overriding: gradient_accumulation_steps = 4
+Overriding: max_iters = 1000
+Overriding: eval_interval = 500
+Overriding: warmup_iters = 200
+Overriding: lr_decay_iters = 1000
+Overriding: out_dir = out-smoke-B
+tokens per iteration will be: 16,384
+Initializing a new model from scratch
+defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+number of parameters: 17.60M
+/home/ubuntu/nanoGPT-unitmask/train.py:201: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 25, with 17,596,416 parameters
+num non-decayed parameter tensors: 13, with 3,328 parameters
+using fused AdamW: True
+step 0: train loss 10.8539, val loss 10.8514
+iter 0: loss 10.8514, time 34441.55ms, mfu -100.00%
+iter 10: loss 10.4660, time 905.05ms, mfu 0.64%
+iter 20: loss 10.2372, time 909.77ms, mfu 0.64%
+iter 30: loss 9.9086, time 909.97ms, mfu 0.64%
+iter 40: loss 9.5538, time 910.55ms, mfu 0.64%
+iter 50: loss 9.1557, time 908.81ms, mfu 0.64%
+iter 60: loss 8.9268, time 912.55ms, mfu 0.64%
+iter 70: loss 8.4272, time 912.19ms, mfu 0.64%
+iter 80: loss 8.0917, time 913.96ms, mfu 0.64%
+iter 90: loss 7.6895, time 911.56ms, mfu 0.64%
+iter 100: loss 7.3372, time 913.77ms, mfu 0.64%
+iter 110: loss 7.1380, time 913.18ms, mfu 0.64%
+iter 120: loss 7.1557, time 913.55ms, mfu 0.64%
+iter 130: loss 6.8345, time 916.05ms, mfu 0.64%
+iter 140: loss 6.7171, time 916.13ms, mfu 0.64%
+iter 150: loss 6.7526, time 920.28ms, mfu 0.64%
+iter 160: loss 6.5945, time 917.71ms, mfu 0.63%
+iter 170: loss 6.6600, time 918.74ms, mfu 0.63%
+iter 180: loss 6.3010, time 918.63ms, mfu 0.63%
+iter 190: loss 6.6547, time 916.02ms, mfu 0.63%
+iter 200: loss 6.3314, time 917.43ms, mfu 0.63%
+iter 210: loss 6.1661, time 919.93ms, mfu 0.63%
+iter 220: loss 6.2373, time 917.85ms, mfu 0.63%
+iter 230: loss 6.2249, time 916.41ms, mfu 0.63%
+iter 240: loss 5.9944, time 921.46ms, mfu 0.63%
+iter 250: loss 5.9426, time 917.52ms, mfu 0.63%
+iter 260: loss 6.0870, time 912.21ms, mfu 0.63%
+iter 270: loss 5.9906, time 919.29ms, mfu 0.63%
+iter 280: loss 6.0469, time 920.22ms, mfu 0.63%
+iter 290: loss 5.8777, time 919.46ms, mfu 0.63%
+iter 300: loss 5.9337, time 917.37ms, mfu 0.63%
+iter 310: loss 6.0934, time 915.89ms, mfu 0.63%
+iter 320: loss 5.9772, time 919.75ms, mfu 0.63%
+iter 330: loss 5.9283, time 916.42ms, mfu 0.63%
+iter 340: loss 5.7160, time 918.24ms, mfu 0.63%
+iter 350: loss 5.5658, time 920.08ms, mfu 0.63%
+iter 360: loss 5.7317, time 923.24ms, mfu 0.63%
+iter 370: loss 5.7603, time 915.79ms, mfu 0.63%
+iter 380: loss 5.7407, time 920.03ms, mfu 0.63%
+iter 390: loss 5.5719, time 922.38ms, mfu 0.63%
+iter 400: loss 5.7700, time 920.43ms, mfu 0.63%
+iter 410: loss 5.6414, time 916.39ms, mfu 0.63%
+iter 420: loss 5.5711, time 917.98ms, mfu 0.63%
+iter 430: loss 5.6846, time 917.77ms, mfu 0.63%
+iter 440: loss 5.8017, time 918.69ms, mfu 0.63%
+iter 450: loss 5.4291, time 920.51ms, mfu 0.63%
+iter 460: loss 5.8631, time 920.22ms, mfu 0.63%
+iter 470: loss 5.5571, time 922.06ms, mfu 0.63%
+iter 480: loss 5.4906, time 922.45ms, mfu 0.63%
+iter 490: loss 5.6311, time 918.66ms, mfu 0.63%
+step 500: train loss 5.5488, val loss 5.5013
+saving checkpoint to out-smoke-B
+iter 500: loss 5.5867, time 34801.79ms, mfu 0.57%
+iter 510: loss 5.5461, time 918.07ms, mfu 0.58%
+iter 520: loss 5.4970, time 921.24ms, mfu 0.58%
+iter 530: loss 5.7545, time 916.67ms, mfu 0.59%
+iter 540: loss 5.7104, time 920.81ms, mfu 0.59%
+iter 550: loss 5.6786, time 918.90ms, mfu 0.59%
+iter 560: loss 5.3368, time 920.73ms, mfu 0.60%
+iter 570: loss 5.6764, time 919.19ms, mfu 0.60%
+iter 580: loss 5.4565, time 920.58ms, mfu 0.60%
+iter 590: loss 5.6421, time 918.63ms, mfu 0.61%
+iter 600: loss 5.3659, time 920.01ms, mfu 0.61%
+iter 610: loss 5.5193, time 915.89ms, mfu 0.61%
+iter 620: loss 5.4444, time 918.06ms, mfu 0.61%
+iter 630: loss 5.4416, time 917.85ms, mfu 0.61%
+iter 640: loss 5.5288, time 919.54ms, mfu 0.62%
+iter 650: loss 5.3561, time 919.67ms, mfu 0.62%
+iter 660: loss 5.3458, time 916.87ms, mfu 0.62%
+iter 670: loss 5.3197, time 917.53ms, mfu 0.62%
+iter 680: loss 5.4115, time 921.42ms, mfu 0.62%
+iter 690: loss 5.4253, time 919.56ms, mfu 0.62%
+iter 700: loss 5.2714, time 922.02ms, mfu 0.62%
+iter 710: loss 5.4648, time 922.87ms, mfu 0.62%
+iter 720: loss 5.2438, time 917.56ms, mfu 0.62%
+iter 730: loss 5.1756, time 922.12ms, mfu 0.62%
+iter 740: loss 5.3312, time 919.35ms, mfu 0.63%
+iter 750: loss 5.5339, time 921.25ms, mfu 0.63%
+iter 760: loss 5.3946, time 921.32ms, mfu 0.63%
+iter 770: loss 5.3718, time 918.94ms, mfu 0.63%
+iter 780: loss 5.5408, time 926.99ms, mfu 0.63%
+iter 790: loss 5.2947, time 917.41ms, mfu 0.63%
+iter 800: loss 5.3776, time 920.03ms, mfu 0.63%
+iter 810: loss 5.4949, time 922.19ms, mfu 0.63%
+iter 820: loss 5.3891, time 919.64ms, mfu 0.63%
+iter 830: loss 5.1606, time 922.25ms, mfu 0.63%
+iter 840: loss 5.3518, time 923.90ms, mfu 0.63%
+iter 850: loss 5.3173, time 916.06ms, mfu 0.63%
+iter 860: loss 5.1774, time 919.00ms, mfu 0.63%
+iter 870: loss 5.2936, time 923.78ms, mfu 0.63%
+iter 880: loss 5.2607, time 923.45ms, mfu 0.63%
+iter 890: loss 5.2091, time 922.90ms, mfu 0.63%
+iter 900: loss 5.4499, time 921.45ms, mfu 0.63%
+iter 910: loss 5.1714, time 919.83ms, mfu 0.63%
+iter 920: loss 5.3550, time 916.73ms, mfu 0.63%
+iter 930: loss 5.4590, time 919.29ms, mfu 0.63%
+iter 940: loss 5.4502, time 921.99ms, mfu 0.63%
+iter 950: loss 5.4788, time 919.31ms, mfu 0.63%
+iter 960: loss 5.3631, time 917.89ms, mfu 0.63%
+iter 970: loss 5.5563, time 921.87ms, mfu 0.63%
+iter 980: loss 5.3088, time 919.73ms, mfu 0.63%
+iter 990: loss 5.5069, time 920.17ms, mfu 0.63%
+step 1000: train loss 5.2326, val loss 5.1751
+saving checkpoint to out-smoke-B
+iter 1000: loss 5.2461, time 35378.33ms, mfu 0.57%
+
+============================================================
+EVAL Model B — extrapolation
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+number of parameters: 17.60M
+Model type: B
+Params: 17,599,744
+Trained block_size: 256
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+   256      175.70     32
+   512      178.67     16
+  1024      189.20      8
+  2048      207.60      4
+  4096      233.16      2
+
+
+============================================================
+TRAINING Model Jm — 1K iters, block_size=256
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/train_wikitext103_small_Jm.py:
+# Train model Jm (unit-masked + content addresses) on WikiText-103 -- small model
+model_type = 'Jm'
+delimiter_id = 628
+
+out_dir = 'out-wikitext103-small-Jm'
+eval_interval = 500
+eval_iters = 200
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+init_from = 'scratch'
+
+wandb_log = False
+
+dataset = 'wikitext103'
+gradient_accumulation_steps = 8
+batch_size = 8
+block_size = 1024
+
+n_layer = 6
+n_head = 8
+n_embd = 256
+dropout = 0.1
+bias = False
+
+learning_rate = 6e-4
+max_iters = 5000
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 1000
+lr_decay_iters = 5000
+min_lr = 6e-5
+
+compile = True
+
+Overriding: compile = False
+Overriding: block_size = 256
+Overriding: batch_size = 16
+Overriding: gradient_accumulation_steps = 4
+Overriding: max_iters = 1000
+Overriding: eval_interval = 500
+Overriding: warmup_iters = 200
+Overriding: lr_decay_iters = 1000
+Overriding: out_dir = out-smoke-Jm
+tokens per iteration will be: 16,384
+Initializing a new model from scratch
+defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+number of parameters: 17.63M
+/home/ubuntu/nanoGPT-unitmask/train.py:201: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 26, with 17,629,184 parameters
+num non-decayed parameter tensors: 14, with 3,584 parameters
+using fused AdamW: True
+Traceback (most recent call last):
+  File "/home/ubuntu/nanoGPT-unitmask/train.py", line 269, in <module>
+    losses = estimate_loss()
+             ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/train.py", line 229, in estimate_loss
+    logits, loss = model(X, Y)
+                   ^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 389, in forward
+    x = block(x, angles=angles, block_mask=block_mask)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 186, in forward
+    x = x + self.attn(self.ln_1(x), kwargs['angles'],
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 140, in forward
+    y = flex_attention(q, k, v, block_mask=block_mask)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py", line 1221, in flex_attention
+    _validate_sdpa_input(query, key, value)
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/attention/_utils.py", line 52, in _validate_sdpa_input
+    raise ValueError(
+ValueError: Expected query, key, and value to have the same dtype, but got query.dtype: torch.float32, key.dtype: torch.float32, and value.dtype: torch.bfloat16 instead.

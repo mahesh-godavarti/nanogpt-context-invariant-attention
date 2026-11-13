@@ -1,0 +1,47 @@
+tokenizer: hf:EleutherAI/pythia-160m
+number of parameters: 405.86M
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+window=2048
+Model type: Jm | params 405,861,248 | delimiter 628 | device cuda
+Fine-tuning for 300 iters on lengths [1024, 2048, 3072, 4096]:
+  iter    1  L=2048 bs=2  loss 3.8548  (4.41s/it)
+  iter   10  L=1024 bs=4  loss 0.0086  (4.84s/it)
+  iter   20  L=3072 bs=1  loss 0.0003  (5.13s/it)
+  iter   30  L=4096 bs=1  loss 0.0087  (5.40s/it)
+  iter   40  L=3072 bs=1  loss 0.0002  (5.16s/it)
+  iter   50  L=2048 bs=2  loss 0.0005  (5.18s/it)
+  iter   60  L=1024 bs=4  loss 0.0001  (5.19s/it)
+  iter   70  L=1024 bs=4  loss 0.0056  (5.05s/it)
+  iter   80  L=2048 bs=2  loss 0.0016  (5.02s/it)
+  iter   90  L=1024 bs=4  loss 0.0008  (4.89s/it)
+  iter  100  L=2048 bs=2  loss 0.0001  (4.74s/it)
+  iter  110  L=4096 bs=1  loss 0.0000  (4.73s/it)
+  iter  120  L=2048 bs=2  loss 0.0003  (4.75s/it)
+  iter  130  L=1024 bs=4  loss 0.0056  (4.74s/it)
+  iter  140  L=2048 bs=2  loss 0.0011  (4.71s/it)
+  iter  150  L=3072 bs=1  loss 0.0000  (4.74s/it)
+  iter  160  L=4096 bs=1  loss 0.0016  (4.76s/it)
+  iter  170  L=1024 bs=4  loss 0.0005  (4.77s/it)
+  iter  180  L=2048 bs=2  loss 0.0007  (4.70s/it)
+  iter  190  L=3072 bs=1  loss 0.0005  (4.71s/it)
+  iter  200  L=1024 bs=4  loss 0.0002  (4.68s/it)
+  iter  210  L=1024 bs=4  loss 0.0002  (4.72s/it)
+  iter  220  L=4096 bs=1  loss 0.0000  (4.76s/it)
+  iter  230  L=3072 bs=1  loss 0.0003  (4.75s/it)
+  iter  240  L=2048 bs=2  loss 0.0008  (4.73s/it)
+  iter  250  L=1024 bs=4  loss 0.0001  (4.70s/it)
+  iter  260  L=2048 bs=2  loss 0.0001  (4.69s/it)
+  iter  270  L=2048 bs=2  loss 0.0002  (4.71s/it)
+  iter  280  L=3072 bs=1  loss 0.0001  (4.69s/it)
+  iter  290  L=1024 bs=4  loss 0.0000  (4.70s/it)
+  iter  300  L=4096 bs=1  loss 0.0003  (4.73s/it)
+  restored the lowest smoothed-loss fine-tune state (ema 0.0002)
+evaluation window=2048
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=1.00  first_token=1.00
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=1.00  first_token=1.00

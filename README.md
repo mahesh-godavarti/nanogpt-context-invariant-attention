@@ -175,6 +175,50 @@ python passkey.py --ckpt out-Jm/ckpt.pt --out out-Jm-passkey --eval_before --cro
 python passkey.py --ckpt out-B/ckpt.pt  --out out-B-passkey  --eval_before --ntk
 ```
 
+## Adapting pretrained models (window mode)
+
+The two-score attention can be added to an existing pretrained RoPE model without retraining it. In **window mode** a key closer
+than `window` tokens is scored exactly as the pretrained model scores it (continuous RoPE, original weights); a key `window` or
+more tokens back is scored by its position inside its sentence plus the sentence's content address. One softmax covers both. On
+inputs no longer than the window the model is the pretrained model to the bit. Trained with `window = 1024` on 2048-token
+sequences so that far keys exist, evaluated with `--window 2048`. Two recipes:
+
+- **all weights trained**: pretrained weights at a low rate (`learning_rate`), new parameters at a high one (`new_param_lr`);
+- **frozen** (`freeze_pretrained = True`, `far_proj = True`): the pretrained weights never change; the far path gets its own query/key
+  projections (copies of the pretrained ones at init), and only those, the address map and the per-head far biases train.
+
+Public checkpoints are converted with `make_hf_ckpt.py` (`GPT.from_hf_llama` for LLaMA-architecture models such as SmolLM,
+`GPT.from_hf_neox` for GPT-NeoX/Pythia); the converted models reproduce the Hugging Face losses. 500 adaptation steps on 8M tokens
+of text unrelated to the pretraining data, one T4 GPU, three seeds per cell:
+
+| model (pretrained context 2048) | ppl 2048, untouched | ppl 16384, untouched + NTK | ppl 16384, frozen window | passkey 16384, untouched + NTK | passkey 16384, frozen window |
+|---|---|---|---|---|---|
+| SmolLM-135M | 17.7 | 98.4 | 16.6-16.7 | .00 | .94-.96 |
+| Pythia-160M | 27.6 | 73.8 | 26.3 | .00 | .96 |
+| Pythia-410M | 16.3 | 45.5 | 16.3-16.6 | .02 | .94-1.00 |
+
+Inside 2048 the frozen window model equals the untouched model exactly. Structured facts (`struct_adapt.py`, design in
+`STRUCT_DESIGN.md`): a frozen model reads facts given as two-name units through the far path, with the relation and argument roles
+carried in learned rotation angles, at 97-100% among 16 units against 13-45% reading the same facts as sentences. Full write-up with
+all arms, controls and the repeated-document test: `WRITEUP_ADAPT.md`; raw numbers: `logs_vt/ADAPT_RESULTS.md`.
+
+```bash
+# convert a public checkpoint (saved as a model-B checkpoint of this repo)
+python make_hf_ckpt.py --arch llama --name HuggingFaceTB/SmolLM-135M --out out-smollm-B --delimiter_ids 30 1673 --dataset smollm_pg19
+python data/smollm_pg19/prepare.py            # 8M tokens of PG-19 books + WikiText-103 val/test, SmolLM tokenizer
+# frozen window adaptation, 500 steps
+python train.py config/smollm_window_farproj_frozen.py --compile=False --use_flex=False
+# evaluate with the window at the full pretrained context
+python eval_lengths.py --ckpt out-smollm-window-500-farproj-frozen/ckpt.pt --lengths 512 1024 2048 4096 8192 16384 --data_dir data/smollm_pg19 --no_flex --window 2048 --cross_shift_c 0
+python passkey.py --ckpt out-smollm-window-500-farproj-frozen/ckpt.pt --data_dir data/smollm_pg19 --train_lengths 1024 2048 3072 4096 --max_train_len 4096 --tokens_per_step 4096 --window 2048 --eval_window 2048 --grad_checkpoint --freeze_pretrained --cross_shift_c 0
+python repeat_test.py --ckpt out-smollm-window-500-farproj-frozen/ckpt.pt --data_dir data/smollm_pg19 --no_flex --window 2048
+python struct_adapt.py --ckpt out-smollm-B/ckpt.pt --steps 10000 --out out-struct-smollm
+```
+
+The anneal recipe (`adapt = True`: every position moved from continuous RoPE to reset-plus-address as `alpha` goes 0.1 -> 1) is
+also in the code (`config/adapt_B_to_Jm.py`); it gives the length behaviour but costs about 7 perplexity at the pretrained length,
+which is why window mode replaced it (see the write-up).
+
 ## Quick start
 
 ### Requirements
@@ -220,6 +264,12 @@ train.py          — Training loop (single GPU or DDP)
 eval_lengths.py   — Perplexity at multiple context lengths (--no_flex, --cross_shift_c, --ntk)
 passkey.py        — Passkey retrieval: fine-tune from a checkpoint, score by context length
 causality_test.py — Verify no output depends on later tokens (delimiter-aware)
+make_hf_ckpt.py   — Convert a Hugging Face LLaMA/GPT-NeoX checkpoint into a model-B checkpoint of this repo
+struct_adapt.py   — Structured facts as two-token units through the far path (frozen base); arms A/B/C
+repeat_test.py    — Repeated-document test: score the second copy of a passage placed far back
+WRITEUP_ADAPT.md  — Write-up of the adaptation experiments; STRUCT_DESIGN.md — structured-unit design
+logs_vt/, logs_smollm/, results_repeat/ — run logs and result tables (ADAPT_RESULTS.md) behind the adaptation write-up
+queue_*.sh        — the exact run scripts
 configurator.py   — CLI config system
 config/           — Training configs for WikiText-103
 data/             — Dataset directory
@@ -230,14 +280,18 @@ data/             — Dataset directory
 Key config parameters beyond standard nanoGPT:
 
 - `model_type`: `'B'`, `'R'`, `'Jm'`, or `'Jmr'`
-- `delimiter_id`: Token ID for segment boundaries (default: 628 for `\n\n` in GPT-2 BPE; use 764 for ` .` as sentence boundary)
+- `delimiter_id`: Token ID for segment boundaries (default: 764 for ` .` in GPT-2 BPE, the sentence end; `\n\n` = 628 never occurs in the prepared WikiText-103, so do not use it as sentence boundary)
 - `cross_shift_c`, `cross_scale_ref`: cross-segment score offset for Jm/Jmr at inference (see Results)
 - `rope_ntk`, `rope_ref_len`: dynamic NTK scaling for B at inference
 - `use_flex`: FlexAttention (default) or SDPA with an explicit mask for Jm/Jmr on CUDA
+- adaptation of pretrained models: `init_from = 'adapt'` with `adapt_ckpt`; `window`, `far_bias_init`, `far_proj`,
+  `freeze_pretrained`, `new_param_lr`, `grad_checkpoint`, `delimiter_ids`; anneal: `adapt`, `adapt_alpha0`, `adapt_anneal_iters`,
+  `adapt_slow_frac`, `adapt_zero_addr`; architecture fields for converted models: `arch`, `n_kv_head`, `intermediate_size`,
+  `rope_per_head`, `rotary_dims`, `attn_bias`, `untied_head`
 
 ## License
 
-Copyright (c) 2026 Mahesh Godavarti. This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). See [LICENSE](LICENSE) for details.
+Copyright (c) 2026 Mahesh Godavarti. Licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0): free to use, change and share for any noncommercial purpose; commercial use is not permitted. See [LICENSE](LICENSE). The original nanoGPT code this builds on remains under its MIT license (see below).
 
 ## Acknowledgments
 

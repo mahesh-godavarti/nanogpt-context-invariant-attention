@@ -1,10 +1,11 @@
-# Copyright (c) 2026 Mahesh Godavarti. Licensed under CC BY-NC-SA 4.0.
+# checkpoints and model outputs
+out-*/
+*.pt
+# prepared data (regenerate with data/*/prepare.py)
+data/*/*.bin
+data/*/prepare*.log
+# scratch
 __pycache__/
 *.pyc
-out-*/
-*.log
-!results/*.log
-data/**/*.bin
-*.pt
-.claude/
-queue_*.sh
+nohup.out
+wandb/

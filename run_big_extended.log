@@ -1,0 +1,70 @@
+============================================================
+EVAL Model B — extended extrapolation
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+number of parameters: 63.52M
+Model type: B
+Params: 63,517,184
+Trained block_size: 1024
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+  1024      127.61      1
+  2048      134.70      1
+  4096      138.21      1
+  8192      145.80      1
+ 16384      153.28      1
+
+
+============================================================
+EVAL Model Jm — extended extrapolation
+============================================================
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+number of parameters: 63.65M
+Model type: Jm
+Params: 63,648,768
+Trained block_size: 1024
+
+Val tokens: 245,104
+
+   ctx         PPL  batch
+--------------------------
+  1024      146.95      1
+  2048      154.74      1
+  4096      150.33      1
+  8192      148.99      1
+Traceback (most recent call last):
+  File "/home/ubuntu/nanoGPT-unitmask/eval_lengths.py", line 96, in <module>
+    main()
+  File "/home/ubuntu/nanoGPT-unitmask/eval_lengths.py", line 89, in main
+    ppl = eval_ppl(model, val_data, L, bs, args.device, args.n_batches)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/eval_lengths.py", line 29, in eval_ppl
+    _, loss = model(x, y)
+              ^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 389, in forward
+    block_mask = self._build_block_mask(seg_ids)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/nanoGPT-unitmask/model.py", line 330, in _build_block_mask
+    return create_block_mask(mask_mod, B, H, T, T, device=seg_ids.device)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py", line 887, in create_block_mask
+    partial_block_mask, full_block_mask = _convert_mask_to_block_mask(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/nn/attention/flex_attention.py", line 692, in _convert_mask_to_block_mask
+    mask_block_sum = mask.sum(
+                     ^^^^^^^^^
+RuntimeError: NVML_SUCCESS == DriverAPI::get()->nvmlInit_v2_() INTERNAL ASSERT FAILED at "/pytorch/c10/cuda/CUDACachingAllocator.cpp":983, please report a bug to PyTorch. 

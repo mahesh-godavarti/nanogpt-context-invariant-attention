@@ -1,0 +1,132 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/pythia410_window_frozen_lr1e-4.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Pythia-410M (GPT-NeoX, 24 layers, 1024 d, quarter rotary): window mode, separate far-path q/k projections, pretrained model FROZEN. Originally SmolLM-135M with keys closer than 2048 tokens scored exactly as pretrained (continuous RoPE) and
+# keys 2048+ tokens back scored by reset-RoPE + content address. Within 2048 tokens the model is the untouched model; no anneal.
+# Far scores start with a per-head bias of -4 (learned). Trained with window 1024 on 2048-token book sequences so far keys exist
+# (user 2026-10-28); evaluated with window 2048 so the deployed model is exact within its full pretrained context.
+model_type = 'Jm'
+delimiter_ids = (15, 964)           # Pythia tokenizer
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-pythia410-B/ckpt.pt'
+adapt_zero_addr = True
+window = 1024            # training window; evaluation uses --window 2048
+far_bias_init = -4.0
+
+out_dir = 'out-pythia410-window-500-farproj-frozen-lr1e-4'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'pythia_fineweb'
+gradient_accumulation_steps = 8
+batch_size = 1
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 2e-5   # schedule base; pretrained weights are frozen
+new_param_lr = 1e-4    # Pythia needs 1e-4 (160M: 1e-3 fails, 1e-4 works)
+far_proj = True
+freeze_pretrained = True
+grad_checkpoint = True
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 1e-5
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1337
+tokens per iteration will be: 16,384
+found vocab_size = 50304 (inside data/pythia_fineweb/meta.pkl)
+Adapting pretrained checkpoint out-pythia410-B/ckpt.pt
+number of parameters: 456.24M
+adapt: loaded 389 tensors; new (fresh) tensors: ['transformer.h.0.attn.far_bias', 'transformer.h.0.attn.q_far_proj.weight', 'transformer.h.0.attn.q_far_proj.bias', 'transformer.h.0.attn.k_far_proj.weight', 'transformer.h.0.attn.k_far_proj.bias', 'transformer.h.1.attn.far_bias', 'transformer.h.1.attn.q_far_proj.weight', 'transformer.h.1.attn.q_far_proj.bias', 'transformer.h.1.attn.k_far_proj.weight', 'transformer.h.1.attn.k_far_proj.bias', 'transformer.h.2.attn.far_bias', 'transformer.h.2.attn.q_far_proj.weight', 'transformer.h.2.attn.q_far_proj.bias', 'transformer.h.2.attn.k_far_proj.weight', 'transformer.h.2.attn.k_far_proj.bias', 'transformer.h.3.attn.far_bias', 'transformer.h.3.attn.q_far_proj.weight', 'transformer.h.3.attn.q_far_proj.bias', 'transformer.h.3.attn.k_far_proj.weight', 'transformer.h.3.attn.k_far_proj.bias', 'transformer.h.4.attn.far_bias', 'transformer.h.4.attn.q_far_proj.weight', 'transformer.h.4.attn.q_far_proj.bias', 'transformer.h.4.attn.k_far_proj.weight', 'transformer.h.4.attn.k_far_proj.bias', 'transformer.h.5.attn.far_bias', 'transformer.h.5.attn.q_far_proj.weight', 'transformer.h.5.attn.q_far_proj.bias', 'transformer.h.5.attn.k_far_proj.weight', 'transformer.h.5.attn.k_far_proj.bias', 'transformer.h.6.attn.far_bias', 'transformer.h.6.attn.q_far_proj.weight', 'transformer.h.6.attn.q_far_proj.bias', 'transformer.h.6.attn.k_far_proj.weight', 'transformer.h.6.attn.k_far_proj.bias', 'transformer.h.7.attn.far_bias', 'transformer.h.7.attn.q_far_proj.weight', 'transformer.h.7.attn.q_far_proj.bias', 'transformer.h.7.attn.k_far_proj.weight', 'transformer.h.7.attn.k_far_proj.bias', 'transformer.h.8.attn.far_bias', 'transformer.h.8.attn.q_far_proj.weight', 'transformer.h.8.attn.q_far_proj.bias', 'transformer.h.8.attn.k_far_proj.weight', 'transformer.h.8.attn.k_far_proj.bias', 'transformer.h.9.attn.far_bias', 'transformer.h.9.attn.q_far_proj.weight', 'transformer.h.9.attn.q_far_proj.bias', 'transformer.h.9.attn.k_far_proj.weight', 'transformer.h.9.attn.k_far_proj.bias', 'transformer.h.10.attn.far_bias', 'transformer.h.10.attn.q_far_proj.weight', 'transformer.h.10.attn.q_far_proj.bias', 'transformer.h.10.attn.k_far_proj.weight', 'transformer.h.10.attn.k_far_proj.bias', 'transformer.h.11.attn.far_bias', 'transformer.h.11.attn.q_far_proj.weight', 'transformer.h.11.attn.q_far_proj.bias', 'transformer.h.11.attn.k_far_proj.weight', 'transformer.h.11.attn.k_far_proj.bias', 'transformer.h.12.attn.far_bias', 'transformer.h.12.attn.q_far_proj.weight', 'transformer.h.12.attn.q_far_proj.bias', 'transformer.h.12.attn.k_far_proj.weight', 'transformer.h.12.attn.k_far_proj.bias', 'transformer.h.13.attn.far_bias', 'transformer.h.13.attn.q_far_proj.weight', 'transformer.h.13.attn.q_far_proj.bias', 'transformer.h.13.attn.k_far_proj.weight', 'transformer.h.13.attn.k_far_proj.bias', 'transformer.h.14.attn.far_bias', 'transformer.h.14.attn.q_far_proj.weight', 'transformer.h.14.attn.q_far_proj.bias', 'transformer.h.14.attn.k_far_proj.weight', 'transformer.h.14.attn.k_far_proj.bias', 'transformer.h.15.attn.far_bias', 'transformer.h.15.attn.q_far_proj.weight', 'transformer.h.15.attn.q_far_proj.bias', 'transformer.h.15.attn.k_far_proj.weight', 'transformer.h.15.attn.k_far_proj.bias', 'transformer.h.16.attn.far_bias', 'transformer.h.16.attn.q_far_proj.weight', 'transformer.h.16.attn.q_far_proj.bias', 'transformer.h.16.attn.k_far_proj.weight', 'transformer.h.16.attn.k_far_proj.bias', 'transformer.h.17.attn.far_bias', 'transformer.h.17.attn.q_far_proj.weight', 'transformer.h.17.attn.q_far_proj.bias', 'transformer.h.17.attn.k_far_proj.weight', 'transformer.h.17.attn.k_far_proj.bias', 'transformer.h.18.attn.far_bias', 'transformer.h.18.attn.q_far_proj.weight', 'transformer.h.18.attn.q_far_proj.bias', 'transformer.h.18.attn.k_far_proj.weight', 'transformer.h.18.attn.k_far_proj.bias', 'transformer.h.19.attn.far_bias', 'transformer.h.19.attn.q_far_proj.weight', 'transformer.h.19.attn.q_far_proj.bias', 'transformer.h.19.attn.k_far_proj.weight', 'transformer.h.19.attn.k_far_proj.bias', 'transformer.h.20.attn.far_bias', 'transformer.h.20.attn.q_far_proj.weight', 'transformer.h.20.attn.q_far_proj.bias', 'transformer.h.20.attn.k_far_proj.weight', 'transformer.h.20.attn.k_far_proj.bias', 'transformer.h.21.attn.far_bias', 'transformer.h.21.attn.q_far_proj.weight', 'transformer.h.21.attn.q_far_proj.bias', 'transformer.h.21.attn.k_far_proj.weight', 'transformer.h.21.attn.k_far_proj.bias', 'transformer.h.22.attn.far_bias', 'transformer.h.22.attn.q_far_proj.weight', 'transformer.h.22.attn.q_far_proj.bias', 'transformer.h.22.attn.k_far_proj.weight', 'transformer.h.22.attn.k_far_proj.bias', 'transformer.h.23.attn.far_bias', 'transformer.h.23.attn.q_far_proj.weight', 'transformer.h.23.attn.q_far_proj.bias', 'transformer.h.23.attn.k_far_proj.weight', 'transformer.h.23.attn.k_far_proj.bias', 'seg_ln.weight', 'seg_ln.bias', 'seg_proj.weight', 'seg_proj.bias']; unexpected: []
+adapt: far-path q/k projections initialised from the pretrained projections
+adapt: pretrained weights frozen; trainable parameters: 50,908,032
+adapt: content-address map initialised to zero
+/home/ubuntu/nanoGPT-unitmask/train.py:263: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+new-parameter group: 124 tensors, 50,908,032 params at 5.0x lr
+num decayed parameter tensors: 0, with 0 parameters
+num non-decayed parameter tensors: 0, with 0 parameters
+using fused AdamW: True
+step 0: train loss 3.7688, val loss 3.3829
+iter 0: loss 3.9252, time 40371.47ms, mfu -100.00%
+iter 10: loss 3.1706, time 16105.45ms, mfu 1.09%
+iter 20: loss 2.8942, time 16105.08ms, mfu 1.09%
+iter 30: loss 2.9919, time 16108.68ms, mfu 1.09%
+iter 40: loss 2.7859, time 16118.04ms, mfu 1.09%
+iter 50: loss 2.8176, time 16115.39ms, mfu 1.09%
+iter 60: loss 3.0944, time 16111.86ms, mfu 1.09%
+iter 70: loss 2.6907, time 16115.16ms, mfu 1.09%
+iter 80: loss 2.9970, time 16109.88ms, mfu 1.09%
+iter 90: loss 2.7325, time 16103.36ms, mfu 1.09%
+step 100: train loss 2.8389, val loss 2.9353
+saving checkpoint to out-pythia410-window-500-farproj-frozen-lr1e-4
+iter 100: loss 2.9521, time 42770.44ms, mfu 1.02%
+iter 110: loss 3.5069, time 16112.91ms, mfu 1.03%
+iter 120: loss 3.0599, time 16097.92ms, mfu 1.03%
+iter 130: loss 2.9759, time 16107.97ms, mfu 1.04%
+iter 140: loss 3.0917, time 16099.94ms, mfu 1.04%
+iter 150: loss 2.9295, time 16106.58ms, mfu 1.05%
+iter 160: loss 2.6151, time 16102.62ms, mfu 1.05%
+iter 170: loss 3.0268, time 16111.15ms, mfu 1.06%
+iter 180: loss 2.6462, time 16103.50ms, mfu 1.06%
+iter 190: loss 2.8144, time 16101.43ms, mfu 1.06%
+step 200: train loss 2.8388, val loss 3.0188
+saving checkpoint to out-pythia410-window-500-farproj-frozen-lr1e-4
+iter 200: loss 2.4291, time 58031.25ms, mfu 0.99%
+iter 210: loss 2.8229, time 16098.78ms, mfu 1.00%
+iter 220: loss 2.9387, time 16095.45ms, mfu 1.01%
+iter 230: loss 2.6945, time 16097.41ms, mfu 1.01%
+iter 240: loss 2.6421, time 16098.43ms, mfu 1.02%
+iter 250: loss 3.0780, time 16103.24ms, mfu 1.03%
+iter 260: loss 2.8525, time 16101.60ms, mfu 1.04%
+iter 270: loss 2.7622, time 16107.92ms, mfu 1.04%
+iter 280: loss 2.7771, time 16094.61ms, mfu 1.05%
+iter 290: loss 2.9906, time 16100.34ms, mfu 1.05%
+step 300: train loss 2.8781, val loss 2.8212
+saving checkpoint to out-pythia410-window-500-farproj-frozen-lr1e-4
+iter 300: loss 3.2548, time 57990.38ms, mfu 0.98%
+iter 310: loss 3.0619, time 16091.55ms, mfu 0.99%
+iter 320: loss 2.9041, time 16092.74ms, mfu 1.00%
+iter 330: loss 2.9577, time 16096.42ms, mfu 1.01%
+iter 340: loss 2.6080, time 16097.82ms, mfu 1.01%
+iter 350: loss 2.9770, time 16104.77ms, mfu 1.02%
+iter 360: loss 2.7692, time 16103.18ms, mfu 1.03%
+iter 370: loss 2.9487, time 16093.98ms, mfu 1.04%
+iter 380: loss 2.9935, time 16099.16ms, mfu 1.04%
+iter 390: loss 3.0231, time 16102.43ms, mfu 1.05%
+step 400: train loss 2.8249, val loss 2.8099
+saving checkpoint to out-pythia410-window-500-farproj-frozen-lr1e-4
+iter 400: loss 2.7368, time 58001.79ms, mfu 0.97%
+iter 410: loss 2.7267, time 16085.29ms, mfu 0.98%
+iter 420: loss 3.1018, time 16104.43ms, mfu 0.99%
+iter 430: loss 2.7071, time 16102.46ms, mfu 1.00%
+iter 440: loss 2.7526, time 16101.46ms, mfu 1.01%
+iter 450: loss 2.8504, time 16090.09ms, mfu 1.02%
+iter 460: loss 2.7202, time 16091.82ms, mfu 1.03%
+iter 470: loss 2.6790, time 16094.96ms, mfu 1.03%
+iter 480: loss 2.7679, time 16098.47ms, mfu 1.04%
+iter 490: loss 2.7106, time 16089.92ms, mfu 1.04%
+step 500: train loss 2.8243, val loss 2.7946
+saving checkpoint to out-pythia410-window-500-farproj-frozen-lr1e-4
+iter 500: loss 2.9081, time 57979.48ms, mfu 0.97%

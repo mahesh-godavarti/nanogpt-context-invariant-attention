@@ -1,0 +1,45 @@
+##### train pythia window splitlr seed 1 Fri Oct 30 09:32:37 UTC 2026
+step 0: train loss 3.5676, val loss 3.6684
+step 100: train loss 3.3015, val loss 3.3553
+step 200: train loss 3.3420, val loss 3.3692
+step 300: train loss 3.2196, val loss 3.4734
+step 400: train loss 3.1652, val loss 3.4493
+step 500: train loss 3.1241, val loss 3.4486
+##### ppl seed 1 (window 2048, c=0)
+   512       39.10      8
+  1024       32.45      4
+  2048       29.66      2
+  4096       26.55      1
+  8192       26.44      1
+ 16384       25.54      1
+##### passkey seed 1 Fri Oct 30 10:44:03 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.92  first_token=0.96
+  ctx=  1024  exact=0.86  first_token=0.90
+  ctx=  2048  exact=0.78  first_token=0.80
+  ctx=  4096  exact=0.88  first_token=0.88
+  ctx=  8192  exact=0.94  first_token=0.96
+  ctx= 16384  exact=0.86  first_token=0.92
+##### train pythia window splitlr seed 2 Fri Oct 30 11:08:19 UTC 2026
+step 0: train loss 3.6230, val loss 3.7168
+step 100: train loss 3.3008, val loss 3.3927
+step 200: train loss 3.2088, val loss 3.4440
+step 300: train loss 3.1017, val loss 3.4627
+step 400: train loss 3.3039, val loss 3.5103
+step 500: train loss 3.0783, val loss 3.4091
+##### ppl seed 2 (window 2048, c=0)
+   512       39.62      8
+  1024       32.94      4
+  2048       30.10      2
+  4096       27.02      1
+  8192       26.90      1
+ 16384       25.92      1
+##### passkey seed 2 Fri Oct 30 12:19:46 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.98  first_token=1.00
+  ctx=  1024  exact=0.92  first_token=0.98
+  ctx=  2048  exact=0.98  first_token=0.98
+  ctx=  4096  exact=0.92  first_token=0.94
+  ctx=  8192  exact=0.78  first_token=0.86
+  ctx= 16384  exact=0.86  first_token=0.92
+##### pythia seeds finished Fri Oct 30 12:43:32 UTC 2026

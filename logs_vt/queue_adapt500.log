@@ -1,0 +1,49 @@
+##### train adapt_B_to_Jm_500 Tue Oct 27 04:15:05 UTC 2026
+adapt: loaded 40 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+step 0: train loss 3.7797, val loss 3.7544
+step 100: train loss 3.7494, val loss 3.7294
+step 200: train loss 3.7375, val loss 3.7187
+step 300: train loss 3.7196, val loss 3.7175
+step 400: train loss 3.7116, val loss 3.7095
+step 500: train loss 3.7487, val loss 3.7348
+##### ppl evals Tue Oct 27 04:30:27 UTC 2026
+##### adaptJm-500 c=0
+   256       47.32     16
+   512       44.51      8
+  1024       41.34      4
+  2048       43.14      2
+  4096       42.34      1
+  8192       47.60      1
+##### adaptJm-500 c=1.5
+   256       47.32     16
+   512       44.51      8
+  1024       41.34      4
+  2048       42.88      2
+  4096       41.28      1
+  8192       43.98      1
+##### passkey Tue Oct 27 04:36:55 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.64  first_token=1.00
+  ctx=  1024  exact=0.62  first_token=0.98
+  ctx=  2048  exact=0.70  first_token=0.94
+  ctx=  4096  exact=0.58  first_token=0.94
+  ctx=  8192  exact=0.62  first_token=0.98
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.64  first_token=1.00
+  ctx=  1024  exact=0.62  first_token=0.98
+  ctx=  2048  exact=0.70  first_token=0.94
+  ctx=  4096  exact=0.58  first_token=0.94
+  ctx=  8192  exact=0.60  first_token=0.96
+##### adapt500 queue finished Tue Oct 27 04:42:43 UTC 2026

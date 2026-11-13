@@ -1,0 +1,35 @@
+##### smoke (5 iters) Tue Nov 10 12:26:22 UTC 2026
+adapt: pretrained weights frozen; trainable parameters: 13,437,774
+step 0: train loss 4.3000, val loss 4.2293
+step 5: train loss 4.1236, val loss 4.0133
+smoke clean
+##### train Tue Nov 10 12:30:45 UTC 2026
+step 0: train loss 4.3541, val loss 4.1914
+step 100: train loss 3.0777, val loss 2.8510
+step 200: train loss 3.2361, val loss 2.8578
+step 300: train loss 3.1304, val loss 2.7871
+step 400: train loss 3.1664, val loss 2.6630
+step 500: train loss 3.1984, val loss 2.8133
+##### repeat test Tue Nov 10 18:17:22 UTC 2026
+out-smollm-window8192-500-farproj-frozen SmolLM frozen, 8192-token adaptation model_type=Jm ntk=False window=2048
+   gap  2nd-copy ppl  2nd-copy acc  unseen ppl
+  1024          1.19         0.969       20.65
+  4096         12.98         0.481       29.50
+  8192         12.48         0.501       24.99
+ 14000         13.88         0.492       24.08
+##### ppl (window 2048, c=0)
+   512       23.90      8
+  1024       20.57      4
+  2048       17.74      2
+  4096       18.37      1
+  8192       16.62      1
+ 16384       15.70      1
+##### passkey Tue Nov 10 18:52:53 UTC 2026
+  restored the lowest smoothed-loss fine-tune state (ema 0.1179)
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=0.98  first_token=1.00
+  ctx=  2048  exact=0.96  first_token=0.98
+  ctx=  4096  exact=0.86  first_token=0.96
+  ctx=  8192  exact=0.92  first_token=1.00
+  ctx= 16384  exact=0.80  first_token=0.98
+##### w8192 queue finished Tue Nov 10 19:37:23 UTC 2026

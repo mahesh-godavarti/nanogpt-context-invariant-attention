@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Mahesh Godavarti
-# Licensed under CC BY-NC-SA 4.0. See LICENSE file for details.
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
 
 """Causality test: no position's output may depend on tokens after it.
 
@@ -75,7 +75,7 @@ def main():
         n_embd=64, dropout=0.0, bias=False, delimiter_id=delimiter_id,
     )
     all_pass = True
-    for model_type in ['B', 'R', 'Jm', 'Jmr']:
+    for model_type in ['B', 'A', 'R', 'Jm', 'Jmr']:
         torch.manual_seed(42)
         model = GPT(GPTConfig(**small_config, model_type=model_type)).eval()
         print(f"Model {model_type}:")

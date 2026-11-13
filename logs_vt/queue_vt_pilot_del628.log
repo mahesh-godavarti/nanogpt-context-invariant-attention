@@ -1,0 +1,197 @@
+##### GPU smoke (20 iters Bp, Jmp) Sat Oct 24 23:14:38 UTC 2026
+smoke Bp clean
+smoke Jmp clean
+##### train B Sat Oct 24 23:15:48 UTC 2026
+step 0: train loss 10.8524, val loss 10.8502
+iter 0: loss 10.8589, time 20964.10ms, mfu -100.00%
+step 500: train loss 5.8167, val loss 5.8056
+step 1000: train loss 4.9552, val loss 4.8937
+iter 1000: loss 5.2527, time 21605.90ms, mfu 2.33%
+step 1500: train loss 4.4170, val loss 4.3821
+step 2000: train loss 4.1222, val loss 4.1046
+iter 2000: loss 4.2785, time 21595.15ms, mfu 2.33%
+step 2500: train loss 3.9594, val loss 3.9525
+step 3000: train loss 3.8756, val loss 3.8558
+iter 3000: loss 4.0415, time 21550.31ms, mfu 2.33%
+step 3500: train loss 3.8198, val loss 3.7957
+step 4000: train loss 3.7621, val loss 3.7434
+iter 4000: loss 3.6873, time 21507.60ms, mfu 2.33%
+step 4500: train loss 3.7392, val loss 3.7336
+iter 4990: loss 3.7529, time 1016.11ms, mfu 2.57%
+step 5000: train loss 3.7109, val loss 3.7206
+##### train Bp Sun Oct 25 00:44:11 UTC 2026
+step 0: train loss 10.8577, val loss 10.8575
+iter 0: loss 10.8642, time 22919.97ms, mfu -100.00%
+step 500: train loss 5.7827, val loss 5.7710
+step 1000: train loss 4.9265, val loss 4.8641
+iter 1000: loss 5.2307, time 23492.01ms, mfu 2.15%
+step 1500: train loss 4.3526, val loss 4.3197
+step 2000: train loss 4.0962, val loss 4.0739
+iter 2000: loss 4.2458, time 23683.03ms, mfu 2.15%
+step 2500: train loss 3.9478, val loss 3.9405
+step 3000: train loss 3.8639, val loss 3.8449
+iter 3000: loss 4.0128, time 23622.58ms, mfu 2.15%
+step 3500: train loss 3.8144, val loss 3.7919
+step 4000: train loss 3.7553, val loss 3.7358
+iter 4000: loss 3.6843, time 23601.05ms, mfu 2.15%
+step 4500: train loss 3.7337, val loss 3.7280
+iter 4990: loss 3.7429, time 1098.85ms, mfu 2.38%
+step 5000: train loss 3.7049, val loss 3.7172
+##### train Jm Sun Oct 25 02:19:57 UTC 2026
+step 0: train loss 10.8559, val loss 10.8607
+iter 0: loss 10.8607, time 30718.56ms, mfu -100.00%
+step 500: train loss 5.8222, val loss 5.7974
+step 1000: train loss 4.9299, val loss 4.8918
+iter 1000: loss 4.9242, time 31289.18ms, mfu 1.62%
+step 1500: train loss 4.4067, val loss 4.3731
+step 2000: train loss 4.1137, val loss 4.0794
+iter 2000: loss 4.3465, time 31124.73ms, mfu 1.62%
+step 2500: train loss 3.9649, val loss 3.9470
+step 3000: train loss 3.8675, val loss 3.8615
+iter 3000: loss 3.9018, time 31273.92ms, mfu 1.62%
+step 3500: train loss 3.7950, val loss 3.7960
+step 4000: train loss 3.7801, val loss 3.7501
+iter 4000: loss 3.8987, time 31228.76ms, mfu 1.62%
+step 4500: train loss 3.7486, val loss 3.7337
+iter 4990: loss 3.8534, time 1460.21ms, mfu 1.79%
+step 5000: train loss 3.7258, val loss 3.7078
+##### train Jmp Sun Oct 25 04:27:09 UTC 2026
+step 0: train loss 10.8720, val loss 10.8750
+iter 0: loss 10.8739, time 33852.97ms, mfu -100.00%
+step 500: train loss 5.8024, val loss 5.7768
+step 1000: train loss 4.9161, val loss 4.8792
+iter 1000: loss 4.9138, time 34116.12ms, mfu 1.48%
+step 1500: train loss 4.3798, val loss 4.3466
+step 2000: train loss 4.0914, val loss 4.0540
+iter 2000: loss 4.3280, time 34453.58ms, mfu 1.48%
+step 2500: train loss 3.9484, val loss 3.9263
+step 3000: train loss 3.8512, val loss 3.8414
+iter 3000: loss 3.8820, time 34161.82ms, mfu 1.48%
+step 3500: train loss 3.7813, val loss 3.7804
+step 4000: train loss 3.7689, val loss 3.7381
+iter 4000: loss 3.8900, time 34275.93ms, mfu 1.48%
+step 4500: train loss 3.7368, val loss 3.7188
+iter 4990: loss 3.8483, time 1601.13ms, mfu 1.63%
+step 5000: train loss 3.7138, val loss 3.6943
+##### train Jmr Sun Oct 25 06:46:39 UTC 2026
+step 0: train loss 10.8524, val loss 10.8502
+iter 0: loss 10.8617, time 30345.97ms, mfu -100.00%
+step 500: train loss 5.8074, val loss 5.7946
+step 1000: train loss 4.9548, val loss 4.8938
+iter 1000: loss 5.2343, time 30935.29ms, mfu 1.63%
+step 1500: train loss 4.4146, val loss 4.3809
+step 2000: train loss 4.1160, val loss 4.0976
+iter 2000: loss 4.2306, time 31035.31ms, mfu 1.64%
+step 2500: train loss 3.9562, val loss 3.9504
+step 3000: train loss 3.8718, val loss 3.8526
+iter 3000: loss 4.0082, time 31165.72ms, mfu 1.64%
+step 3500: train loss 3.8135, val loss 3.7923
+step 4000: train loss 3.7559, val loss 3.7383
+iter 4000: loss 3.6644, time 30950.90ms, mfu 1.64%
+step 4500: train loss 3.7322, val loss 3.7287
+iter 4990: loss 3.7019, time 1444.85ms, mfu 1.81%
+step 5000: train loss 3.7042, val loss 3.7163
+##### train Jmrp Sun Oct 25 08:52:41 UTC 2026
+step 0: train loss 10.8577, val loss 10.8575
+iter 0: loss 10.8662, time 33641.83ms, mfu -100.00%
+step 500: train loss 5.7905, val loss 5.7783
+step 1000: train loss 4.9256, val loss 4.8621
+iter 1000: loss 5.2149, time 34316.46ms, mfu 1.52%
+step 1500: train loss 4.3550, val loss 4.3207
+step 2000: train loss 4.0984, val loss 4.0767
+iter 2000: loss 4.2152, time 34250.60ms, mfu 1.53%
+step 2500: train loss 3.9498, val loss 3.9435
+step 3000: train loss 3.8650, val loss 3.8455
+iter 3000: loss 4.0040, time 34402.42ms, mfu 1.52%
+step 3500: train loss 3.8131, val loss 3.7901
+step 4000: train loss 3.7528, val loss 3.7344
+iter 4000: loss 3.6584, time 34409.44ms, mfu 1.53%
+step 4500: train loss 3.7307, val loss 3.7263
+iter 4990: loss 3.7254, time 1560.99ms, mfu 1.68%
+step 5000: train loss 3.7024, val loss 3.7137
+##### evals Sun Oct 25 11:07:56 UTC 2026
+##### B plain
+   256       46.76     16
+   512       43.99      8
+  1024       40.49      4
+  2048       56.11      2
+  4096       83.23      1
+  8192      124.43      1
+##### B --ntk
+   256       46.76     16
+   512       43.99      8
+  1024       40.49      4
+  2048       45.06      2
+  4096       51.90      1
+  8192       73.42      1
+##### Bp plain
+   256       46.48     16
+   512       43.74      8
+  1024       40.32      4
+  2048       53.37      2
+  4096       77.45      1
+  8192      128.14      1
+##### Bp --ntk
+   256       46.48     16
+   512       43.74      8
+  1024       40.32      4
+  2048       43.90      2
+  4096       49.90      1
+  8192       68.65      1
+##### Jm c=0
+   256       46.84     16
+   512       43.99      8
+  1024       40.62      4
+  2048       65.07      2
+  4096      117.91      1
+  8192      194.23      1
+##### Jm c=1.5
+   256       46.84     16
+   512       43.99      8
+  1024       40.62      4
+  2048       65.07      2
+  4096      117.91      1
+  8192      194.23      1
+##### Jmp c=0
+   256       46.29     16
+   512       43.47      8
+  1024       40.08      4
+  2048       51.97      2
+  4096       72.66      1
+  8192      125.72      1
+##### Jmp c=1.5
+   256       46.29     16
+   512       43.47      8
+  1024       40.08      4
+  2048       51.97      2
+  4096       72.66      1
+  8192      125.72      1
+##### Jmr c=0
+   256       46.60     16
+   512       43.78      8
+  1024       40.31      4
+  2048       55.60      2
+  4096       83.28      1
+  8192      123.31      1
+##### Jmr c=1.5
+   256       46.60     16
+   512       43.78      8
+  1024       40.31      4
+  2048       55.60      2
+  4096       83.28      1
+  8192      123.31      1
+##### Jmrp c=0
+   256       46.27     16
+   512       43.54      8
+  1024       40.23      4
+  2048       56.90      2
+  4096       91.56      1
+  8192      149.72      1
+##### Jmrp c=1.5
+   256       46.27     16
+   512       43.54      8
+  1024       40.23      4
+  2048       56.90      2
+  4096       91.56      1
+  8192      149.72      1
+##### pilot finished Sun Oct 25 11:37:47 UTC 2026

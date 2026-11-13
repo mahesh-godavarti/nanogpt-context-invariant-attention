@@ -1,0 +1,9 @@
+tokenizer: hf:EleutherAI/pythia-160m
+number of parameters: 162.32M
+Model type: B | params 162,322,944 | delimiter 628 | device cpu
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx=   512  exact=0.98  first_token=0.98
+  ctx=  2048  exact=1.00  first_token=1.00
+Passkey accuracy after fine-tuning (rope_ntk=True):
+  ctx=   512  exact=0.98  first_token=0.98
+  ctx=  2048  exact=1.00  first_token=1.00

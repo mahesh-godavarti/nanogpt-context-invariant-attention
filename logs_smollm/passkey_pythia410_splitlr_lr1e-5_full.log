@@ -1,0 +1,46 @@
+tokenizer: hf:EleutherAI/pythia-160m
+number of parameters: 405.86M
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+window=2048
+Model type: Jm | params 405,861,248 | delimiter 628 | device cuda
+Fine-tuning for 300 iters on lengths [1024, 2048, 3072, 4096]:
+  iter    1  L=4096 bs=1  loss 12.5625  (7.34s/it)
+  iter   10  L=2048 bs=2  loss 0.0171  (5.46s/it)
+  iter   20  L=1024 bs=4  loss 0.0035  (5.48s/it)
+  iter   30  L=4096 bs=1  loss 0.0003  (5.39s/it)
+  iter   40  L=4096 bs=1  loss 0.0008  (5.15s/it)
+  iter   50  L=1024 bs=4  loss 0.0002  (4.92s/it)
+  iter   60  L=2048 bs=2  loss 0.0007  (4.78s/it)
+  iter   70  L=4096 bs=1  loss 0.0003  (4.81s/it)
+  iter   80  L=3072 bs=1  loss 0.0003  (4.72s/it)
+  iter   90  L=1024 bs=4  loss 0.0002  (4.63s/it)
+  iter  100  L=2048 bs=2  loss 0.0002  (4.62s/it)
+  iter  110  L=4096 bs=1  loss 0.0000  (4.61s/it)
+  iter  120  L=1024 bs=4  loss 0.0001  (4.55s/it)
+  iter  130  L=4096 bs=1  loss 0.0002  (4.60s/it)
+  iter  140  L=4096 bs=1  loss 0.0001  (4.57s/it)
+  iter  150  L=2048 bs=2  loss 0.0002  (4.55s/it)
+  iter  160  L=4096 bs=1  loss 0.0001  (4.57s/it)
+  iter  170  L=3072 bs=1  loss 0.0000  (4.59s/it)
+  iter  180  L=2048 bs=2  loss 0.0001  (4.60s/it)
+  iter  190  L=1024 bs=4  loss 0.0002  (4.55s/it)
+  iter  200  L=2048 bs=2  loss 0.0002  (4.54s/it)
+  iter  210  L=2048 bs=2  loss 0.0000  (4.56s/it)
+  iter  220  L=1024 bs=4  loss 0.0002  (4.58s/it)
+  iter  230  L=3072 bs=1  loss 0.0000  (4.60s/it)
+  iter  240  L=3072 bs=1  loss 0.0019  (4.61s/it)
+  iter  250  L=1024 bs=4  loss 0.0007  (4.63s/it)
+  iter  260  L=4096 bs=1  loss 0.0005  (4.66s/it)
+  iter  270  L=2048 bs=2  loss 0.0125  (4.65s/it)
+  iter  280  L=1024 bs=4  loss 0.0018  (4.65s/it)
+  iter  290  L=2048 bs=2  loss 0.0000  (4.64s/it)
+  iter  300  L=2048 bs=2  loss 0.0097  (4.62s/it)
+evaluation window=2048
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=1.00  first_token=1.00
+  ctx=  2048  exact=0.98  first_token=0.98
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=0.92  first_token=1.00
+  ctx= 16384  exact=0.86  first_token=1.00

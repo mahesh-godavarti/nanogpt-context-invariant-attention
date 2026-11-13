@@ -1,0 +1,125 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/pythia_cont.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Control for the Pythia window run: Pythia-160M fine-tuned 500 steps on the same FineWeb-Edu tokens, same schedule, no addresses.
+# keys 2048+ tokens back scored by reset-RoPE + content address. Within 2048 tokens the model is the untouched model; no anneal.
+# Far scores start with a per-head bias of -4 (learned). Trained with window 1024 on 2048-token FineWeb-Edu sequences so far keys exist
+# (user 2026-10-28); evaluated with window 2048 so the deployed model is exact within its full pretrained context.
+model_type = 'B'
+delimiter_ids = (15, 964)           # Pythia tokenizer: '.' and ' .'
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-pythia-B/ckpt.pt'
+adapt_zero_addr = True
+window = 0
+grad_checkpoint = False
+far_bias_init = -6.0   # Pythia: its attention scores are larger, -4 let far keys disturb the start by +0.28 nats; -6 by +0.06
+
+out_dir = 'out-pythia-Bcont-500'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'pythia_fineweb'
+gradient_accumulation_steps = 8
+batch_size = 1
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 1e-4
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 1e-5
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1337
+tokens per iteration will be: 16,384
+found vocab_size = 50304 (inside data/pythia_fineweb/meta.pkl)
+Adapting pretrained checkpoint out-pythia-B/ckpt.pt
+number of parameters: 162.32M
+adapt: loaded 197 tensors; new (fresh) tensors: []; unexpected: []
+/home/ubuntu/nanoGPT-unitmask/train.py:250: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 74, with 162,201,600 parameters
+num non-decayed parameter tensors: 122, with 121,344 parameters
+using fused AdamW: True
+step 0: train loss 3.2374, val loss 3.3481
+iter 0: loss 3.3403, time 3355.17ms, mfu -100.00%
+iter 10: loss 3.6671, time 1184.84ms, mfu 5.32%
+iter 20: loss 3.1455, time 1201.14ms, mfu 5.31%
+iter 30: loss 3.1302, time 1199.47ms, mfu 5.31%
+iter 40: loss 3.4573, time 1206.13ms, mfu 5.30%
+iter 50: loss 3.8432, time 1209.74ms, mfu 5.29%
+iter 60: loss 3.6205, time 1211.89ms, mfu 5.28%
+iter 70: loss 3.6547, time 1208.27ms, mfu 5.28%
+iter 80: loss 3.6353, time 1219.00ms, mfu 5.26%
+iter 90: loss 3.2297, time 1216.30ms, mfu 5.26%
+step 100: train loss 3.4485, val loss 3.7860
+saving checkpoint to out-pythia-Bcont-500
+iter 100: loss 3.2819, time 5778.83ms, mfu 4.84%
+iter 110: loss 3.1535, time 1224.13ms, mfu 4.87%
+iter 120: loss 3.6405, time 1222.67ms, mfu 4.90%
+iter 130: loss 3.3191, time 1220.20ms, mfu 4.93%
+iter 140: loss 3.1740, time 1219.89ms, mfu 4.95%
+iter 150: loss 3.6489, time 1222.27ms, mfu 4.97%
+iter 160: loss 3.1647, time 1218.20ms, mfu 4.99%
+iter 170: loss 3.7862, time 1221.84ms, mfu 5.01%
+iter 180: loss 3.6460, time 1223.06ms, mfu 5.02%
+iter 190: loss 3.3125, time 1222.64ms, mfu 5.04%
+step 200: train loss 3.3708, val loss 3.8117
+saving checkpoint to out-pythia-Bcont-500
+iter 200: loss 3.5386, time 18870.90ms, mfu 4.57%
+iter 210: loss 3.4353, time 1208.11ms, mfu 4.63%
+iter 220: loss 3.7161, time 1212.47ms, mfu 4.69%
+iter 230: loss 3.3929, time 1223.13ms, mfu 4.73%
+iter 240: loss 3.4901, time 1220.02ms, mfu 4.78%
+iter 250: loss 3.5983, time 1225.02ms, mfu 4.81%
+iter 260: loss 3.4593, time 1221.95ms, mfu 4.85%
+iter 270: loss 3.5914, time 1223.50ms, mfu 4.88%
+iter 280: loss 3.5047, time 1215.05ms, mfu 4.91%
+iter 290: loss 3.1678, time 1222.02ms, mfu 4.93%
+step 300: train loss 3.3284, val loss 3.7540
+saving checkpoint to out-pythia-Bcont-500
+iter 300: loss 3.1827, time 18612.92ms, mfu 4.48%
+iter 310: loss 2.9290, time 1215.64ms, mfu 4.55%
+iter 320: loss 3.8226, time 1213.67ms, mfu 4.61%
+iter 330: loss 3.2196, time 1217.55ms, mfu 4.67%
+iter 340: loss 2.7990, time 1220.83ms, mfu 4.72%
+iter 350: loss 3.1196, time 1218.58ms, mfu 4.76%
+iter 360: loss 3.7363, time 1224.88ms, mfu 4.80%
+iter 370: loss 2.8522, time 1221.59ms, mfu 4.84%
+iter 380: loss 3.5671, time 1221.00ms, mfu 4.87%
+iter 390: loss 2.9232, time 1221.51ms, mfu 4.90%
+step 400: train loss 3.1196, val loss 3.5685
+saving checkpoint to out-pythia-Bcont-500
+iter 400: loss 2.9071, time 18840.78ms, mfu 4.44%
+iter 410: loss 2.9680, time 1214.88ms, mfu 4.52%
+iter 420: loss 3.4187, time 1211.44ms, mfu 4.59%
+iter 430: loss 3.3331, time 1218.27ms, mfu 4.64%
+iter 440: loss 3.4256, time 1215.86ms, mfu 4.70%
+iter 450: loss 3.7926, time 1219.55ms, mfu 4.75%
+iter 460: loss 2.9214, time 1223.53ms, mfu 4.79%
+iter 470: loss 3.3076, time 1222.91ms, mfu 4.82%
+iter 480: loss 3.0676, time 1223.73ms, mfu 4.86%
+iter 490: loss 3.1075, time 1224.31ms, mfu 4.89%
+step 500: train loss 3.0217, val loss 3.5586
+saving checkpoint to out-pythia-Bcont-500
+iter 500: loss 3.2926, time 18460.82ms, mfu 4.43%

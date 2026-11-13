@@ -1,0 +1,121 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/smollm_cont.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Control: SmolLM-135M fine-tuned on the same PG-19 tokens with the same schedule, no addresses.
+model_type = 'B'
+delimiter_ids = (30, 1673)          # SmolLM tokenizer: '.' and ' .'
+init_from = 'adapt'
+adapt = False
+adapt_ckpt = 'out-smollm-B/ckpt.pt'  # the untouched SmolLM saved as a model-B checkpoint (make_hf_ckpt.py)
+adapt_alpha0 = 0.1
+adapt_anneal_iters = 500
+adapt_slow_frac = 1.0
+
+out_dir = 'out-smollm-Bcont-500'
+eval_interval = 100
+eval_iters = 20
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'smollm_pg19'
+gradient_accumulation_steps = 4
+batch_size = 2
+block_size = 2048
+
+dropout = 0.0
+bias = False
+
+learning_rate = 1e-4
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 1e-5
+
+compile = False
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1337
+tokens per iteration will be: 16,384
+found vocab_size = 49152 (inside data/smollm_pg19/meta.pkl)
+Adapting pretrained checkpoint out-smollm-B/ckpt.pt
+number of parameters: 134.52M
+adapt: loaded 274 tensors; new (fresh) tensors: []; unexpected: []
+/home/ubuntu/nanoGPT-unitmask/train.py:242: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 211, with 134,479,872 parameters
+num non-decayed parameter tensors: 61, with 35,136 parameters
+using fused AdamW: True
+step 0: train loss 3.2079, val loss 2.8682
+iter 0: loss 3.0031, time 8260.81ms, mfu -100.00%
+iter 10: loss 3.8438, time 1907.61ms, mfu 3.39%
+iter 20: loss 3.1830, time 1916.80ms, mfu 3.39%
+iter 30: loss 3.3701, time 1916.98ms, mfu 3.39%
+iter 40: loss 2.2942, time 1919.28ms, mfu 3.39%
+iter 50: loss 3.3768, time 1913.55ms, mfu 3.39%
+iter 60: loss 3.3481, time 1914.43ms, mfu 3.38%
+iter 70: loss 3.5301, time 1922.37ms, mfu 3.38%
+iter 80: loss 3.2854, time 1915.62ms, mfu 3.38%
+iter 90: loss 3.1298, time 1921.31ms, mfu 3.38%
+step 100: train loss 3.2190, val loss 2.9861
+saving checkpoint to out-smollm-Bcont-500
+iter 100: loss 2.8524, time 9801.54ms, mfu 3.11%
+iter 110: loss 3.3607, time 1918.83ms, mfu 3.13%
+iter 120: loss 2.7438, time 1915.92ms, mfu 3.16%
+iter 130: loss 3.4445, time 1919.45ms, mfu 3.18%
+iter 140: loss 3.6199, time 1919.61ms, mfu 3.20%
+iter 150: loss 2.6432, time 1917.33ms, mfu 3.22%
+iter 160: loss 3.5099, time 1915.99ms, mfu 3.23%
+iter 170: loss 2.4757, time 1920.87ms, mfu 3.25%
+iter 180: loss 3.3893, time 1921.68ms, mfu 3.26%
+iter 190: loss 2.4510, time 1921.90ms, mfu 3.27%
+step 200: train loss 3.1489, val loss 3.0531
+saving checkpoint to out-smollm-Bcont-500
+iter 200: loss 2.6384, time 20967.12ms, mfu 2.97%
+iter 210: loss 3.0231, time 1915.03ms, mfu 3.01%
+iter 220: loss 3.4382, time 1918.73ms, mfu 3.05%
+iter 230: loss 2.9046, time 1916.87ms, mfu 3.08%
+iter 240: loss 2.4041, time 1910.88ms, mfu 3.11%
+iter 250: loss 3.0849, time 1918.62ms, mfu 3.14%
+iter 260: loss 3.4697, time 1917.11ms, mfu 3.16%
+iter 270: loss 3.3122, time 1917.12ms, mfu 3.18%
+iter 280: loss 3.8420, time 1917.70ms, mfu 3.20%
+iter 290: loss 2.9652, time 1919.29ms, mfu 3.22%
+step 300: train loss 3.1478, val loss 3.0268
+saving checkpoint to out-smollm-Bcont-500
+iter 300: loss 3.1053, time 21017.08ms, mfu 2.93%
+iter 310: loss 2.5659, time 1915.85ms, mfu 2.97%
+iter 320: loss 3.0038, time 1910.57ms, mfu 3.01%
+iter 330: loss 3.4709, time 1912.36ms, mfu 3.05%
+iter 340: loss 3.7042, time 1915.34ms, mfu 3.08%
+iter 350: loss 3.1811, time 1922.26ms, mfu 3.11%
+iter 360: loss 2.8476, time 1916.88ms, mfu 3.14%
+iter 370: loss 2.5919, time 1918.44ms, mfu 3.16%
+iter 380: loss 3.3001, time 1922.14ms, mfu 3.18%
+iter 390: loss 2.7425, time 1916.84ms, mfu 3.20%
+step 400: train loss 3.0366, val loss 3.0268
+saving checkpoint to out-smollm-Bcont-500
+iter 400: loss 3.4621, time 20914.10ms, mfu 2.91%
+iter 410: loss 3.3443, time 1916.06ms, mfu 2.96%
+iter 420: loss 2.5844, time 1920.66ms, mfu 3.00%
+iter 430: loss 2.7175, time 1916.71ms, mfu 3.04%
+iter 440: loss 2.4048, time 1914.62ms, mfu 3.07%
+iter 450: loss 3.2999, time 1920.94ms, mfu 3.10%
+iter 460: loss 2.4051, time 1922.66ms, mfu 3.13%
+iter 470: loss 2.9009, time 1915.20ms, mfu 3.15%
+iter 480: loss 2.9911, time 1915.24ms, mfu 3.17%
+iter 490: loss 3.8479, time 1917.41ms, mfu 3.19%
+step 500: train loss 3.0213, val loss 2.9940
+saving checkpoint to out-smollm-Bcont-500
+iter 500: loss 3.0217, time 20724.90ms, mfu 2.91%

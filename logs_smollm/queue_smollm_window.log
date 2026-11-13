@@ -1,0 +1,50 @@
+##### smoke (10 iters window) Wed Oct 28 01:18:20 UTC 2026
+adapt: loaded 274 tensors; new (fresh) tensors: ['transformer.h.0.attn.far_bias', 'transformer.h.1.attn.far_bias', 'transformer.h.2.attn.far_bias', 'transformer.h.3.attn.far_bias', 'transformer.h.4.attn.far_bias', 'transformer.h.5.attn.far_bias', 'transformer.h.6.attn.far_bias', 'transformer.h.7.attn.far_bias', 'transformer.h.8.attn.far_bias', 'transformer.h.9.attn.far_bias', 'transformer.h.10.attn.far_bias', 'transformer.h.11.attn.far_bias', 'transformer.h.12.attn.far_bias', 'transformer.h.13.attn.far_bias', 'transformer.h.14.attn.far_bias', 'transformer.h.15.attn.far_bias', 'transformer.h.16.attn.far_bias', 'transformer.h.17.attn.far_bias', 'transformer.h.18.attn.far_bias', 'transformer.h.19.attn.far_bias', 'transformer.h.20.attn.far_bias', 'transformer.h.21.attn.far_bias', 'transformer.h.22.attn.far_bias', 'transformer.h.23.attn.far_bias', 'transformer.h.24.attn.far_bias', 'transformer.h.25.attn.far_bias', 'transformer.h.26.attn.far_bias', 'transformer.h.27.attn.far_bias', 'transformer.h.28.attn.far_bias', 'transformer.h.29.attn.far_bias', 'seg_ln.weight', 'seg_proj.weight']; unexpected: []
+adapt: content-address map initialised to zero
+step 0: train loss 3.6807, val loss 3.3527
+step 5: train loss 3.7061, val loss 3.0118
+step 10: train loss 3.4166, val loss 3.0267
+smoke clean
+##### train smollm_window Wed Oct 28 01:20:05 UTC 2026
+adapt: loaded 274 tensors; new (fresh) tensors: ['transformer.h.0.attn.far_bias', 'transformer.h.1.attn.far_bias', 'transformer.h.2.attn.far_bias', 'transformer.h.3.attn.far_bias', 'transformer.h.4.attn.far_bias', 'transformer.h.5.attn.far_bias', 'transformer.h.6.attn.far_bias', 'transformer.h.7.attn.far_bias', 'transformer.h.8.attn.far_bias', 'transformer.h.9.attn.far_bias', 'transformer.h.10.attn.far_bias', 'transformer.h.11.attn.far_bias', 'transformer.h.12.attn.far_bias', 'transformer.h.13.attn.far_bias', 'transformer.h.14.attn.far_bias', 'transformer.h.15.attn.far_bias', 'transformer.h.16.attn.far_bias', 'transformer.h.17.attn.far_bias', 'transformer.h.18.attn.far_bias', 'transformer.h.19.attn.far_bias', 'transformer.h.20.attn.far_bias', 'transformer.h.21.attn.far_bias', 'transformer.h.22.attn.far_bias', 'transformer.h.23.attn.far_bias', 'transformer.h.24.attn.far_bias', 'transformer.h.25.attn.far_bias', 'transformer.h.26.attn.far_bias', 'transformer.h.27.attn.far_bias', 'transformer.h.28.attn.far_bias', 'transformer.h.29.attn.far_bias', 'seg_ln.weight', 'seg_proj.weight']; unexpected: []
+adapt: content-address map initialised to zero
+step 0: train loss 3.5152, val loss 3.2800
+step 100: train loss 3.0813, val loss 2.9763
+step 200: train loss 3.1439, val loss 3.1309
+step 300: train loss 3.0234, val loss 3.0145
+step 400: train loss 3.0903, val loss 2.8694
+step 500: train loss 3.1396, val loss 3.1430
+##### window: ppl Wed Oct 28 02:22:07 UTC 2026
+##### window c=0
+   512       27.23      8
+  1024       23.07      4
+  2048       19.80      2
+  4096       20.79      1
+  8192       19.28      1
+ 16384       19.24      1
+##### window c=1.5
+   512       27.23      8
+  1024       23.07      4
+  2048       19.80      2
+  4096       21.58      1
+  8192       20.34      1
+ 16384       20.47      1
+##### window: passkey Wed Oct 28 03:34:18 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=0.98  first_token=1.00
+  ctx=  2048  exact=0.92  first_token=0.94
+  ctx=  4096  exact=0.32  first_token=0.60
+  ctx=  8192  exact=0.08  first_token=0.24
+  ctx= 16384  exact=0.00  first_token=0.18
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=1.00  first_token=1.00
+  ctx=  1024  exact=0.98  first_token=1.00
+  ctx=  2048  exact=0.92  first_token=0.94
+  ctx=  4096  exact=0.20  first_token=0.44
+  ctx=  8192  exact=0.04  first_token=0.20
+  ctx= 16384  exact=0.00  first_token=0.12
+Traceback (most recent call last):
+    x = block(x, rope=rope, addr=addr, rope_near=rope_near, shift=shift, window=self.config.window)
+RuntimeError: NVML_SUCCESS == DriverAPI::get()->nvmlInit_v2_() INTERNAL ASSERT FAILED at "/pytorch/c10/cuda/CUDACachingAllocator.cpp":983, please report a bug to PyTorch. 
+##### window queue finished Wed Oct 28 04:43:36 UTC 2026

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Mahesh Godavarti
-# Licensed under CC BY-NC-SA 4.0. See LICENSE file for details.
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
 
 """Passkey retrieval: fine-tune a checkpoint on short examples, test at long contexts.
 
@@ -28,6 +28,7 @@ import argparse
 import json
 import math
 import os
+import pickle
 import time
 
 import numpy as np
@@ -43,7 +44,8 @@ from model import GPTConfig, GPT
 class PasskeyMaker:
     def __init__(self, data, delimiter_id, enc):
         self.data = data            # np.memmap / array of token ids (filler source)
-        self.delim = delimiter_id
+        self.delims = tuple(delimiter_id) if isinstance(delimiter_id, (tuple, list)) else (delimiter_id,)
+        self.delim = self.delims[0]
         self.enc = enc
         self.query = enc.encode(" The pass key is")
 
@@ -52,7 +54,7 @@ class PasskeyMaker:
         key = int(rng.integers(10000, 100000))
         key_sent = self.enc.encode(f" The pass key is {key} . Remember it .")
         answer = self.enc.encode(f" {key}")
-        assert key_sent[-1] == self.delim
+        assert key_sent[-1] in self.delims, (key_sent[-1], self.delims)
         n_fill = L + 1 - len(key_sent) - len(self.query) - len(answer)
         assert n_fill > 20, "length too short for a passkey example"
 
@@ -62,7 +64,7 @@ class PasskeyMaker:
         # Insert the key sentence after a sentence boundary near the chosen depth.
         depth = rng.uniform(0.05, 0.95)
         target = int(depth * n_fill)
-        ends = np.nonzero(span[:target] == self.delim)[0]
+        ends = np.nonzero(np.isin(span[:target], self.delims))[0]
         cut = int(ends[-1]) + 1 if len(ends) > 0 else target
         before, after = span[:cut], span[cut:]
 
@@ -115,8 +117,8 @@ def evaluate(model, maker, lengths, n_trials, device, seed=1000):
 
 def finetune(model, maker, args, device):
     model.train()
-    decay = [p for p in model.parameters() if p.dim() >= 2]
-    nodecay = [p for p in model.parameters() if p.dim() < 2]
+    decay = [p for p in model.parameters() if p.requires_grad and p.dim() >= 2]
+    nodecay = [p for p in model.parameters() if p.requires_grad and p.dim() < 2]
     opt = torch.optim.AdamW([{'params': decay, 'weight_decay': 0.1},
                              {'params': nodecay, 'weight_decay': 0.0}],
                             lr=args.lr, betas=(0.9, 0.95))
@@ -127,6 +129,8 @@ def finetune(model, maker, args, device):
     torch.manual_seed(args.seed)  # dropout etc. during fine-tuning
     lengths = [l for l in args.train_lengths if l <= args.max_train_len]
     t0 = time.time()
+    ema, best_ema, best_state = None, float('inf'), None   # keep the lowest smoothed-loss parameters (the last steps can spike)
+    trainable = [n for n, p in model.named_parameters() if p.requires_grad]
     for it in range(1, args.finetune_iters + 1):
         L = int(rng.choice(lengths))
         bs = max(1, args.tokens_per_step // L)
@@ -137,13 +141,19 @@ def finetune(model, maker, args, device):
             _, loss = model(x, y)
         scaler.scale(loss).backward()
         scaler.unscale_(opt)
-        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+        torch.nn.utils.clip_grad_norm_([q for q in model.parameters() if q.requires_grad], 1.0)
         scaler.step(opt)
         scaler.update()
         opt.zero_grad(set_to_none=True)
+        ema = loss.item() if ema is None else 0.9 * ema + 0.1 * loss.item()
+        if it >= args.finetune_iters // 3 and ema < best_ema:
+            best_ema = ema; sd = model.state_dict(); best_state = {n: sd[n].detach().clone() for n in trainable}
         if it % args.log_interval == 0 or it == 1:
             print(f"  iter {it:4d}  L={L:4d} bs={bs}  loss {loss.item():.4f}  "
                   f"({(time.time() - t0) / it:.2f}s/it)", flush=True)
+    if best_state is not None:
+        model.load_state_dict(best_state, strict=False)
+        print(f"  restored the lowest smoothed-loss fine-tune state (ema {best_ema:.4f})", flush=True)
     model.eval()
 
 
@@ -178,11 +188,23 @@ def main():
                         '(fine-tuning uses the first value)')
     p.add_argument('--ntk', action='store_true',
                    help='B: also evaluate with dynamic NTK scaling beyond max_train_len')
+    p.add_argument('--window', type=int, default=None, help='window-mode models: near/far boundary (tokens) during the passkey fine-tune')
+    p.add_argument('--freeze_pretrained', action='store_true', help='fine-tune only the adaptation parameters (far projections, address map, far biases)')
+    p.add_argument('--grad_checkpoint', action='store_true', help='window-mode models: activation checkpointing during the fine-tune')
+    p.add_argument('--eval_window', type=int, default=None, help='window-mode models: near/far boundary at evaluation (default: same as --window)')
     p.add_argument('--smoke', action='store_true')
     args = p.parse_args()
 
-    import tiktoken
-    enc = tiktoken.get_encoding('gpt2')
+    # Tokenizer: the one named in data_dir/meta.pkl ('hf:<name>' = Hugging Face tokenizer), else GPT-2 BPE.
+    meta_path = os.path.join(args.data_dir, 'meta.pkl')
+    meta = pickle.load(open(meta_path, 'rb')) if os.path.exists(meta_path) else {}
+    if str(meta.get('tokenizer', '')).startswith('hf:'):
+        from transformers import AutoTokenizer
+        enc = AutoTokenizer.from_pretrained(meta['tokenizer'][3:])
+        print(f"tokenizer: {meta['tokenizer']}")
+    else:
+        import tiktoken
+        enc = tiktoken.get_encoding('gpt2')
     device = torch.device(args.device)
 
     if args.smoke:
@@ -209,25 +231,42 @@ def main():
     # rows are labelled "after fine-tuning" like the run that produced it.
     loaded_finetuned = (not args.smoke) and 'passkey_finetune' in (ckpt.get('config') or {})
     model.config.use_flex = bool(args.flex)
+    if args.window is not None:
+        model.config.window = args.window
+        print(f"window={model.config.window}")
+    model.config.grad_checkpoint = bool(args.grad_checkpoint)
+    if args.freeze_pretrained:
+        n_tr = 0
+        for n_, p_ in model.named_parameters():
+            new_p = n_.startswith('seg_') or n_.endswith('far_bias') or '_far_proj' in n_ or n_.endswith('_angles')
+            p_.requires_grad_(new_p); n_tr += p_.numel() if new_p else 0
+        print(f"passkey fine-tune with the pretrained weights frozen; trainable {n_tr:,}")
     print(f"Model type: {model.config.model_type} | params {model.get_num_params():,} | "
           f"delimiter {model.config.delimiter_id} | device {device}")
 
     train_data = np.memmap(os.path.join(args.data_dir, 'train.bin'), dtype=np.uint16, mode='r')
     val_data = np.memmap(os.path.join(args.data_dir, 'val.bin'), dtype=np.uint16, mode='r')
-    train_maker = PasskeyMaker(train_data, model.config.delimiter_id, enc)
-    val_maker = PasskeyMaker(val_data, model.config.delimiter_id, enc)
+    delims = tuple(model.config.delimiter_ids) or model.config.delimiter_id
+    train_maker = PasskeyMaker(train_data, delims, enc)
+    val_maker = PasskeyMaker(val_data, delims, enc)
 
     # R, Jm, Jmr attend across segments through the same path, so the cross-segment offset
     # applies to all three; B is evaluated plain and, with --ntk, with NTK scaling.
-    is_seg_model = model.config.model_type in ('R', 'Jm', 'Jmr')
+    is_seg_model = model.config.model_type in ('R', 'Jm', 'Jmr')   # A and B: plain (B also --ntk)
     if is_seg_model:
         settings = [('cross_shift_c', c) for c in args.cross_shift_c]
+        if args.ntk:   # adapted model: NTK-scale the bands left on continuous RoPE beyond max_train_len (all offset settings)
+            model.config.rope_ntk = True
+            print("rope_ntk=True on the un-annealed bands")
     else:
         settings = [('rope_ntk', False)] + ([('rope_ntk', True)] if args.ntk else [])
     model.config.rope_ref_len = args.max_train_len
 
     def evaluate_all(tag):
         out = {}
+        if args.eval_window is not None:
+            model.config.window = args.eval_window
+            print(f"evaluation window={model.config.window}")
         for name, val in settings:
             setattr(model.config, name, val)
             print(f"Passkey accuracy {tag} ({name}={val}):")

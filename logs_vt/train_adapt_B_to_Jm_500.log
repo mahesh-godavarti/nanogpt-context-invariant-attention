@@ -1,0 +1,126 @@
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Overriding config with config/adapt_B_to_Jm_500.py:
+# Copyright (c) 2026 Mahesh Godavarti
+# Licensed under the PolyForm Noncommercial License 1.0.0. See LICENSE file for details.
+
+# Adapt the pretrained continuous-RoPE model B (5K pilot checkpoint) to content addresses.
+# Start: alpha = 0.1, key/query angle = pos_in_seg*f + (1-alpha)*seg_start*f (alpha = 0 is B exactly),
+# cross-segment keys get alpha * content address (content map at full gradient strength).
+# Short budget: alpha goes linearly from 0.1 to 1 over all 500 iterations (a tenth of the pretraining), lr 2e-4 warmup 50 cosine to 2e-5.
+model_type = 'Jm'
+delimiter_id = 764
+init_from = 'adapt'
+adapt = True
+adapt_ckpt = 'out-wikitext103-small-B/ckpt.pt'
+adapt_alpha0 = 0.1
+adapt_anneal_iters = 500
+adapt_slow_frac = 1.0
+
+out_dir = 'out-wikitext103-small-adaptJm-500'
+eval_interval = 100
+eval_iters = 200
+log_interval = 10
+eval_only = False
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'wikitext103'
+gradient_accumulation_steps = 8
+batch_size = 8
+block_size = 1024
+
+n_layer = 6
+n_head = 8
+n_embd = 256
+dropout = 0.1
+bias = False
+
+learning_rate = 2e-4
+max_iters = 500
+weight_decay = 1e-1
+beta1 = 0.9
+beta2 = 0.95
+grad_clip = 1.0
+
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 2e-5
+
+compile = True
+
+Overriding: compile = False
+Overriding: use_flex = False
+Overriding: seed = 1337
+tokens per iteration will be: 65,536
+Adapting pretrained checkpoint out-wikitext103-small-B/ckpt.pt
+number of parameters: 17.63M
+adapt: loaded 40 tensors; new (fresh) tensors: ['seg_ln.weight', 'seg_proj.weight']; unexpected: []
+/home/ubuntu/nanoGPT-unitmask/train.py:233: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+num decayed parameter tensors: 26, with 17,629,184 parameters
+num non-decayed parameter tensors: 14, with 3,584 parameters
+using fused AdamW: True
+step 0: train loss 3.7797, val loss 3.7544
+iter 0: loss 3.7600, time 30536.17ms, mfu -100.00%
+iter 10: loss 3.8557, time 1462.47ms, mfu 1.79%
+iter 20: loss 4.0320, time 1459.93ms, mfu 1.79%
+iter 30: loss 3.7446, time 1459.48ms, mfu 1.79%
+iter 40: loss 4.1353, time 1459.74ms, mfu 1.79%
+iter 50: loss 3.9822, time 1461.24ms, mfu 1.79%
+iter 60: loss 3.8774, time 1461.21ms, mfu 1.79%
+iter 70: loss 3.6443, time 1470.53ms, mfu 1.79%
+iter 80: loss 3.9741, time 1477.38ms, mfu 1.79%
+iter 90: loss 3.7681, time 1479.27ms, mfu 1.79%
+step 100: train loss 3.7494, val loss 3.7294
+saving checkpoint to out-wikitext103-small-adaptJm-500
+iter 100: loss 3.7593, time 31060.15ms, mfu 1.62%
+iter 110: loss 3.6187, time 1464.58ms, mfu 1.63%
+iter 120: loss 3.7635, time 1482.94ms, mfu 1.65%
+iter 130: loss 3.7137, time 1469.20ms, mfu 1.66%
+iter 140: loss 4.1142, time 1478.15ms, mfu 1.67%
+iter 150: loss 4.0797, time 1480.54ms, mfu 1.68%
+iter 160: loss 3.7207, time 1478.89ms, mfu 1.69%
+iter 170: loss 3.6961, time 1459.73ms, mfu 1.70%
+iter 180: loss 3.9448, time 1480.76ms, mfu 1.71%
+iter 190: loss 3.6012, time 1480.70ms, mfu 1.71%
+step 200: train loss 3.7375, val loss 3.7187
+saving checkpoint to out-wikitext103-small-adaptJm-500
+iter 200: loss 3.9598, time 31604.02ms, mfu 1.55%
+iter 210: loss 3.7401, time 1479.15ms, mfu 1.57%
+iter 220: loss 3.8171, time 1481.33ms, mfu 1.59%
+iter 230: loss 3.8212, time 1480.63ms, mfu 1.61%
+iter 240: loss 3.8800, time 1481.52ms, mfu 1.63%
+iter 250: loss 3.8703, time 1482.26ms, mfu 1.64%
+iter 260: loss 4.0238, time 1467.93ms, mfu 1.65%
+iter 270: loss 3.7520, time 1480.55ms, mfu 1.67%
+iter 280: loss 3.9720, time 1479.66ms, mfu 1.68%
+iter 290: loss 4.0715, time 1464.57ms, mfu 1.69%
+step 300: train loss 3.7196, val loss 3.7175
+saving checkpoint to out-wikitext103-small-adaptJm-500
+iter 300: loss 3.7535, time 31674.56ms, mfu 1.53%
+iter 310: loss 3.7947, time 1479.91ms, mfu 1.55%
+iter 320: loss 3.7524, time 1463.10ms, mfu 1.57%
+iter 330: loss 3.7217, time 1474.46ms, mfu 1.59%
+iter 340: loss 3.8475, time 1477.38ms, mfu 1.61%
+iter 350: loss 3.6815, time 1464.14ms, mfu 1.63%
+iter 360: loss 3.8666, time 1461.74ms, mfu 1.65%
+iter 370: loss 3.7903, time 1480.65ms, mfu 1.66%
+iter 380: loss 3.8663, time 1479.65ms, mfu 1.67%
+iter 390: loss 3.8131, time 1481.17ms, mfu 1.68%
+step 400: train loss 3.7116, val loss 3.7095
+saving checkpoint to out-wikitext103-small-adaptJm-500
+iter 400: loss 3.9329, time 31772.92ms, mfu 1.52%
+iter 410: loss 3.7658, time 1479.00ms, mfu 1.54%
+iter 420: loss 3.9498, time 1479.73ms, mfu 1.57%
+iter 430: loss 3.6802, time 1461.77ms, mfu 1.59%
+iter 440: loss 3.7952, time 1479.95ms, mfu 1.61%
+iter 450: loss 3.7581, time 1477.95ms, mfu 1.62%
+iter 460: loss 3.9518, time 1481.09ms, mfu 1.64%
+iter 470: loss 3.4970, time 1480.26ms, mfu 1.65%
+iter 480: loss 3.9034, time 1480.89ms, mfu 1.66%
+iter 490: loss 4.0398, time 1469.13ms, mfu 1.68%
+step 500: train loss 3.7487, val loss 3.7348
+saving checkpoint to out-wikitext103-small-adaptJm-500
+iter 500: loss 3.8049, time 31610.60ms, mfu 1.52%

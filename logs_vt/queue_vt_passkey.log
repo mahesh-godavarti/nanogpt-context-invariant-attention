@@ -1,0 +1,113 @@
+##### smoke Mon Oct 26 14:26:00 UTC 2026
+smoke clean
+########## B Mon Oct 26 14:26:05 UTC 2026
+Passkey accuracy before fine-tuning (rope_ntk=False):
+Traceback (most recent call last):
+    results['before'] = evaluate_all("before fine-tuning")
+AssertionError
+########## Bp Mon Oct 26 14:26:09 UTC 2026
+Passkey accuracy before fine-tuning (rope_ntk=False):
+Traceback (most recent call last):
+    results['before'] = evaluate_all("before fine-tuning")
+AssertionError
+########## Jm Mon Oct 26 14:26:14 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.68  first_token=0.98
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.72  first_token=0.96
+  ctx=  4096  exact=0.58  first_token=0.96
+  ctx=  8192  exact=0.52  first_token=0.96
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.68  first_token=0.98
+  ctx=  1024  exact=0.60  first_token=1.00
+  ctx=  2048  exact=0.70  first_token=0.96
+  ctx=  4096  exact=0.60  first_token=0.98
+  ctx=  8192  exact=0.58  first_token=0.98
+########## Jmp Mon Oct 26 14:32:00 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.68  first_token=1.00
+  ctx=  1024  exact=0.56  first_token=0.96
+  ctx=  2048  exact=0.76  first_token=0.94
+  ctx=  4096  exact=0.56  first_token=0.94
+  ctx=  8192  exact=0.30  first_token=0.68
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.68  first_token=1.00
+  ctx=  1024  exact=0.56  first_token=0.96
+  ctx=  2048  exact=0.78  first_token=0.94
+  ctx=  4096  exact=0.58  first_token=0.96
+  ctx=  8192  exact=0.58  first_token=0.98
+########## Jmr Mon Oct 26 14:37:55 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.58  first_token=0.86
+  ctx=  1024  exact=0.56  first_token=0.96
+  ctx=  2048  exact=0.66  first_token=0.92
+  ctx=  4096  exact=0.54  first_token=0.94
+  ctx=  8192  exact=0.46  first_token=0.88
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.58  first_token=0.86
+  ctx=  1024  exact=0.56  first_token=0.96
+  ctx=  2048  exact=0.66  first_token=0.92
+  ctx=  4096  exact=0.52  first_token=0.92
+  ctx=  8192  exact=0.50  first_token=0.92
+########## Jmrp Mon Oct 26 14:43:42 UTC 2026
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.00  first_token=0.00
+  ctx=  1024  exact=0.00  first_token=0.00
+  ctx=  2048  exact=0.00  first_token=0.00
+  ctx=  4096  exact=0.00  first_token=0.00
+  ctx=  8192  exact=0.00  first_token=0.00
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.30  first_token=0.66
+  ctx=  1024  exact=0.36  first_token=0.78
+  ctx=  2048  exact=0.38  first_token=0.74
+  ctx=  4096  exact=0.20  first_token=0.66
+  ctx=  8192  exact=0.16  first_token=0.70
+Passkey accuracy after fine-tuning (cross_shift_c=1.5):
+  ctx=   512  exact=0.30  first_token=0.66
+  ctx=  1024  exact=0.36  first_token=0.78
+  ctx=  2048  exact=0.38  first_token=0.76
+  ctx=  4096  exact=0.20  first_token=0.70
+  ctx=  8192  exact=0.24  first_token=0.76
+##### passkey finished Mon Oct 26 14:49:35 UTC 2026

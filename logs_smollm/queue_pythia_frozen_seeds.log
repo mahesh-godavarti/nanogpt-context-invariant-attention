@@ -1,0 +1,45 @@
+##### train frozen 160M lr1e-4 seed 1 Wed Nov  4 10:23:54 UTC 2026
+step 0: train loss 3.9518, val loss 3.8505
+step 100: train loss 3.2752, val loss 3.4012
+step 200: train loss 3.3256, val loss 3.4330
+step 300: train loss 3.3353, val loss 3.3708
+step 400: train loss 3.2696, val loss 3.5199
+step 500: train loss 3.4084, val loss 3.3652
+##### ppl seed 1 (window 2048, c=0)
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096       25.95      1
+  8192       26.36      1
+ 16384       26.25      1
+##### passkey seed 1 Wed Nov  4 11:33:01 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.86  first_token=0.90
+  ctx=  1024  exact=0.90  first_token=0.90
+  ctx=  2048  exact=0.76  first_token=0.78
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=0.92  first_token=1.00
+  ctx= 16384  exact=0.96  first_token=1.00
+##### train frozen 160M lr1e-4 seed 2 Wed Nov  4 11:56:55 UTC 2026
+step 0: train loss 3.9035, val loss 3.8278
+step 100: train loss 3.3212, val loss 3.3600
+step 200: train loss 3.3076, val loss 3.4062
+step 300: train loss 3.3124, val loss 3.3852
+step 400: train loss 3.4042, val loss 3.4501
+step 500: train loss 3.3418, val loss 3.3685
+##### ppl seed 2 (window 2048, c=0)
+   512       36.47      8
+  1024       30.19      4
+  2048       27.63      2
+  4096       26.12      1
+  8192       26.52      1
+ 16384       26.28      1
+##### passkey seed 2 Wed Nov  4 13:06:03 UTC 2026
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.86  first_token=0.90
+  ctx=  1024  exact=0.90  first_token=0.90
+  ctx=  2048  exact=0.76  first_token=0.78
+  ctx=  4096  exact=0.42  first_token=0.46
+  ctx=  8192  exact=0.20  first_token=0.26
+  ctx= 16384  exact=0.12  first_token=0.20
+##### frozen 160M seeds finished Wed Nov  4 13:29:28 UTC 2026

@@ -1,0 +1,29 @@
+##### A seed0 16384 cells started Wed Oct  7 05:15:32 UTC 2026
+##### A s0 plain
+ 16384       22.63      1
+########## A seed=0
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.05  first_token=0.17
+########## A seed=1
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.05  first_token=0.18
+########## A seed=2
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.04  first_token=0.11
+########## A ceiling
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.18  first_token=0.20
+########## A s0
+number of parameters: 63.52M
+Model type: A | params 63,517,184 | delimiter 764 | device cuda
+Passkey accuracy after fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.11  first_token=0.16
+##### A 16384 cells finished Wed Oct  7 06:46:00 UTC 2026

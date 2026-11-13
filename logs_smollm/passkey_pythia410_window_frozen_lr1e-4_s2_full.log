@@ -1,0 +1,48 @@
+tokenizer: hf:EleutherAI/pythia-160m
+number of parameters: 456.24M
+/home/ubuntu/experiments/venv/lib/python3.12/site-packages/torch/cuda/__init__.py:734: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+window=2048
+passkey fine-tune with the pretrained weights frozen; trainable 50,908,032
+Model type: Jm | params 456,242,048 | delimiter 628 | device cuda
+Fine-tuning for 300 iters on lengths [1024, 2048, 3072, 4096]:
+  iter    1  L=4096 bs=1  loss 0.4420  (7.28s/it)
+  iter   10  L=4096 bs=1  loss 0.0923  (5.06s/it)
+  iter   20  L=1024 bs=4  loss 1.2040  (4.51s/it)
+  iter   30  L=3072 bs=1  loss 0.0863  (4.48s/it)
+  iter   40  L=1024 bs=4  loss 1.1935  (4.31s/it)
+  iter   50  L=2048 bs=2  loss 0.8849  (4.40s/it)
+  iter   60  L=2048 bs=2  loss 0.0915  (4.22s/it)
+  iter   70  L=1024 bs=4  loss 1.0356  (4.18s/it)
+  iter   80  L=4096 bs=1  loss 0.0628  (4.22s/it)
+  iter   90  L=4096 bs=1  loss 0.0099  (4.27s/it)
+  iter  100  L=3072 bs=1  loss 0.0109  (4.26s/it)
+  iter  110  L=4096 bs=1  loss 0.0163  (4.23s/it)
+  iter  120  L=3072 bs=1  loss 0.0052  (4.20s/it)
+  iter  130  L=4096 bs=1  loss 0.0059  (4.25s/it)
+  iter  140  L=4096 bs=1  loss 0.0333  (4.25s/it)
+  iter  150  L=1024 bs=4  loss 1.0470  (4.23s/it)
+  iter  160  L=2048 bs=2  loss 1.7552  (4.21s/it)
+  iter  170  L=2048 bs=2  loss 0.5022  (4.18s/it)
+  iter  180  L=3072 bs=1  loss 0.0130  (4.15s/it)
+  iter  190  L=1024 bs=4  loss 0.3980  (4.17s/it)
+  iter  200  L=4096 bs=1  loss 0.0039  (4.22s/it)
+  iter  210  L=2048 bs=2  loss 0.5636  (4.26s/it)
+  iter  220  L=2048 bs=2  loss 0.6269  (4.26s/it)
+  iter  230  L=1024 bs=4  loss 0.4053  (4.25s/it)
+  iter  240  L=4096 bs=1  loss 0.0011  (4.24s/it)
+  iter  250  L=3072 bs=1  loss 0.0061  (4.24s/it)
+  iter  260  L=4096 bs=1  loss 0.0013  (4.23s/it)
+  iter  270  L=4096 bs=1  loss 0.0035  (4.25s/it)
+  iter  280  L=3072 bs=1  loss 0.0019  (4.24s/it)
+  iter  290  L=3072 bs=1  loss 0.0088  (4.25s/it)
+  iter  300  L=3072 bs=1  loss 0.0071  (4.27s/it)
+  restored the lowest smoothed-loss fine-tune state (ema 0.1528)
+evaluation window=2048
+Passkey accuracy after fine-tuning (cross_shift_c=0.0):
+  ctx=   512  exact=0.86  first_token=0.98
+  ctx=  1024  exact=0.86  first_token=0.98
+  ctx=  2048  exact=0.76  first_token=0.92
+  ctx=  4096  exact=1.00  first_token=1.00
+  ctx=  8192  exact=1.00  first_token=1.00
+  ctx= 16384  exact=1.00  first_token=1.00

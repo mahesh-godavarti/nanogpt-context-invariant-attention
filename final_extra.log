@@ -1,0 +1,27 @@
+##### passkey 16384 B
+Passkey accuracy before fine-tuning (rope_ntk=False):
+  ctx= 16384  exact=0.00  first_token=0.02
+Passkey accuracy before fine-tuning (rope_ntk=True):
+  ctx= 16384  exact=0.00  first_token=0.38
+##### passkey 16384 Jm
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx= 16384  exact=0.44  first_token=0.76
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx= 16384  exact=0.72  first_token=0.96
+##### passkey 16384 Jmr
+Passkey accuracy before fine-tuning (cross_shift_c=0.0):
+  ctx= 16384  exact=0.50  first_token=0.90
+Passkey accuracy before fine-tuning (cross_shift_c=1.5):
+  ctx= 16384  exact=0.62  first_token=0.94
+##### Jmr ppl c=0
+  1024       43.37      4
+  2048       45.91      2
+  4096       45.48      1
+  8192       53.10      1
+ 16384       81.79      1
+##### Jmr ppl c=1.5
+  1024       43.37      4
+  2048       45.95      2
+  4096       44.41      1
+  8192       45.37      1
+ 16384       52.00      1
