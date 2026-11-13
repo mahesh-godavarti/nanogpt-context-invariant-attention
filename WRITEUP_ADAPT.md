@@ -1,8 +1,7 @@
 # Adapting pretrained RoPE models to content-addressed attention
 
-Mahesh Godavarti, 2026-11-06. Final write-up of the adaptation experiments (2026-10-26 to 11-06). Raw tables and run logs:
-`logs_vt/ADAPT_RESULTS.md`, `logs_smollm/`; code in this repository (uncommitted); structured-task design in `STRUCT_DESIGN.md`;
-patent notes in `/home/ubuntu/patent/`. Earlier draft kept as `WRITEUP_ADAPT_draft_2026-11-05.md`.
+Mahesh Godavarti, 2026-11-13. Write-up of the adaptation experiments (2026-10-26 to 11-10). Raw tables and run logs:
+`logs_vt/ADAPT_RESULTS.md`, `logs_smollm/`; code in this repository; structured-task design in `STRUCT_DESIGN.md`.
 
 ## 1. Questions
 
@@ -152,8 +151,9 @@ window, so the far path retrieves approximately where the near path retrieves ex
    context is that of the fine-tuning text, 1-2 perplexity, which a no-address control pays equally.
 2. **With the pretrained weights frozen the result is cleaner.** Far-path query/key projections, the address map and the far
    biases are the only new parameters (9-13% of the model). Inside its context the model is the untouched model to the last
-   digit; beyond it, perplexity falls below the model's own 2048 value out to 16384 on all three models; retrieval at 8x is
-   94-100%. The one per-model setting is the new-parameter learning rate (1e-3 on SmolLM, 1e-4 on the Pythias; at 1e-3 the
+   digit; beyond it, perplexity stays at the model's own 2048 level out to 16384: at 16384 it is below that value on SmolLM
+   (16.6-16.7 vs 17.7) and Pythia-160M (26.3 vs 27.6) and within 2% of it on Pythia-410M (16.3-16.6 vs 16.3); retrieval at 8x
+   is 94-100%. The one per-model setting is the new-parameter learning rate (1e-3 on SmolLM, 1e-4 on the Pythias; at 1e-3 the
    Pythia far path does not train, at 3e-3 it diverges).
 3. **Structured facts.** A frozen model reads facts supplied as two-name units through the far path, with no relation words, at
    97-100% among 16 units and 87-100% among 64 (trained on 16), against 13-45% and 4-16% reading the same facts written as
@@ -191,5 +191,4 @@ and exact near copying (95-98%): the hypothesis that the far path simply lacked 
 2026-11-10 by adapting the frozen SmolLM on 8192-token sequences with the 2048 window, and rejected (far-copy accuracy .48-.50
 against .50-.54; perplexity slightly better at 16384, 15.7 against 16.6; passkey slightly worse). The ceiling is in the mechanism,
 the token-by-token read-off through far keys, which does not reproduce the pretrained induction circuit the near path uses.
-Lengths beyond 16384. The structured task with all weights trained, for comparison. Publishing weights and code after the
-provisional is filed.
+Lengths beyond 16384. The structured task with all weights trained, for comparison. Publishing the adapted weights.

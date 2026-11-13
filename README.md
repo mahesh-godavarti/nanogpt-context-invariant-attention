@@ -4,6 +4,24 @@ A fork of [nanoGPT](https://github.com/karpathy/nanoGPT) by Andrej Karpathy that
 
 Paper: Mahesh Godavarti, *Content-based addressing for long context* — [arXiv:2609.07314](https://arxiv.org/abs/2609.07314).
 
+## Headline: 8x the context for a frozen pretrained model
+
+Three public models pretrained at context 2048 (SmolLM-135M, Pythia-160M, Pythia-410M) were adapted with content-addressed
+attention beyond their context. The pretrained weights are frozen, so inside 2048 tokens every output is identical to the
+original model. Adaptation: 500 steps on 8M tokens of text unrelated to the pretraining data, one T4 GPU; new parameters are
+9-13% of the model. Three seeds per model; ranges are across seeds.
+
+| model | ppl 2048, original | ppl 16384, original + NTK | ppl 16384, adapted | passkey 16384, original + NTK | passkey 16384, adapted |
+|---|---|---|---|---|---|
+| SmolLM-135M | 17.7 | 98.4 | 16.6-16.7 | 0% | 94-96% |
+| Pythia-160M | 27.6 | 73.8 | 26.3 | 0% | 96% |
+| Pythia-410M | 16.3 | 45.5 | 16.3-16.6 | 2% | 94-100% |
+
+The same far path lets a frozen model read facts given as structured two-name units (relation carried in attention angles, no
+relation words): 97-100% hit@1 among 16 facts, against 13-45% when the same facts are written as sentences in the context.
+Details, commands and every control: [Adapting pretrained models](#adapting-pretrained-models-window-mode) below and
+[`WRITEUP_ADAPT.md`](WRITEUP_ADAPT.md). The rest of this README covers the from-scratch experiments that came first.
+
 Standard transformers assign every token a position from 0 to T-1, so a model trained at length 1024 meets positions it has never seen when evaluated at 4096. Here the position restarts at 0 after every delimiter token (a sentence or paragraph boundary), so no position ever exceeds the longest segment seen in training, whatever the context length. Attention across segments is routed by a per-segment content address on the keys instead of by absolute position. The result is perplexity that degrades slowly beyond the training context instead of collapsing.
 
 ## What's different from nanoGPT
@@ -269,7 +287,7 @@ struct_adapt.py   — Structured facts as two-token units through the far path (
 repeat_test.py    — Repeated-document test: score the second copy of a passage placed far back
 WRITEUP_ADAPT.md  — Write-up of the adaptation experiments; STRUCT_DESIGN.md — structured-unit design
 logs_vt/, logs_smollm/, results_repeat/ — run logs and result tables (ADAPT_RESULTS.md) behind the adaptation write-up
-queue_*.sh        — the exact run scripts
+queue_*.sh        — the exact run scripts, as run on the author's machine (edit the `cd` and venv paths at the top; they write to logs_smollm/ and logs_vt/)
 configurator.py   — CLI config system
 config/           — Training configs for WikiText-103
 data/             — Dataset directory
@@ -291,7 +309,7 @@ Key config parameters beyond standard nanoGPT:
 
 ## License
 
-Copyright (c) 2026 Mahesh Godavarti. Licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0): free to use, change and share for any noncommercial purpose; commercial use is not permitted. See [LICENSE](LICENSE). The original nanoGPT code this builds on remains under its MIT license (see below).
+Copyright (c) 2026 Mahesh Godavarti. Licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0): free to use, change and share for any noncommercial purpose; commercial use is not permitted. See [LICENSE](LICENSE). The original nanoGPT code this builds on remains under its MIT license; its copyright and permission notice is in [LICENSE-nanoGPT](LICENSE-nanoGPT).
 
 **Patent pending.** The content-addressed attention and the adaptation methods in this repository are the subject of a pending patent application.
 
