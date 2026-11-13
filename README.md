@@ -287,7 +287,7 @@ struct_adapt.py   — Structured facts as two-token units through the far path (
 repeat_test.py    — Repeated-document test: score the second copy of a passage placed far back
 WRITEUP_ADAPT.md  — Write-up of the adaptation experiments; STRUCT_DESIGN.md — structured-unit design
 logs_vt/, logs_smollm/, results_repeat/ — run logs and result tables (ADAPT_RESULTS.md) behind the adaptation write-up
-queue_*.sh        — the exact run scripts, as run on the author's machine (edit the `cd` and venv paths at the top; they write to logs_smollm/ and logs_vt/)
+queue_*.sh        — the exact run scripts, as run on the author's machine (edit the `cd` and venv paths at the top; adaptation runs write to logs_smollm/ and logs_vt/, the from-scratch runs to the top level)
 configurator.py   — CLI config system
 config/           — Training configs for WikiText-103
 data/             — Dataset directory
